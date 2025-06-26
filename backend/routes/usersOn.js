@@ -1066,7 +1066,6 @@ router.post('/get-user-details', authenticateToken, async function (req, res) {
 
     if (result) {
 
-      console.log('result::::::', result);
       return res.status(200).send({
         success: true,
         data: {
