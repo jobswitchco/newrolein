@@ -1,5 +1,5 @@
 import express from 'express';
-import dbConnection from "./db.mjs";
+import dbConnection from "./db.js";
 const app = express();
 import bodyParser from "body-parser";
 import cors from 'cors';
