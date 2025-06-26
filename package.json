@@ -1,6 +1,7 @@
 {
   "name": "newrole",
   "version": "0.1.0",
+   "type": "module",
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^6.3.1",
