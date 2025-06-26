@@ -170,7 +170,7 @@ function BrandSignup() {
       maxWidth={450}
       padding={1}
     >
-      <GoogleOAuthProvider clientId={clientId}>
+      <GoogleOAuthProvider clientId='455976777846-jve7vqhe2ujq5ofm8svqkbpj8mse8kf9.apps.googleusercontent.com'>
         <GoogleLogin
           onSuccess={async (credentialResponse) => {
             const decoded = jwtDecode(credentialResponse.credential);
@@ -322,7 +322,7 @@ function BrandSignup() {
       maxWidth={550}
      
     >
-      <GoogleOAuthProvider clientId={clientId}>
+      <GoogleOAuthProvider clientId='455976777846-jve7vqhe2ujq5ofm8svqkbpj8mse8kf9.apps.googleusercontent.com'>
         <GoogleLogin
           onSuccess={async (credentialResponse) => {
             const decoded = jwtDecode(credentialResponse.credential);
