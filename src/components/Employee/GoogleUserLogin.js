@@ -18,7 +18,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import { useDispatch} from 'react-redux';
-import {login} from '../../store/professionalSlice';
+import {login} from '../../store/professionalSlice.js';
 import logo from "../../images/desk-logo.svg";
 
 
