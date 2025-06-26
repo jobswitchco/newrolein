@@ -41,6 +41,8 @@ function BrandSignup() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
+  console.log('clientId: ',process.env.REACT_APP_GOOGLE_CLIENT_ID);
+
 
 
    useEffect(() => {
