@@ -34,7 +34,9 @@ const ConversationDialog = ({ open, onClose, conversationId, onMessageRead}) => 
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [messageInput, setMessageInput] = useState("");
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
     const bottomRef = useRef(null);
         const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

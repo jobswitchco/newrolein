@@ -71,7 +71,9 @@ function JobPreferences() {
     currency: "INR",
   });
 
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
 
   const formatCTC = (amount, currency) => {
     if (currency === "INR") {

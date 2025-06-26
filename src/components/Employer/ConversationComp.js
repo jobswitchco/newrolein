@@ -23,7 +23,9 @@ const ConversationComp = ({ open, conversationId, onClose, onMessageRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
-  const baseUrl = "http://localhost:8001/employersOn";
+  // const baseUrl = "http://localhost:8001/employersOn";
+      const baseUrl="/api/employersOn";
+
   const bottomRef = useRef(null);
 
   const fetchConversation = async () => {

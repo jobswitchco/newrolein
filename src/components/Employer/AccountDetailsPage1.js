@@ -23,7 +23,9 @@ const AccountDetailsPage1 = () => {
       const [newPassword, setNewPassword] = useState("");
       const [passwordDialogue, setPasswordDialogue] = useState(false);
 
-      const baseUrl = "http://localhost:8001/employersOn";
+      // const baseUrl = "http://localhost:8001/employersOn";
+      const baseUrl="/api/employersOn";
+
       const theme = useTheme();
       const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 

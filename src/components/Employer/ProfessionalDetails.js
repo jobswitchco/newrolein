@@ -16,7 +16,9 @@ const ProfessionalDetails = ({userId, open, onClose}) => {
   const [user, setUser] = useState(null);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const baseUrl = "http://localhost:8001/employersOn";
+  // const baseUrl = "http://localhost:8001/employersOn";
+      const baseUrl="/api/employersOn";
+
   const [activeTab, setActiveTab] = useState(0);
    const [shortlisted, setShortlisted] = useState(false);
 

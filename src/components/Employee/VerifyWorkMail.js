@@ -35,7 +35,9 @@ function UserSignup() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [errorMessage, setErrorMessage] = useState("");
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
 
   const handleClickAway = () => {
     //this function keeps the dialogue open, even when user clicks outside the dialogue. dont delete this function

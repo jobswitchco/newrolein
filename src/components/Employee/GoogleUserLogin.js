@@ -34,7 +34,9 @@ function BrandSignup() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;

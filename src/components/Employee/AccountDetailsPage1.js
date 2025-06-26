@@ -26,7 +26,8 @@ const AccountDetailsPage1 = () => {
       const [deleteAccountDialog, setDeleteAccountDialog] = useState(false);
       const [enterCodeDialog, setEnterCodeDialog] = useState(false);
       const [emailCode, setEmailCode] = useState("");
-      const baseUrl = "http://localhost:8001/usersOn";
+      // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn"
       const theme = useTheme();
       const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 

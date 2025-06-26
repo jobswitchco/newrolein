@@ -39,7 +39,9 @@ const InvitedTable = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const today = dayjs();
-  const baseUrl = "http://localhost:8001/employersOn";
+  // const baseUrl = "http://localhost:8001/employersOn";
+      const baseUrl="/api/employersOn";
+
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [selectedConversationId, setSelectedConversationId] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);

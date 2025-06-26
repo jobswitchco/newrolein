@@ -10,14 +10,14 @@ const EmployersTable = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-  const baseUrl = "http://localhost:8001/adminOn";
+  // const baseUrl = "http://localhost:8001/adminOn";
 
 
 
   const fetchEmployers = async ( ) => {
     setLoading(true);
     try {
-      const response = await axios.get(baseUrl + '/all_employers?page=${currentPage}&limit=10');
+      const response = await axios.get('api/adminOn/all_employers?page=${currentPage}&limit=10');
       setEmployers(response.data.employers);
       setTotalPages(response.data.totalPages);
     } catch (error) {

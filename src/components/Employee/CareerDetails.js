@@ -59,7 +59,9 @@ function CareerDetails() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
   const [ loading, setLoading ] = useState(false);
   const [ userDetails, setUserDetails ] = useState({});
   const [open, setOpen] = useState(false);

@@ -43,7 +43,9 @@ function SkillsComp() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
 
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
 
   const debouncedInput = useDebounce(input, 400);
   

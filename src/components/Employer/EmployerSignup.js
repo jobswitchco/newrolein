@@ -28,7 +28,9 @@ function UserSignup() {
   const [company_category, setCompanyCategory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const baseUrl = "http://localhost:8001/adminOn";
+  // const baseUrl = "http://localhost:8001/adminOn";
+      const baseUrl="/api/adminOn";
+
 
 
   async function submit(e) {

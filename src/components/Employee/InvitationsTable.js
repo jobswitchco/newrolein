@@ -35,7 +35,9 @@ const InvitationsTable = () => {
   const [loading, setLoading] = useState(false);
   const [selectedConv, setSelectedConv] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
     const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 

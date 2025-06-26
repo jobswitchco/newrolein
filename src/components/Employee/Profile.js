@@ -21,7 +21,9 @@ function Profile() {
   const navigate = useNavigate();
   const [ loading, setLoading ] = useState(true);
   const [ userDetails, setUserDetails ] = useState('');
-  const baseUrl = "http://localhost:8001/usersOn";
+  // const baseUrl = "http://localhost:8001/usersOn";
+      const baseUrl="/api/usersOn";
+
   const [passwordDialogue, setPasswordDialogue] = useState(false);
   const [originalPassword, setOriginalPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

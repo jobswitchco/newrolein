@@ -10,7 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 function BillingAndPlans() {
   const [subscription, setSubscription] = useState(null);
   const navigate = useNavigate();
-  const baseUrl = "http://localhost:8001/employersOn";
+  // const baseUrl = "http://localhost:8001/employersOn";
+      const baseUrl="/api/employersOn";
+
   const [ loading, setLoading ] = useState(false);
 
     const handleSessionExpired = () => {

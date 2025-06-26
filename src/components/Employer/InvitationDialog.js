@@ -14,7 +14,9 @@ const InvitationDialog = ({ userIds = [], open, onClose, onInvitationSent  }) =>
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const baseUrl = "http://localhost:8001/employersOn";
+  // const baseUrl = "http://localhost:8001/employersOn";
+      const baseUrl="/api/employersOn";
+
 
 
   useEffect(() => {
