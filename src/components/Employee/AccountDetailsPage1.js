@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { logout } from "../../store/professionalSlice.js";
+import { logout } from "../../store/professionalSlice";
 import { useDispatch } from "react-redux";
 import LogoutIcon from '@mui/icons-material/Logout';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';

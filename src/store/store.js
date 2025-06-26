@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import brandReducer from './employerSlice.js';
-import creatorReducer from './professionalSlice.js';
+import brandReducer from './employerSlice';
+import creatorReducer from './professionalSlice';
 
 const persistedStateJSON = localStorage.getItem("professionalDetails");
 const persistedState = persistedStateJSON

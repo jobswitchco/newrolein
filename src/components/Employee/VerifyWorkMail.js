@@ -19,7 +19,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from '../../images/desk-logo.svg'
-import { logout } from "../../store/professionalSlice.js";
+import { logout } from "../../store/professionalSlice";
 import { useDispatch } from "react-redux";
 
 

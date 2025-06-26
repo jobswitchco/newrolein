@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { logout } from "../../store/employerSlice.js";
+import { logout } from "../../store/employerSlice";
 import { useDispatch } from "react-redux";
 
 
