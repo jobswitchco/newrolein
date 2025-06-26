@@ -41,10 +41,6 @@ function BrandSignup() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
-  console.log('clientId: ',process.env.REACT_APP_GOOGLE_CLIENT_ID);
-
-
-
    useEffect(() => {
             const verifyToken = async () => {
               setLoading(true);
@@ -170,7 +166,7 @@ function BrandSignup() {
       maxWidth={450}
       padding={1}
     >
-      <GoogleOAuthProvider clientId='455976777846-jve7vqhe2ujq5ofm8svqkbpj8mse8kf9.apps.googleusercontent.com'>
+      <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
           onSuccess={async (credentialResponse) => {
             const decoded = jwtDecode(credentialResponse.credential);
@@ -322,7 +318,7 @@ function BrandSignup() {
       maxWidth={550}
      
     >
-      <GoogleOAuthProvider clientId='455976777846-jve7vqhe2ujq5ofm8svqkbpj8mse8kf9.apps.googleusercontent.com'>
+      <GoogleOAuthProvider clientId={clientId}>
         <GoogleLogin
           onSuccess={async (credentialResponse) => {
             const decoded = jwtDecode(credentialResponse.credential);
