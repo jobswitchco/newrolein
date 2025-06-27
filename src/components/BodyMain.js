@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
 
 
 function BodyMain() {
+  const theme = useTheme();
+
   useEffect(() => {
     AOS.init({
-      duration: 800, // Animation duration in ms
+      duration: 100, // Animation duration in ms
       once: true, // Animation will run once
     });
   }, []);
@@ -39,7 +42,7 @@ function BodyMain() {
               <h2
                 className="txt-4"
                 data-aos="fade-up"
-                data-aos-delay="200"
+                data-aos-delay="100"
                 style={{ color : '#777270'}}
               >
                 Only for working professionals. Top companies reach out — you stay anonymous & employed.
@@ -54,7 +57,7 @@ function BodyMain() {
                 <button
                   className="btn signup-btn-grad btn-g-fonts"
                   data-aos="zoom-in"
-                  data-aos-delay="400"
+                  data-aos-delay="100"
                 >
                   Enroll now
                 </button>
