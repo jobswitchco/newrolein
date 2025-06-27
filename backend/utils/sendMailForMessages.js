@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer";
 
 const sendMailForMessages = async (options) => {
-  console.log('Entered sendMail');
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -9,13 +8,13 @@ const sendMailForMessages = async (options) => {
     port: 587,
     secure: false,
     auth: {
-      user: "jobswitchco@gmail.com",
-      pass: "twezwzjrluonsbrt",
+      user: "noreply@newrole.in",
+      pass: "wvhajyzzgqnzhlhj",
     },
   });
 
   const mailOptions = {
-    from: 'jobswitchco@gmail.com',
+    from: 'noreply@newrole.in',
     to: options.to,
     subject: options.subject,
     html: `
