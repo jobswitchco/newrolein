@@ -2,10 +2,29 @@ import { Box, Typography, Container, Grid } from '@mui/material';
 import directEmployerImage from '../images/business-7768170_1280.jpg';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { Helmet } from "react-helmet";
+
 
 export default function DirectEmployerOutreach() {
   return (
     <>
+     <Helmet>
+        <title>Job Switch Platform Where Employers Contact You | Newrole</title>
+        <meta
+          name="description"
+          content="Tired of applying? On Newrole, verified companies reach out to you directly. No resumes, no spam — just real job switch opportunities that match you."
+        />
+        <meta
+          property="og:title"
+          content="Job Switch Platform Where Employers Contact You | Newrole"
+        />
+        <meta
+          property="og:description"
+          content="Tired of applying? On Newrole, verified companies reach out to you directly. No resumes, no spam — just real job switch opportunities that match you."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <Navbar />
 
       <Container maxWidth="lg" sx={{ py: 10 }}>

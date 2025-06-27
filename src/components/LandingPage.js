@@ -95,7 +95,7 @@ export default function LandingPage() {
         />
         <meta
           property="og:title"
-          content="Turn Audio into Stunning Videos | AudioReel"
+          content="Fastest Way to Switch Jobs | Direct Access to Top Tech Companies"
         />
         <meta
           property="og:description"

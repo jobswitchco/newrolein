@@ -2,10 +2,30 @@ import { Box, Typography, Container, Grid } from '@mui/material';
 import fasterHiringImage from '../images/startup-3267505_1280.jpg'; // Replace with your actual image
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { Helmet } from "react-helmet";
+
 
 export default function FasterHiring() {
   return (
     <>
+      <Helmet>
+        <title>Fast Hiring Platform to Speed Up Recruitment | Newrole</title>
+        <meta
+          name="description"
+          content="Newrole.in helps you hire faster with smart screening and verified profiles. Skip delays and move from shortlist to interview in days, not weeks."
+        />
+        <meta
+          property="og:title"
+          content="Fast Hiring Platform to Speed Up Recruitment | Newrole"
+        />
+        <meta
+          property="og:description"
+          content="Newrole.in helps you hire faster with smart screening and verified profiles. Skip delays and move from shortlist to interview in days, not weeks."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
+
       <Navbar />
 
       <Container maxWidth="lg" sx={{ py: 10 }}>

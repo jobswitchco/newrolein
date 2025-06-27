@@ -3,6 +3,8 @@ import { Box, Typography, Container, Grid } from '@mui/material';
 import profilebasedImage from '../images/man-6086273_1280.jpg'
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { Helmet } from "react-helmet";
+
 
 
 export default function ProfileBasedDiscovery() {
@@ -13,6 +15,23 @@ export default function ProfileBasedDiscovery() {
 
   return (
     <>
+
+      <Helmet>
+            <title>Profile-Based Job Discovery | No Applications Needed | Newrole</title>
+            <meta
+              name="description"
+              content="Tired of applying? With Newrole, your profile does the work. Get discovered by companies based on skills, experience, and goals — no resume spam or cold outreach."
+            />
+            <meta
+              property="og:title"
+              content="Profile-Based Job Discovery | No Applications Needed | Newrole"
+            />
+            <meta
+              property="og:description"
+              content="Tired of applying? With Newrole, your profile does the work. Get discovered by companies based on skills, experience, and goals — no resume spam or cold outreach."
+            />
+            <meta property="og:type" content="website" />
+          </Helmet>
 
     <Navbar />
 

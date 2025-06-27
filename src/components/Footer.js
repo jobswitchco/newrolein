@@ -1,6 +1,5 @@
 import { Grid, Typography, IconButton, Box, Divider } from "@mui/material";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 export default function Footer() {
@@ -204,24 +203,17 @@ export default function Footer() {
             Follow Us
           </Typography>
           <Box display="flex" justifyContent="flex-start" gap={2}>
+           
             <IconButton
-              href="https://www.youtube.com/channel/UCqp363NhrpKpeGlOK2U-hWA"
-              target="_blank"
-              color="inherit"
-              sx={{ "&:hover": { color: "#FF0000" } }}
-            >
-              <YouTubeIcon sx={{ fontSize: 30 }} />
-            </IconButton>
-            <IconButton
-              href="https://www.instagram.com/audioreel/"
+              href="https://www.linkedin.com/company/newrole-in"
               target="_blank"
               color="inherit"
               sx={{ "&:hover": { color: "#E4405F" } }}
             >
-              <InstagramIcon sx={{ fontSize: 30 }} />
+              <LinkedInIcon sx={{ fontSize: 34 }} />
             </IconButton>
             <IconButton
-              href="https://x.com/audioreel"
+              href="https://x.com/newrole_in"
               target="_blank"
               color="inherit"
               sx={{ "&:hover": { color: "#1DA1F2" } }}
