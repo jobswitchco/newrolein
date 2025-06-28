@@ -1,17 +1,6 @@
 import { Box, Grid, Typography, useMediaQuery } from '@mui/material';
-import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 
-
-const CircleImage = styled('img')(({ size }) => ({
-  width: size,
-  height: size,
-  borderRadius: '50%',
-  objectFit: 'cover',
-  border: '3px solid white',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-  position: 'absolute',
-}));
 
 const BannerLandpage = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -20,7 +9,7 @@ const BannerLandpage = () => {
     <Box sx={{ py: isMobile ? 6 : 10, px: 3 }}>
       <Grid container alignItems="center" justifyContent="center" spacing={4}>
         {/* Left Section with Circles */}
-        <Grid item xs={12} md={6} sx={{ position: 'relative', height: isMobile ? 250 : 400 }}>
+        {/* <Grid item xs={12} md={6} sx={{ position: 'relative', height: isMobile ? 250 : 400 }}>
           <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
             <CircleImage
               src="https://randomuser.me/api/portraits/men/32.jpg"
@@ -38,7 +27,7 @@ const BannerLandpage = () => {
               style={{ bottom: isMobile ? 20 : 40, right: isMobile ? 30 : 100 }}
             />
           </Box>
-        </Grid>
+        </Grid> */}
 
         {/* Right Section with Text and Buttons */}
         <Grid item xs={12} md={6}>
@@ -54,7 +43,7 @@ const BannerLandpage = () => {
             </Button> */}
 
                 <div className="col-12 col-md-12 enrollnow-button-credit-card">
-                          <Link to="/login" style={{ textDecoration: 'none' }}>
+                          <Link to="/professional/login" style={{ textDecoration: 'none' }}>
                             <button
                               className="btn signup-btn-grad btn-g-fonts"
                             >

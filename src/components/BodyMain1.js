@@ -11,11 +11,14 @@ import {
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
-import youtube from "../images/woman-5653501_1280.jpg";
+import noresumes from "../images/noresumes.svg";
+import employerSearch from "../images/employersFind.svg";
+import employerHire from "../images/employersHire.svg";
+
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
-import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import WavingHandOutlinedIcon from '@mui/icons-material/WavingHandOutlined';
 import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
 
 function BodyMain1() {
@@ -90,8 +93,8 @@ function BodyMain1() {
      <Grid item xs={12} md={4} sx={{ mt: isMobile ? 4 : 0}}>
       <img  
         className="img-fluid rounded" 
-        src={youtube} 
-        alt="youtube-icon" 
+        src={employerSearch} 
+        alt="employerSearch" 
         data-aos="zoom-in"
         data-aos-delay="250"
       />
@@ -106,11 +109,11 @@ function BodyMain1() {
      <Grid item xs={12} md={6}>
       <Stack sx={{ display : 'flex', flexDirection : 'column', px: isMobile ? 0 : 3}}>
 
-<VisibilityOffOutlinedIcon sx={{ fontSize : '44px', mb: 1}}/>
-<Typography sx={{ fontSize : isMobile ? '18px' : '20px', fontWeight : 500, mb: 2}}>Hide Current Employer</Typography>
+<WavingHandOutlinedIcon sx={{ fontSize : '44px', mb: 1, color : '#261FB3'}}/>
+<Typography sx={{ fontSize : isMobile ? '17px' : '19px', fontWeight : 500, mb: 2}}>No Resumes. No Applications.</Typography>
 <Typography sx={{ fontSize : isMobile ? '16px' : '18px', pr: isMobile ? 0 : 7, mb: isMobile ? 2 : 0}}>
-  Professionals can choose to <span style={{ display : 'inline-block', textDecoration : 'underline', fontWeight : 500}}>hide</span> their current employer's name on their profile, 
-  ensuring <span style={{ display : 'inline-block', textDecoration : 'underline', fontWeight : 500}}>complete privacy</span> while exploring new opportunities without concern of exposure.
+  Working professionals shouldn't need to post <span style={{ display : 'inline-block', textDecoration : 'underline', fontWeight : 500}}> resumes </span> or apply for <span style={{ display : 'inline-block', textDecoration : 'underline', fontWeight : 500}}>jobs.</span> Get discovered by top companies based on your experience and preferences — while staying in your current role.
+
 </Typography>
 
       </Stack>
@@ -119,8 +122,8 @@ function BodyMain1() {
  <Grid item xs={12} md={6} >
       <img  
         className="img-fluid rounded points-image-dimen" 
-        src={youtube} 
-        alt="youtube-icon" 
+        src={noresumes} 
+        alt="noresumes" 
         data-aos="zoom-in"
         data-aos-delay="250"
       />
@@ -134,7 +137,7 @@ function BodyMain1() {
      <Grid item xs={12} md={6}>
       <Stack sx={{ display : 'flex', flexDirection : 'column', px: isMobile ? 0 : 3}}>
 
-<PersonSearchOutlinedIcon sx={{ fontSize : '44px', mb: 1}}/>
+<PersonSearchOutlinedIcon sx={{ fontSize : '44px', mb: 1, color : '#B13BFF'}}/>
 <Typography sx={{ fontSize : isMobile ? '18px' : '20px', fontWeight : 500, mb: 2}}>How Employers Hire</Typography>
 <Typography sx={{ fontSize : isMobile ? '16px' : '18px', pr: isMobile ? 0 : 7, mb: isMobile ? 2 : 0}}>
   Recruiters actively explore professionals based on <span style={{ display : 'inline-block', fontStyle : 'italic', textDecoration : 'underline'}}>role</span>, <span style={{ display : 'inline-block', fontStyle : 'italic', textDecoration : 'underline'}}>experience</span>, and <span style={{ display : 'inline-block', fontStyle : 'italic', textDecoration : 'underline'}}>skills</span>. 
@@ -148,8 +151,8 @@ function BodyMain1() {
  <Grid item xs={12} md={6} >
       <img  
         className="img-fluid rounded points-image-dimen" 
-        src={youtube} 
-        alt="youtube-icon" 
+        src={employerHire} 
+        alt="employerHire" 
         data-aos="zoom-in"
         data-aos-delay="250"
       />

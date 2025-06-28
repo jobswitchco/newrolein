@@ -35,7 +35,8 @@ function BodyMain() {
                 style={{ color: '#09122C' }}
                 data-aos="fade-up"
               >
-                <span className="gradient-text" style={{ display: 'inline' }}>Job Switch?</span> Do It Silently, and Smartly.
+                <span className="gradient-text" style={{ display: 'inline' }}>Job Switch?</span> 
+                <br />Skip the Posts. <br />Ditch the Resumes.
                 <br />
               </h1>
 
@@ -45,7 +46,7 @@ function BodyMain() {
                 data-aos-delay="100"
                 style={{ color : '#777270'}}
               >
-                Only for working professionals. Top companies reach out — you stay anonymous & employed.
+                Only for working IT professionals. Top companies reach out — no resumes, no job posts.
               </h2>
 
             </div>
