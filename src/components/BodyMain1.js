@@ -8,8 +8,6 @@ import {
   useTheme,
   Link
 } from "@mui/material";
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS CSS
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 import noresumes from "../images/noresumes.svg";
 import employerSearch from "../images/employersFind.svg";
@@ -24,13 +22,6 @@ import PersonSearchOutlinedIcon from '@mui/icons-material/PersonSearchOutlined';
 function BodyMain1() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
-
-  useEffect(() => {
-    AOS.init({
-      duration: 100, // Animation duration in ms
-      once: true, // Animation will run once
-    });
-  }, []);
 
   return (
    <>
@@ -93,7 +84,6 @@ function BodyMain1() {
     </Grid>
   </Grid>
 
-  {/* Image (moved without AOS for better performance) */}
   <Grid item xs={12} md={4} sx={{ mt: isMobile ? 4 : 0 }}>
     <img
       className="img-fluid rounded"
@@ -124,8 +114,7 @@ function BodyMain1() {
         className="img-fluid rounded points-image-dimen" 
         src={noresumes} 
         alt="noresumes" 
-        data-aos="zoom-in"
-        data-aos-delay="250"
+      
       />
 
  </Grid>
@@ -153,8 +142,7 @@ function BodyMain1() {
         className="img-fluid rounded points-image-dimen" 
         src={employerHire} 
         alt="employerHire" 
-        data-aos="zoom-in"
-        data-aos-delay="250"
+      
       />
 
  </Grid>
