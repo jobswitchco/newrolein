@@ -27,7 +27,7 @@ function BodyMain1() {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in ms
+      duration: 100, // Animation duration in ms
       once: true, // Animation will run once
     });
   }, []);
@@ -96,7 +96,7 @@ function BodyMain1() {
         src={employerSearch} 
         alt="employerSearch" 
         data-aos="zoom-in"
-        data-aos-delay="250"
+        data-aos-delay="100"
       />
 
     </Grid>
