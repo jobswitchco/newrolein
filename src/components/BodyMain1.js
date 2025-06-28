@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 import noresumes from "../images/noresumes.svg";
-import employerSearch from "../images/employersFind.svg";
 import employerHire from "../images/employersHire.svg";
 
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
@@ -25,74 +24,6 @@ function BodyMain1() {
 
   return (
    <>
- 
-  <Grid
-  container
-  sx={{
-    px: isMobile ? 4 : 10,
-    mb: isMobile ? 10 : 14,
-    alignItems: 'center',
-  }}
->
-  {/* LCP-focused text */}
-  <Grid item xs={12} md={8} sx={{ pr: isMobile ? 0 : 12 }}>
-    <Typography
-      component="h1"
-      variant="h5"
-      sx={{
-        fontSize: { xs: '26px', md: '32px' },
-        fontWeight: 500,
-        color: '#09122C',
-        textAlign: { xs: 'center', md: 'left' },
-        mb: 4,
-      }}
-    >
-      Stop applying for Jobs — Let employers find the talent they need.
-    </Typography>
-
-    <Grid container spacing={4}>
-      {/* Column 1 */}
-      <Grid item xs={12} md={6}>
-        <Typography sx={{ fontSize: '16px', fontWeight: 500, mb: 1 }}>
-          Create Account
-        </Typography>
-        <Typography sx={{ fontSize: '15px', fontWeight: 400, color: '#777270' }}>
-          Create a{' '}
-          <span
-            style={{
-              fontStyle: 'italic',
-              textDecoration: 'underline',
-              color: '#333446',
-            }}
-          >
-            forever-free
-          </span>{' '}
-          account and join a network of verified professionals.
-        </Typography>
-      </Grid>
-
-      {/* Column 2 */}
-      <Grid item xs={12} md={6}>
-        <Typography sx={{ fontSize: '16px', fontWeight: 500, mb: 1 }}>
-          Employment Details
-        </Typography>
-        <Typography sx={{ fontSize: '15px', fontWeight: 400, color: '#777270' }}>
-          Add your current and past roles to help employers understand your experience
-          and expertise.
-        </Typography>
-      </Grid>
-    </Grid>
-  </Grid>
-
-  <Grid item xs={12} md={4} sx={{ mt: isMobile ? 4 : 0 }}>
-    <img
-      className="img-fluid rounded"
-      src={employerSearch}
-      alt="employerSearch"
-      style={{ width: '100%', height: 'auto' }}
-    />
-  </Grid>
-</Grid>
 
    <Grid container sx={{ px : isMobile ? 4 : 10, mb: isMobile ? 10 : 14, alignItems : 'center'}}>
 

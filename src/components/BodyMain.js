@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import employerSearch from "../images/employersFind.svg";
+
 
 function BodyMain() {
 
@@ -51,6 +53,56 @@ function BodyMain() {
 
 
       </div>
+
+        <div className="container py-5">
+      <div className="row align-items-center">
+        {/* Left Content - 8 columns on md and up */}
+        <div className="col-12 col-md-8 mb-4 mb-md-0">
+          <h1 className="fw-medium text-dark mb-4" style={{ fontSize: '32px' }}>
+            Stop applying for Jobs — Let employers find the talent they need.
+          </h1>
+
+          <div className="row">
+            {/* Column 1 */}
+            <div className="col-12 col-md-6 mb-4 mb-md-0">
+              <p className="fw-medium mb-1">Create Account</p>
+              <p style={{ color: '#777270', fontSize: '15px' }}>
+                Create a{' '}
+                <span
+                  style={{
+                    fontStyle: 'italic',
+                    textDecoration: 'underline',
+                    color: '#333446',
+                  }}
+                >
+                  forever-free
+                </span>{' '}
+                account and join a network of verified professionals.
+              </p>
+            </div>
+
+            {/* Column 2 */}
+            <div className="col-12 col-md-6">
+              <p className="fw-medium mb-1">Employment Details</p>
+              <p style={{ color: '#777270', fontSize: '15px' }}>
+                Add your current and past roles to help employers understand your experience
+                and expertise.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Image - 4 columns on md and up */}
+        <div className="col-12 col-md-4">
+          <img
+            src={employerSearch}
+            alt="employerSearch"
+            className="img-fluid rounded"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
 
      
     </>
