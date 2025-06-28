@@ -54,19 +54,19 @@ function BodyMain() {
 
       </div>
 
-        <div className="container py-5">
+        <div className="container py-1 px-5">
       <div className="row align-items-center">
         {/* Left Content - 8 columns on md and up */}
         <div className="col-12 col-md-8 mb-4 mb-md-0">
-          <h1 className="fw-medium text-dark mb-4" style={{ fontSize: '32px' }}>
-            Stop applying for Jobs — Let employers find the talent they need.
+          <h1 className="fw-medium text-dark mb-4" style={{ fontSize: '26px' }}>
+            Stop applying for Jobs— <br/>Let employers find the talent they need.
           </h1>
 
           <div className="row">
             {/* Column 1 */}
             <div className="col-12 col-md-6 mb-4 mb-md-0">
               <p className="fw-medium mb-1">Create Account</p>
-              <p style={{ color: '#777270', fontSize: '15px' }}>
+              <p style={{ color: '#777270', fontSize: '16px' }}>
                 Create a{' '}
                 <span
                   style={{
@@ -84,7 +84,7 @@ function BodyMain() {
             {/* Column 2 */}
             <div className="col-12 col-md-6">
               <p className="fw-medium mb-1">Employment Details</p>
-              <p style={{ color: '#777270', fontSize: '15px' }}>
+              <p style={{ color: '#777270', fontSize: '16px' }}>
                 Add your current and past roles to help employers understand your experience
                 and expertise.
               </p>
