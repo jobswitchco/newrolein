@@ -34,75 +34,75 @@ function BodyMain1() {
 
   return (
    <>
-   <Grid container sx={{ px : isMobile ? 4 : 10, mb: isMobile ? 10 : 14, alignItems : 'center'}}>
+ 
+  <Grid
+  container
+  sx={{
+    px: isMobile ? 4 : 10,
+    mb: isMobile ? 10 : 14,
+    alignItems: 'center',
+  }}
+>
+  {/* LCP-focused text */}
+  <Grid item xs={12} md={8} sx={{ pr: isMobile ? 0 : 12 }}>
+    <Typography
+      component="h1"
+      variant="h5"
+      sx={{
+        fontSize: { xs: '26px', md: '32px' },
+        fontWeight: 500,
+        color: '#09122C',
+        textAlign: { xs: 'center', md: 'left' },
+        mb: 4,
+      }}
+    >
+      Stop applying for Jobs — Let employers find the talent they need.
+    </Typography>
 
-    <Grid item xs={12} md={8} sx={{ pr: isMobile ? 0 : 16}}>
-
-      <Stack sx={{ display : 'flex', flexDirection : 'column', gap: 5}}>
-          <Typography sx={{ fontSize : isMobile ? '26px' : '32px', fontWeight : 500, pr: isMobile ? 0 : 12, textAlign : isMobile ? 'center' : ''}}>Stop applying for Jobs &nbsp;—Let employers find the talent they need.</Typography>
-
-<Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-  {/* First Column */}
-  <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', pr: isMobile ? 0 : 2 }}>
-    <Stack spacing={6} sx={{ height: '100%' }}>
-      {/* Heading Block 1 */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Create Account</Typography>
-        <Typography sx={{ fontSize: '15px', fontWeight: 400, color: '#777270' }}>
-          Create a <span style={{ display : 'inline', fontStyle : 'italic', textDecoration : 'underline', color : '#333446'}}>forever-free&nbsp;</span> account and join a network of verified professionals.
+    <Grid container spacing={4}>
+      {/* Column 1 */}
+      <Grid item xs={12} md={6}>
+        <Typography sx={{ fontSize: '16px', fontWeight: 500, mb: 1 }}>
+          Create Account
         </Typography>
-      </Box>
-
-      {/* Heading Block 2 */}
-      {/* <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1}}>
-        <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>That's it</Typography>
         <Typography sx={{ fontSize: '15px', fontWeight: 400, color: '#777270' }}>
-          Now companies can reach out to you directly for interviews and opportunities.
+          Create a{' '}
+          <span
+            style={{
+              fontStyle: 'italic',
+              textDecoration: 'underline',
+              color: '#333446',
+            }}
+          >
+            forever-free
+          </span>{' '}
+          account and join a network of verified professionals.
         </Typography>
-      </Box> */}
-    </Stack>
-  </Box>
+      </Grid>
 
-  {/* Second Column */}
-  <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', pr: isMobile ? 0 : 2 }}>
-    <Stack spacing={6} sx={{ height: '100%' }}>
-      {/* Heading Block 1 */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Employment Details</Typography>
+      {/* Column 2 */}
+      <Grid item xs={12} md={6}>
+        <Typography sx={{ fontSize: '16px', fontWeight: 500, mb: 1 }}>
+          Employment Details
+        </Typography>
         <Typography sx={{ fontSize: '15px', fontWeight: 400, color: '#777270' }}>
-          Add your current and past roles to help employers understand your experience and expertise.
+          Add your current and past roles to help employers understand your experience
+          and expertise.
         </Typography>
-      </Box>
-
-      {/* Heading Block 2 */}
-      {/* <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>Don't forget</Typography>
-        <Typography sx={{ fontSize: '15px', fontWeight: 400, color: '#777270' }}>
-          to turn off your profile after landing your next role —or you may keep receiving new opportunities.
-        </Typography>
-      </Box> */}
-    </Stack>
-  </Box>
-</Box>
-
-
-      </Stack>
-
+      </Grid>
     </Grid>
+  </Grid>
 
-     <Grid item xs={12} md={4} sx={{ mt: isMobile ? 4 : 0}}>
-      <img  
-        className="img-fluid rounded" 
-        src={employerSearch} 
-        alt="employerSearch" 
-        data-aos="zoom-in"
-        data-aos-delay="100"
-      />
-
-    </Grid>
-
-
-   </Grid>
+  {/* Image (moved without AOS for better performance) */}
+  <Grid item xs={12} md={4} sx={{ mt: isMobile ? 4 : 0 }}>
+    <img
+      className="img-fluid rounded"
+      src={employerSearch}
+      alt="employerSearch"
+      style={{ width: '100%', height: 'auto' }}
+    />
+  </Grid>
+</Grid>
 
    <Grid container sx={{ px : isMobile ? 4 : 10, mb: isMobile ? 10 : 14, alignItems : 'center'}}>
 
