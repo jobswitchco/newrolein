@@ -543,7 +543,11 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
     const user = await USER.findById(userId)
       .populate({
         path: 'employmentDetails',
-        populate: [{ path: 'jobRoleId', model: 'roles' }]
+        populate: [{ path: 'jobRoleId', model: 'roles' }, {
+        path: 'workLocation',
+        model: 'job_locations',
+        select: 'city',
+      }]
       })
       .populate({ path: 'skills', model: 'skills' })
       .populate({ path: 'pref_job_locations', model: 'job_locations' })
@@ -594,7 +598,9 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
       toYear: emp.toYear,
       isCurrentEmployment: emp.isCurrentEmployment,
       totalExpInMonths: emp.totalExpInMonths,
-      projects: emp.projects || []
+      projects: emp.projects || [],
+      workLocation: emp.workLocation,
+
     }));
 
     const skills = (user.skills || []).map(skill => ({

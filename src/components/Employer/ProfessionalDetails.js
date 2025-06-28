@@ -159,7 +159,7 @@ useEffect(() => {
     <Dialog
       open={open}
       fullScreen
-      onClose={onClose} 
+      onClose={()=> onClose(shortlisted)} 
       slotProps={{
         paper: {
           sx: {
@@ -174,7 +174,7 @@ useEffect(() => {
     >
       {/* Close Button */}
       <IconButton
-        onClick={onClose}
+        onClick={()=> onClose(shortlisted)}
         sx={{
           position: 'absolute',
           top: 12,
@@ -237,7 +237,7 @@ useEffect(() => {
 
 
       <Box position="absolute" top={10} right={10}>
-        <IconButton onClick={onClose}>
+        <IconButton onClick={()=> onClose(shortlisted)}>
           <CloseIcon />
         </IconButton>
       </Box>
@@ -445,9 +445,20 @@ useEffect(() => {
 
 
           ) : (
+            <Stack sx={{ display : 'flex', flexDirection : 'row', gap : 1}}>
+
             <Typography sx={{ fontSize: '16px', fontWeight: 400, mt: '4px' }}>
             {emp.companyName}
           </Typography>
+
+  <Divider orientation="vertical" flexItem/>
+
+
+           <Typography sx={{ fontSize: '16px', fontWeight: 400, mt: '4px' }}>
+            {emp.workLocation.city}
+          </Typography>
+
+            </Stack>
           )}
 
           

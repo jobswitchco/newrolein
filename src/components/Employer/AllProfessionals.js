@@ -516,8 +516,10 @@ if (typeof totalExpInMonths === 'number') {
 <ProfessionalDetails
   userId={selectedUserId}
   open={dialogOpen}
-  onClose={() => {
-    setProfessionals(prev => prev.filter(user => user._id !== selectedUserId));
+  onClose={(wasShortlisted) => {
+    if (wasShortlisted) {
+      setProfessionals(prev => prev.filter(user => user._id !== selectedUserId));
+    }
     setDialogOpen(false);
     setSelectedUserId(null);
   }}

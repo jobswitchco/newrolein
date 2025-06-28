@@ -364,9 +364,20 @@ const handleClick = async () => {
 
 
           ) : (
+            <Stack sx={{ display : 'flex', flexDirection : 'row', gap : 1}}>
+
             <Typography sx={{ fontSize: '16px', fontWeight: 400, mt: '4px' }}>
             {emp.companyName}
           </Typography>
+
+  <Divider orientation="vertical" flexItem/>
+
+
+           <Typography sx={{ fontSize: '16px', fontWeight: 400, mt: '4px' }}>
+            {emp.workLocation.city}
+          </Typography>
+
+            </Stack>
           )}
 
           
