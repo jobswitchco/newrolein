@@ -269,11 +269,7 @@ font-family: 'Roboto', sans-serif; */
 @media (min-width: 576px) {
 
      .gradient-text {
-  background: linear-gradient(270deg, #5409DA, #5409DA, #328E6E);
-  background-size: 600% 600%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientMove 4s ease infinite;
+      color: '#5409DA';
   font-size: 66px;
 
 }
@@ -894,11 +890,7 @@ height : 28px;
 @media (max-width: 576px) {
 
       .gradient-text {
-  background: linear-gradient(270deg, #5409DA, #5409DA, #328E6E);
-  background-size: 600% 600%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientMove 4s ease infinite;
+      color: '#5409DA';
   font-size: 44px;
 
 }
