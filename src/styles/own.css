@@ -64,28 +64,6 @@ font-family: 'Roboto', sans-serif; */
   text-decoration: none;
 }
 
-.signup-btn-grad-main {
-  background-image: linear-gradient(
-    to right,
-    #1d976c 0%,
-    #93f9b9 51%,
-    #1d976c 100%
-  );
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  display: block;
-  width: 9rem;
-}
-
-.signup-btn-grad-main:hover {
-  background-position: right center;
-  /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
 
 /* BodyMain component's two buttons styling- END*/
 
@@ -269,7 +247,6 @@ font-family: 'Roboto', sans-serif; */
 @media (min-width: 576px) {
 
      .gradient-text {
-      color: '#5409DA';
   font-size: 66px;
 
 }
@@ -289,30 +266,6 @@ font-family: 'Roboto', sans-serif; */
     height: 50%;
   }
 
-   .signup-btn-grad-mobile-btn {
-    background-image: linear-gradient(
-        to right,
-        #6319f8 0%,
-        #11009E 51%,
-        #7752FE 100%
-      );
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    display: flex;
-    width: fit-content;
-    text-decoration: none;
-    font-weight: 500;
-    background-color: #11009E;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-radius: 22px;
-  
-  }
 
 .cookie-noti-banner-container{
 
@@ -726,15 +679,9 @@ height : 28px;
   }
 
   .signup-btn-grad {
-    background-image: linear-gradient(
-        to right,
-        #6319f8 0%,
-        #11009E 51%,
-        #7752FE 100%
-      );
+   
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
     background-size: 200% auto;
     color: white;
     display: flex;
@@ -742,76 +689,28 @@ height : 28px;
     text-decoration: none;
     height: 50px;
     font-weight: 500;
-    background-color: #11009E;
+    background-color: #261FB3;
     padding-left: 4rem;
     padding-right: 4rem;
   
   }
 
-  .signup-btn-grad:hover {
-    background-position: right center;
-    /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .signup-btn-grad-2 {
-    background-image: linear-gradient(
-      to right,
-      #6319f8 0%,
-      #7752FE 51%,
-      #7752FE 100%
-    );
+     .signup-btn-grad:hover {
+   
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    box-shadow: 0 0 20px #eee;
     display: flex;
-    max-width: 50%;
+    width: 100%;
     text-decoration: none;
-    margin-top: 20px;
+    height: 50px;
     font-weight: 500;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-
+    background-color: #261FB3;
+    padding-left: 4rem;
+    padding-right: 4rem;
   
   }
-
-  .signup-btn-grad-all-features {
-    background-image: linear-gradient(
-      to right,
-      #604CC3 0%,
-      #604CC3 51%,
-      #7752FE 091057%
-    );
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    box-shadow: 0 0 20px #eee;
-    display: flex;
-    max-width: 75%;
-    text-decoration: none;
-    margin-top: 20px;
-    font-weight: 500;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    
-    /** Center the button **/
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.signup-btn-grad-all-features:hover {
-  color: white !important;
-}
 
 
   .subtext{
@@ -890,8 +789,7 @@ height : 28px;
 @media (max-width: 576px) {
 
       .gradient-text {
-      color: '#5409DA';
-  font-size: 44px;
+  font-size: 40px;
 
 }
 
@@ -1077,63 +975,40 @@ margin-right: 1rem;
 
   }
 
-  .signup-btn-grad-2 {
-    background-image: linear-gradient(
-      to right,
-      #6319f8 0%,
-      #7752FE 51%,
-      #7752FE 100%
-    );
+  .signup-btn-grad {
+   
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    box-shadow: 0 0 20px #eee;
     display: flex;
-    max-width: 60%;
+    width: 100%;
     text-decoration: none;
-    margin-top: 20px;
+    height: 50px;
     font-weight: 500;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-
+    background-color: #261FB3;
+    padding-left: 4rem;
+    padding-right: 4rem;
   
   }
 
-  .signup-btn-grad-all-features {
-    background-image: linear-gradient(
-      to right,
-      #604CC3 0%,
-      #604CC3 51%,
-      #7752FE 091057%
-    );
+     .signup-btn-grad:hover {
+   
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
     background-size: 200% auto;
     color: white;
-    box-shadow: 0 0 20px #eee;
     display: flex;
-    max-width: 75%;
+    width: 100%;
     text-decoration: none;
-    margin-top: 20px;
+    height: 50px;
     font-weight: 500;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    
-    /** Center the button **/
-    margin-left: auto;
-    margin-right: auto;
-}
+    background-color: #261FB3;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  
+  }
 
-.signup-btn-grad-all-features:hover {
-  color: white !important;
-}
   .features-main-block{
 
     background-color: #EEEEEE;
@@ -1269,55 +1144,6 @@ margin-right: 1rem;
     margin-top : 6px;
   }
 
-  .signup-btn-grad {
-    background-image: linear-gradient(
-        to right,
-        #6319f8 0%,
-        #11009E 51%,
-        #7752FE 100%
-      );
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    display: flex;
-    width: 100%;
-    text-decoration: none;
-    height: 50px;
-    font-weight: 500;
-    background-color: #11009E;
-    padding-left: 4rem;
-    padding-right: 4rem;
-  
-  }
-
-
-  
-  .signup-btn-grad-mobile-btn {
-    background-image: linear-gradient(
-        to right,
-        #6319f8 0%,
-        #11009E 51%,
-        #7752FE 100%
-      );
-    justify-content: center;
-    align-items: center;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    display: flex;
-    width: fit-content;
-    text-decoration: none;
-    font-weight: 500;
-    background-color: #11009E;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-radius: 22px;
-  
-  }
   
 
   .txt-1 {

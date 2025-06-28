@@ -21,7 +21,7 @@ function BodyMain() {
                 className="txt-2"
                 style={{ color: '#09122C' }}
               >
-                <span className="gradient-text" style={{ display: 'inline' }}>Job Switch?</span> 
+                <span className="gradient-text" style={{ display: 'inline', color: '#261FB3' }}>Job Switch?</span> 
                 <br />Skip the Posts. <br />Ditch the Resumes.
                 <br />
               </h1>
