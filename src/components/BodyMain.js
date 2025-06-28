@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Grid } from '@mui/material';
 
 function BodyMain() {
 
@@ -8,9 +7,7 @@ function BodyMain() {
       <div className="main-hero-box" style={{ position: 'relative', overflow: 'hidden' }}>
 
 
-<Grid container >
 
-  <Grid item xs={12} md={12}>
 
        <div className="main-hero-cutom-div">
 
@@ -19,7 +16,6 @@ function BodyMain() {
 
               <h1
                 className="txt-2"
-                style={{ color: '#09122C' }}
               >
                 <span className="gradient-text" style={{ display: 'inline', color: '#261FB3' }}>Job Switch?</span> 
                 <br />Skip the Posts. <br />Ditch the Resumes.
@@ -51,13 +47,7 @@ function BodyMain() {
 
           </div>
 
-  </Grid>
-
-
-
-     
-
-</Grid>
+ 
 
 
       </div>
