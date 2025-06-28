@@ -1357,7 +1357,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       ) : (
         
         <>
-            <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5, mt : 3}}>
+            <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5}}>
           Joining date
         </Typography>
 
