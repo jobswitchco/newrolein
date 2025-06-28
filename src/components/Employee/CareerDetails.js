@@ -585,8 +585,8 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
                     onClick={handleOpenNameEditDialog}
                   />
                 </Box>
-                <Typography sx={{ fontSize: isSmallScreen ? "12px" : "14px", fontWeight: 300, color: "grey" }}>
-                 Employers see this name. It's anonymous and editable.
+                <Typography sx={{ fontSize: isSmallScreen ? "13px" : "14px", fontWeight: 300, color: "grey" }}>
+                Recruiters see this name. It's editable.
                 </Typography>
               </Stack>
             </Box>
@@ -1131,88 +1131,57 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
     </RadioGroup>
 
     {/* Grid section */}
-    <Grid container spacing={2} mt={1} mb={4}>
-      {/* Company + Toggle */}
-      <Grid item xs={12}>
-      <Box sx={{ mb: 2 }}>
-  <Box
-    sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      mb: 0.5,
-    }}
-  >
-
-<Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
-  {currEmpTrue ? 'Company Name' : 'Current Company'}
-</Typography>
+   
+     <Grid container spacing={2} mt={1} mb={4}>
 
 
-{currEmpTrue ? ('') : (<>
-  <Tooltip
-      title="Select this option to hide your current company from employers and keep your job search private."
-      placement="top-start"
-    >
-      <FormControlLabel
-        control={
-          <Switch
-            size="small"
-            checked={formData.hideCurrentCompany || false} // default to false
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                hideCurrentCompany: e.target.checked,
-              }))
-            }
+ <Grid container spacing={2} sx={{ pl: isSmallScreen ? 2 : 2, mt: 0.5}}>
+
+     <Grid item xs={12} md={6}>
+      <Box>
+          <Box
             sx={{
-              '& .MuiSwitch-thumb': { backgroundColor: '#000000' },
-              '& .MuiSwitch-track': { backgroundColor: 'grey' },
-              '& .MuiSwitch-thumb.Mui-checked': {
-                backgroundColor: 'green',
-              },
-              '& .MuiSwitch-track.Mui-checked': {
-                backgroundColor: 'grey',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              mb: 0.5,
+            }}
+          >
+
+            <Typography sx={{ fontSize: '14px', fontWeight: 500 }}>
+              {currEmpTrue ? 'Company Name' : 'Current Company'}
+            </Typography>
+
+   
+          </Box>
+
+          <TextField
+            label={currEmpTrue?  !formData.companyName ? 'Company Name' : '' : !formData.companyName ? 'Current Company Name' : ''}
+            name="companyName"
+            fullWidth
+            value={formData.companyName}
+            onChange={handleChange}
+            required
+            slotProps={{
+              inputLabel: {
+                sx: {
+                  fontSize: '14px',
+                  '&.Mui-focused': { display: 'none' },
+                  display: 'block',
+                },
+                shrink: false,
               },
             }}
           />
-        }
-        label="Hide from employer"
-        labelPlacement="start"
-        sx={{
-          '.MuiFormControlLabel-label': {
-            fontSize: '12px',
-            color: 'grey',
-          },
-        }}
-      />
-    </Tooltip>
-</>)}
 
-   
-  </Box>
+  
+      </Box>
 
-  <TextField
-    label={currEmpTrue?  !formData.companyName ? 'Company Name' : '' : !formData.companyName ? 'Current Company Name' : ''}
-    name="companyName"
-    fullWidth
-    value={formData.companyName}
-    onChange={handleChange}
-    required
-    slotProps={{
-      inputLabel: {
-        sx: {
-          fontSize: '14px',
-          '&.Mui-focused': { display: 'none' },
-          display: 'block',
-        },
-        shrink: false,
-      },
-    }}
-  />
-</Box>
+      </Grid>
 
-<Grid item xs={12} mt={2}>
+      
+
+<Grid item xs={12} md={6}>
   <Typography sx={{ fontSize: "14px", fontWeight: 500, mb: 0.5 }}>
     Work Location
   </Typography>
@@ -1226,7 +1195,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       onClick={handleToggle}
       fullWidth
       InputProps={{ readOnly: true }}
-      sx={{ cursor: "pointer", mt: 1 }}
+      sx={{ cursor: "pointer" }}
        slotProps={{ inputLabel: { sx: { fontSize: '14px' } } }}
     />
 
@@ -1261,7 +1230,10 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
 
       
-      </Grid>
+
+ </Grid>
+
+   
 
       {/* Designation */}
 
@@ -1606,12 +1578,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 </Box>
   </Grid>
 
-
-
-
-
-
-    
 
     </Grid>
   </DialogContent>

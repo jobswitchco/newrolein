@@ -245,13 +245,13 @@ async function submit(e) {
                     🔒 Verify Identity
                     </Typography>
 
-                    <Typography sx={{ fontSize : '13px', color : '#3C3D37'}}>
+                    <Typography sx={{ fontSize : '15px', color : '#3C3D37'}}>
                     This is a <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>one-time</span> verification process to confirm that you're a <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>working professional.</span>
                     Your work email will <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500, textDecoration : 'underline'}}>never</span> be shared with your current or future employer, or used for any marketing or promotional purposes.
                     </Typography>
 
 
-                    <Typography sx={{ fontSize : '13px', color : '#3C3D37', mt: 2}}>
+                    <Typography sx={{ fontSize : '15px', color : '#3C3D37', mt: 2}}>
                     We ask for this step to maintain a <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>trusted and authentic community</span> of professionals on this platform — ensuring that every listing and profile is <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>real</span>, <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>verified</span>, and <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>safe.</span>
                     </Typography>
 
@@ -309,7 +309,7 @@ async function submit(e) {
     Verify Now
   </Button>
 
-  <Typography sx={{ fontSize : '13px', color : '#3C3D37', mt: 3, mb: 6}}>
+  <Typography sx={{ fontSize : '15px', color : '#3C3D37', mt: 3, mb: 6}}>
 From here on <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>all communications</span> such as interview schedules, profile updates, or job-related notifications will be sent to your personal email <span style={{ display : 'inline-block', color : '#000000', fontWeight : 500}}>{fetchedEmail}&nbsp;</span>
  <br /> —so you stay informed, privately and securely.
                     </Typography>

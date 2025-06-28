@@ -9,6 +9,10 @@ const Skills_Schema = new Schema({
         type: String,
     },
 
+     category: {
+        type: String,
+    },
+
      color: {
         type: String,
     },

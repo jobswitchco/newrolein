@@ -110,7 +110,7 @@ export default function LandingPage() {
       <BodyMain />
       <BodyMain1 />
       <PlatformComparison />
-      <BodyMain2 />
+      {/* <BodyMain2 /> */}
       <ReviewsCarousel />
       <BannerLandpage />
       <Footer />
