@@ -43,7 +43,7 @@ const AccountDetailsPage1 = () => {
             dispatch(logout()); // Clear Redux state
             window.location.href = "/professional/login"; // Ensures full logout
         } catch (error) {
-            console.error("Logout failed:", error);
+            // console.error("Logout failed:", error);
         }
     };
 

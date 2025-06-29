@@ -33,7 +33,7 @@ const JobRoleSelector = ({ selectedRoleId, onRoleSelect }) => {
           setSuggestedRoles(response.data.roles || []);
         }
       } catch (error) {
-        console.error("Error fetching role suggestions:", error);
+        // console.error("Error fetching role suggestions:", error);
       } finally {
         setLoading(false);
       }
@@ -60,7 +60,7 @@ const JobRoleSelector = ({ selectedRoleId, onRoleSelect }) => {
             setSelectedRole(res.data.role);
           }
         } catch (err) {
-          console.error("Error fetching selected role by ID", err);
+          // console.error("Error fetching selected role by ID", err);
         }
       };
       fetchRoleById();

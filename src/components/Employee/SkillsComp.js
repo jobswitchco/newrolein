@@ -66,7 +66,7 @@ function SkillsComp() {
           setSuggestedSkills(response.data.skills || []);
         }
       } catch (error) {
-        console.error("Error fetching skill suggestions:", error);
+        // console.error("Error fetching skill suggestions:", error);
       }
     };
 
@@ -164,7 +164,7 @@ function SkillsComp() {
         }
       }
     } catch (error) {
-      console.error('Error saving data:', error);
+      // console.error('Error saving data:', error);
     }
   };
   

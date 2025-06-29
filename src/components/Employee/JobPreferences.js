@@ -189,7 +189,7 @@ function JobPreferences() {
     }
     return response.data.cities || [];
   } catch (error) {
-    console.error("Error fetching cities:", error);
+    // console.error("Error fetching cities:", error);
     setCities([]);
     return [];
   }
@@ -237,7 +237,7 @@ const handleSave = async () => {
       }
     }
   } catch (error) {
-    console.error("Error saving data:", error);
+    // console.error("Error saving data:", error);
   }
 };
 

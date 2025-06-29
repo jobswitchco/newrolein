@@ -65,7 +65,7 @@ const InvitedTable = () => {
       );
 
       setUsers(response.data.users || []);
-      console.log('users::::::', response.data.users);
+      // console.log('users::::::', response.data.users);
       setTotalPages(response.data.totalPages || 1);
     } catch (error) {
       console.error("Error fetching professionals:", error);

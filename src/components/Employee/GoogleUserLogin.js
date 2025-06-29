@@ -91,8 +91,8 @@ function BrandSignup() {
         setIsLoading(false);
       }
     } catch (err) {
-      console.error(err);
-      toast.error(err?.response?.data?.message || "Login failed. Please try again.");
+      // console.error(err);
+      // toast.error(err?.response?.data?.message || "Login failed. Please try again.");
       setIsLoading(false);
     }
   };
@@ -173,7 +173,7 @@ function BrandSignup() {
             handleLoginSuccess(decoded.email, decoded.given_name, decoded.family_name);
           }}
           onError={() => {
-            console.log('Login Failed');
+            // console.log('Login Failed');
           }}
         />
       </GoogleOAuthProvider>
@@ -325,7 +325,7 @@ function BrandSignup() {
             handleLoginSuccess(decoded.email, decoded.given_name, decoded.family_name);
           }}
           onError={() => {
-            console.log('Login Failed');
+            // console.log('Login Failed');
           }}
         />
       </GoogleOAuthProvider>

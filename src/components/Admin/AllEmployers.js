@@ -21,7 +21,7 @@ const EmployersTable = () => {
       setEmployers(response.data.employers);
       setTotalPages(response.data.totalPages);
     } catch (error) {
-      console.error('Error fetching employers:', error);
+      // console.error('Error fetching employers:', error);
     } finally {
       setLoading(false);
     }

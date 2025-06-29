@@ -185,7 +185,7 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
         
                               if(ress.data.success){
                                 setUserDetails(ress.data.data);
-                                console.log('Data::::::::', ress.data.data);
+                                // console.log('Data::::::::', ress.data.data);
                                 const hasCurrentEmployment = ress.data.data.employmentDetails.some((curr) => curr.isCurrentEmployment);
                                 setCurrEmpTrue(hasCurrentEmployment);
                                 setLoading(false);
@@ -500,7 +500,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       }
       return response.data.cities || [];
     } catch (error) {
-      console.error("Error fetching cities:", error);
+      // console.error("Error fetching cities:", error);
       setCities([]);
       return [];
     }

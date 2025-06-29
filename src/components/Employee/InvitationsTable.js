@@ -60,7 +60,7 @@ const InvitationsTable = () => {
       setTotalPages(res.data.totalPages || 1);
       setPage(res.data.currentPage || pg);
     } catch (error) {
-      console.error("Error fetching invitations:", error);
+      // console.error("Error fetching invitations:", error);
     } finally {
       setLoading(false);
     }

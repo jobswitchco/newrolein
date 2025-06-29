@@ -64,7 +64,7 @@ const ConversationDialog = ({ open, onClose, conversationId, onMessageRead}) => 
        onMessageRead?.(); 
     }
   } catch (err) {
-    console.error("Failed to fetch messages:", err);
+    // console.error("Failed to fetch messages:", err);
   } finally {
     setLoading(false);
   }
@@ -96,7 +96,7 @@ const ConversationDialog = ({ open, onClose, conversationId, onMessageRead}) => 
       setMessageInput("");
       await fetchMessages(); // refresh chat
     } catch (err) {
-      console.error("Error sending message:", err);
+      // console.error("Error sending message:", err);
     }
   };
 
