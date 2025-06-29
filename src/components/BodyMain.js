@@ -20,7 +20,9 @@ function BodyMain() {
                     text-align: center;
                   }
 
-          
+                   
+                    
+
 
           .hero-gradient-text {
               font-family: Inter, system-ui, sans-serif;
@@ -37,6 +39,18 @@ function BodyMain() {
           }
 
           @media (max-width: 768px) {
+
+          .hero-sub-txt {
+                    font-family: Inter, system-ui, sans-serif;
+                    font-display: swap;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    margin-bottom: 1.5rem;
+                    color: #09122C;
+                    line-height: 1.5;
+                    text-align: left;
+                  
+                  }
             
        
              .hero-txt-4 {
@@ -100,6 +114,18 @@ function BodyMain() {
           }
 
            @media (min-width: 576px) {
+
+           .hero-sub-txt {
+                    font-family: Inter, system-ui, sans-serif;
+                    font-display: swap;
+                    font-size: 2rem;
+                    font-weight: 500;
+                    margin-bottom: 1.5rem;
+                    color: #09122C;
+                    line-height: 1.5;
+                    text-align: left;
+                  
+                  }
             
         
 
@@ -193,20 +219,11 @@ function BodyMain() {
         <div className="row align-items-center">
           {/* Left Content */}
           <div className="col-12 col-md-8 mb-4 mb-md-0">
-           <h1
-  style={{
-    fontFamily: 'Inter, system-ui, sans-serif',
-    fontSize: '22px',
-    lineHeight: 1.5,
-    fontWeight: 500,
-    color: '#09122C',
-    marginBottom: '1.5rem',
-    textAlign: 'left',
-  }}
+           <p className="hero-sub-txt"
 >
   Stop applying for Jobs— <br />
   Let employers find the talent they need.
-</h1>
+</p>
 
 
             <div className="row">
