@@ -8,26 +8,20 @@ function BodyMain() {
       <style>
         {`
 
-        .hero-txt-2 {
-                    font-family: Inter, system-ui, sans-serif;
-                    font-display: swap;
-                    font-size: clamp(1.6rem, 5vw + 0.65rem, 3.8rem); /* ~30px to ~66px */
-                    font-weight: 600;
-                    color: #09122C;
-                    line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
-                    padding-left: clamp(1rem, 5vw, 6rem);
-                    padding-right: clamp(1rem, 5vw, 6rem);
-                    text-align: center;
-                  }
+
 
                    
                     
 
 
-          .hero-gradient-text {
+         
+
+          @media (max-width: 768px) {
+
+           .hero-gradient-text {
               font-family: Inter, system-ui, sans-serif;
                     font-display: swap;
-                    font-size: clamp(1.6rem, 5vw + 0.65rem, 3.8rem); /* ~30px to ~66px */
+                    font-size: 1.8rem;
                     font-weight: 600;
               color: #261FB3;
 
@@ -38,7 +32,17 @@ function BodyMain() {
           
           }
 
-          @media (max-width: 768px) {
+           .hero-txt-2 {
+                    font-family: Inter, system-ui, sans-serif;
+                    font-display: swap;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                    color: #09122C;
+                    line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
+                    padding-left: clamp(1rem, 5vw, 6rem);
+                    padding-right: clamp(1rem, 5vw, 6rem);
+                    text-align: center;
+                  }
 
           .hero-sub-txt {
                     font-family: Inter, system-ui, sans-serif;
@@ -114,6 +118,32 @@ function BodyMain() {
           }
 
            @media (min-width: 576px) {
+
+             .hero-gradient-text {
+              font-family: Inter, system-ui, sans-serif;
+                    font-display: swap;
+                    font-size: 3.2rem;
+                    font-weight: 600;
+              color: #261FB3;
+
+                    line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
+                    padding-left: clamp(1rem, 5vw, 6rem);
+                    padding-right: clamp(1rem, 5vw, 6rem);
+                    text-align: center;
+          
+          }
+
+            .hero-txt-2 {
+                    font-family: Inter, system-ui, sans-serif;
+                    font-display: swap;
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: #09122C;
+                    line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
+                    padding-left: clamp(1rem, 5vw, 6rem);
+                    padding-right: clamp(1rem, 5vw, 6rem);
+                    text-align: center;
+                  }
 
            .hero-sub-txt {
                     font-family: Inter, system-ui, sans-serif;
