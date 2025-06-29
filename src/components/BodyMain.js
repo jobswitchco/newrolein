@@ -161,13 +161,19 @@ function BodyMain() {
 
                   .responsive-img {
                     max-width: 100%;
-                    height: 300px;
+                    height: 400px;
                     display: block;
                   }
 
           }
 
            @media (min-width: 576px) {
+
+            .responsive-img {
+                    max-width: 100%;
+                    height: 400px;
+                    display: block;
+                  }
 
         
 
@@ -204,6 +210,8 @@ function BodyMain() {
                   padding-right: 7%;
                   flex-direction: row;
                   align-items: center;
+                  padding-top: 1rem;
+                  padding-bottom: 1rem;
                   }
 
                   .sub-content-div-container{
