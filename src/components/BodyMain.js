@@ -42,6 +42,17 @@ function BodyMain() {
                     text-align: center;
                   }
 
+                   .content-image-container {
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      width: 100%;
+                      box-sizing: border-box;
+                      overflow-x: hidden;
+                      padding-left: 7%;
+                      padding-right: 7%;
+                    }
+
           .hero-sub-txt {
                     font-family: Inter, system-ui, sans-serif;
                     font-display: swap;
@@ -52,7 +63,7 @@ function BodyMain() {
                     line-height: 1.5;
                     text-align: left;
                       width: 100%;
-  overflow-x: hidden;
+                    overflow-x: hidden;
                   
                   }
             
@@ -119,16 +130,7 @@ function BodyMain() {
 
              
 
-                  .content-image-container {
-                      display: flex;
-                      flex-direction: column;
-                      align-items: center;
-                      width: 100%;
-                      box-sizing: border-box;
-                      overflow-x: hidden;
-                      padding-left: 7%;
-                      padding-right: 7%;
-                    }
+                 
 
                   .sub-content-div-container{
 
@@ -323,7 +325,6 @@ function BodyMain() {
         `}
       </style>
 
-      <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
 
         <div className="hero-main-hero-cutom-div">
 
@@ -412,13 +413,10 @@ function BodyMain() {
   <img
               src={employerSearch}
               alt="employerSearch"
-               loading="lazy"
               className="responsive-img"
             />
 
 
-
-</div>
 
 </div>
 
