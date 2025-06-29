@@ -25,7 +25,7 @@ function BodyMain1() {
   return (
    <>
 
-   <Grid container sx={{ px : isMobile ? 4 : 10, mb: isMobile ? 10 : 14, alignItems : 'center'}}>
+   <Grid container sx={{ px : isMobile ? 4 : 10, mb: isMobile ? 10 : 4, alignItems : 'center'}}>
 
      <Grid item xs={12} md={6}>
       <Stack sx={{ display : 'flex', flexDirection : 'column', px: isMobile ? 0 : 3}}>

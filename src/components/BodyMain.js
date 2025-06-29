@@ -9,15 +9,15 @@ function BodyMain() {
         {`
 
         .hero-txt-2 {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(1.875rem, 5vw + 1rem, 4.125rem); /* ~30px to ~66px */
-  font-weight: 600;
-  color: #09122C;
-  line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
-  padding-left: clamp(1rem, 5vw, 6rem);
-  padding-right: clamp(1rem, 5vw, 6rem);
-  text-align: center;
-}
+                    font-family: "Inter", system-ui, sans-serif;
+                    font-size: clamp(1.6rem, 5vw + 0.65rem, 4.0rem); /* ~30px to ~66px */
+                    font-weight: 600;
+                    color: #09122C;
+                    line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
+                    padding-left: clamp(1rem, 5vw, 6rem);
+                    padding-right: clamp(1rem, 5vw, 6rem);
+                    text-align: center;
+                  }
 
           
 
@@ -37,8 +37,8 @@ function BodyMain() {
                 font-weight: 400;
                 line-height: 1.6;
                 text-align: center;
-                padding-left: 14%;
-                padding-right: 14%;
+                padding-left: 10%;
+                padding-right: 10%;
 
               }
 
@@ -170,7 +170,7 @@ function BodyMain() {
             </h1>
 
             <h2 className="hero-txt-4">
-              Only for working IT professionals — no resumes, no job posts.
+              Only for working IT professionals <br/>—no resumes, no job posts.
             </h2>
           </div>
 
@@ -186,7 +186,7 @@ function BodyMain() {
         <div className="row align-items-center">
           {/* Left Content */}
           <div className="col-12 col-md-8 mb-4 mb-md-0">
-            <h1 className="fw-medium text-dark mb-4" style={{ fontSize: '26px' }}>
+            <h1 className="fw-medium text-dark mb-4" style={{ fontSize: '22px', lineHeight: 1.5 }}>
               Stop applying for Jobs— <br />
               Let employers find the talent they need.
             </h1>
