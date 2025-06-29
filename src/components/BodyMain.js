@@ -193,10 +193,21 @@ function BodyMain() {
         <div className="row align-items-center">
           {/* Left Content */}
           <div className="col-12 col-md-8 mb-4 mb-md-0">
-            <h1 className="fw-medium text-dark mb-4" style={{ fontSize: '22px', lineHeight: 1.5 }}>
-              Stop applying for Jobs— <br />
-              Let employers find the talent they need.
-            </h1>
+           <h1
+  style={{
+    fontFamily: 'Inter, system-ui, sans-serif',
+    fontSize: '22px',
+    lineHeight: 1.5,
+    fontWeight: 500,
+    color: '#09122C',
+    marginBottom: '1.5rem',
+    textAlign: 'left',
+  }}
+>
+  Stop applying for Jobs— <br />
+  Let employers find the talent they need.
+</h1>
+
 
             <div className="row">
               <div className="col-12 col-md-6 mb-4 mb-md-0">
