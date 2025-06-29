@@ -18,6 +18,15 @@ function BodyMain() {
 
           @media (max-width: 768px) {
 
+           .new-sub-container{
+
+              padding-left : 9%;
+              padding-right : 9%;
+              display: flex;
+                flex-direction: column;
+                align-items: center;
+                        }
+
            .hero-gradient-text {
               font-family: Inter, system-ui, sans-serif;
                     font-display: swap;
@@ -118,6 +127,15 @@ function BodyMain() {
           }
 
            @media (min-width: 576px) {
+
+           .new-sub-container{
+
+              padding-left : 7%;
+              padding-right : 7%;
+              display: flex;
+                flex-direction: row;
+                align-items: center;
+                        }
 
              .hero-gradient-text {
               font-family: Inter, system-ui, sans-serif;
@@ -245,10 +263,9 @@ function BodyMain() {
         </div>
 
 
-      <div className="container py-1 px-5">
-        <div className="row align-items-center">
+      <div className="new-sub-container">
           {/* Left Content */}
-          <div className="col-12 col-md-8 mb-4 mb-md-0">
+          <div className="col-12 col-md-8">
            <p className="hero-sub-txt"
 >
   Stop applying for Jobs— <br />
@@ -295,7 +312,6 @@ function BodyMain() {
               height="300"
             />
           </div>
-        </div>
       </div>
     </>
   );
