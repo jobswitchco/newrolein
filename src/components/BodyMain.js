@@ -23,7 +23,16 @@ function BodyMain() {
           
 
           .hero-gradient-text {
+              font-family: Inter, system-ui, sans-serif;
+                    font-display: swap;
+                    font-size: clamp(1.6rem, 5vw + 0.65rem, 3.8rem); /* ~30px to ~66px */
+                    font-weight: 600;
               color: #261FB3;
+
+                    line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
+                    padding-left: clamp(1rem, 5vw, 6rem);
+                    padding-right: clamp(1rem, 5vw, 6rem);
+                    text-align: center;
           
           }
 
@@ -161,15 +170,11 @@ function BodyMain() {
 
         <div className="hero-main-hero-cutom-div">
           <div className="col-12 col-md-12 col-lg-12">
-            <h1 className="hero-txt-2">
-              <span className="hero-gradient-text" >
-                Job Switch?
-              </span>
-              <br />
-              Skip the Posts. <br />
-              Ditch the Resumes.
-              <br />
-            </h1>
+          <h1>
+  <div className="hero-gradient-text">Job Switch?</div>
+  <div className= "hero-txt-2">Skip the Posts. <br /> Ditch the Resumes.</div>
+</h1>
+
 
             <h2 className="hero-txt-4">
               Only for working IT professionals <br/>—no resumes, no job posts.
