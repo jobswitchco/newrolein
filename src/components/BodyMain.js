@@ -9,7 +9,7 @@ function BodyMain() {
         {`
 
         .hero-txt-2 {
-                    font-family: "Inter", system-ui, sans-serif;
+                    font-family: system-ui, sans-serif;
                     font-display: swap;
                     font-size: clamp(1.6rem, 5vw + 0.65rem, 4.0rem); /* ~30px to ~66px */
                     font-weight: 600;
@@ -32,7 +32,7 @@ function BodyMain() {
             
        
              .hero-txt-4 {
-                font-family: "Inter";
+                font-family: system-ui, sans-serif;
                 padding-top: 2rem;
                 font-size: 18px;
                 font-weight: 400;
