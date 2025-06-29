@@ -9,13 +9,6 @@ function BodyMain() {
         {`
 
 
-
-                   
-                    
-
-
-         
-
           @media (max-width: 768px) {
 
          
@@ -54,7 +47,6 @@ function BodyMain() {
                     }
 
           .hero-sub-txt {
-                    font-family: Inter, system-ui, sans-serif;
                     font-display: swap;
                     font-size: 1.2rem;
                     font-weight: 500;
@@ -246,7 +238,6 @@ function BodyMain() {
                   }
 
            .hero-sub-txt {
-                    font-family: Inter, system-ui, sans-serif;
                     font-display: swap;
                     font-size: 2rem;
                     font-weight: 500;
