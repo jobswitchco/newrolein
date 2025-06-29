@@ -47,7 +47,6 @@ function BodyMain() {
                     }
 
           .hero-sub-txt {
-                    font-display: swap;
                     font-size: 1.2rem;
                     font-weight: 500;
                     margin-bottom: 1.5rem;
@@ -238,7 +237,6 @@ function BodyMain() {
                   }
 
            .hero-sub-txt {
-                    font-display: swap;
                     font-size: 2rem;
                     font-weight: 500;
                     margin-bottom: 1.5rem;
