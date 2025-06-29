@@ -11,7 +11,7 @@ function BodyMain() {
         .hero-txt-2 {
                     font-family: Inter, system-ui, sans-serif;
                     font-display: swap;
-                    font-size: clamp(1.6rem, 5vw + 0.65rem, 4.0rem); /* ~30px to ~66px */
+                    font-size: clamp(1.6rem, 5vw + 0.65rem, 3.8rem); /* ~30px to ~66px */
                     font-weight: 600;
                     color: #09122C;
                     line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
@@ -23,9 +23,8 @@ function BodyMain() {
           
 
           .hero-gradient-text {
-            background: linear-gradient(90deg, #271bb3, #7c5fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+              color: #261FB3;
+          
           }
 
           @media (max-width: 768px) {
