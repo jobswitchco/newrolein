@@ -209,6 +209,7 @@ export default function Footer() {
               target="_blank"
               color="inherit"
               sx={{ "&:hover": { color: "#E4405F" } }}
+              aria-label="Visit our LinkedIn page"
             >
               <LinkedInIcon sx={{ fontSize: 34 }} />
             </IconButton>
@@ -217,6 +218,7 @@ export default function Footer() {
               target="_blank"
               color="inherit"
               sx={{ "&:hover": { color: "#1DA1F2" } }}
+              aria-label="Visit our Twitter page"
             >
               <TwitterIcon sx={{ fontSize: 30 }} />
             </IconButton>

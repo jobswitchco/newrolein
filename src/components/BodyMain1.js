@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import {
   Typography,
   Stack,
@@ -11,7 +10,6 @@ import {
 import ArrowRightAltOutlinedIcon from "@mui/icons-material/ArrowRightAltOutlined";
 import noresumes from "../images/noresumes.svg";
 import employerHire from "../images/employersHire.svg";
-
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
@@ -22,8 +20,10 @@ function BodyMain1() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); 
 
+
   return (
    <>
+ 
 
    <Grid container sx={{ px : isMobile ? 4 : 10, mb: isMobile ? 10 : 4, alignItems : 'center'}}>
 
@@ -121,7 +121,8 @@ function BodyMain1() {
   target="_blank"
   rel="noopener noreferrer"
   underline="none"
-  sx={{ textDecoration: 'none' }} // removes default underline on hover
+  sx={{ textDecoration: 'none' }}
+  aria-label="Learn more about profile-based discovery"
 >
   <Stack
     sx={{
@@ -166,6 +167,8 @@ function BodyMain1() {
   rel="noopener noreferrer"
   underline="none"
   sx={{ textDecoration: 'none' }} 
+  aria-label="Learn more about employer reachout"
+
 >
 
   
@@ -212,6 +215,8 @@ function BodyMain1() {
   rel="noopener noreferrer"
   underline="none"
   sx={{ textDecoration: 'none' }} 
+  aria-label="Learn more about faster hiring"
+
 >
   <Stack
     sx={{
