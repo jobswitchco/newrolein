@@ -7,6 +7,18 @@ function BodyMain() {
       {/* Inline critical CSS for LCP */}
       <style>
         {`
+
+        .hero-txt-2 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(1.875rem, 5vw + 1rem, 4.125rem); /* ~30px to ~66px */
+  font-weight: 600;
+  color: #09122C;
+  line-height: clamp(2.2rem, 1.0em + 2vh, 5.2rem);
+  padding-left: clamp(1rem, 5vw, 6rem);
+  padding-right: clamp(1rem, 5vw, 6rem);
+  text-align: center;
+}
+
           
 
           .hero-gradient-text {
@@ -17,15 +29,7 @@ function BodyMain() {
 
           @media (max-width: 768px) {
             
-            .hero-txt-2 {
-            font-family: "Inter", system-ui, sans-serif;
-            font-size: 30px;
-            font-weight: 600;
-            color: #09122C;
-            line-height: 1.4;
-            text-align: center;
-
-          }
+       
              .hero-txt-4 {
                 font-family: "Inter";
                 padding-top: 2rem;
@@ -87,16 +91,7 @@ function BodyMain() {
 
            @media (min-width: 576px) {
             
-           .hero-txt-2 {
-            font-family: "Inter", system-ui, sans-serif;
-            font-size: 66px;
-            font-weight: 500;
-            color: #09122C;
-            line-height: 5.2rem;
-            padding-left: 6rem;
-            padding-right: 6rem;
-            text-align: center;
-          }
+        
 
             .hero-txt-4 {
                     font-family: "Inter";
