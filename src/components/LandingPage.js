@@ -1,3 +1,50 @@
+import Navbar from "../components/Navbar";
+import BodyMain from "../components/BodyMain";
+import Footer from "../components/Footer";
+import { Helmet } from "react-helmet";
+// import { useMediaQuery } from "@mui/material";
+import BodyMain1 from "./BodyMain1";
+// import BodyMain2 from "./BodyMain2";
+import ReviewsCarousel from "./ReviewsCard";
+import BannerLandpage from "./BannerLandPage";
+import PlatformComparison from "./PlatformComparison";
+
+export default function LandingPage() {
+
+  return (
+    <>
+      <Helmet>
+        <title>Switch IT Jobs Faster | Verified Offers from Top Companies</title>
+        <meta
+          name="description"
+          content="Find high-paying tech jobs without resumes or fake calls. Newrole connects working professionals directly with top companies. No spam, just real offers."
+        />
+        <meta
+          property="og:title"
+          content="Switch IT Jobs Faster | Verified Offers from Top Companies"
+        />
+        <meta
+          property="og:description"
+          content="Find high-paying tech jobs without resumes or fake calls. Newrole connects working professionals directly with top companies. No spam, just real offers."
+        />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://www.newrole.in" />
+       <meta name="google-site-verification" content="z3S3YuiRlbJVB_u7hB9OAhXaVifVn7bO5dzXyyHM-bc" />
+      </Helmet>
+
+      <Navbar />
+      <BodyMain />
+      <BodyMain1 />
+      <PlatformComparison />
+      {/* <BodyMain2 /> */}
+      <ReviewsCarousel />
+      <BannerLandpage />
+      <Footer />
+
+     
+    </>
+  );
+}
 // // import Head from 'next/head'
 // import React, { useEffect } from 'react';
 // import Navbar from '../components/Navbar'
@@ -20,6 +67,21 @@
 //     gtag('js', new Date());
 //     gtag('config', 'G-D1X0WBG5EL');
 //   }, []);
+
+  // const [cookieConsent, setCookieConsent] = useState(null);
+  // const isMobile = useMediaQuery("(max-width:600px)");
+
+  // useEffect(() => {
+  //   if (cookieConsent === "accept") {
+      // Initialize Google Analytics only if the user accepts cookies
+  //     window.dataLayer = window.dataLayer || [];
+  //     function gtag() {
+  //       window.dataLayer.push(arguments);
+  //     }
+  //     gtag("js", new Date());
+  //     gtag("config", "G-D1X0WBG5EL");
+  //   }
+  // }, [cookieConsent]);
 
 //   return (
 
@@ -57,65 +119,4 @@
 // }
 
 // import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import BodyMain from "../components/BodyMain";
-import Footer from "../components/Footer";
-import { Helmet } from "react-helmet";
-// import { useMediaQuery } from "@mui/material";
-import BodyMain1 from "./BodyMain1";
-import BodyMain2 from "./BodyMain2";
-import ReviewsCarousel from "./ReviewsCard";
-import BannerLandpage from "./BannerLandPage";
-import PlatformComparison from "./PlatformComparison";
 
-export default function LandingPage() {
-  // const [cookieConsent, setCookieConsent] = useState(null);
-  // const isMobile = useMediaQuery("(max-width:600px)");
-
-  // useEffect(() => {
-  //   if (cookieConsent === "accept") {
-      // Initialize Google Analytics only if the user accepts cookies
-  //     window.dataLayer = window.dataLayer || [];
-  //     function gtag() {
-  //       window.dataLayer.push(arguments);
-  //     }
-  //     gtag("js", new Date());
-  //     gtag("config", "G-D1X0WBG5EL");
-  //   }
-  // }, [cookieConsent]);
-
-
-  return (
-    <>
-      <Helmet>
-        <title>Fastest Way to Switch Jobs | Direct Access to Top Tech Companies</title>
-        <meta
-          name="description"
-          content="Switch to high-paying IT jobs faster with Newrole. Explore verified openings from trusted companies. No spam, no fake calls — just real tech career moves."
-        />
-        <meta
-          property="og:title"
-          content="Fastest Way to Switch Jobs | Direct Access to Top Tech Companies"
-        />
-        <meta
-          property="og:description"
-          content="Switch to high-paying IT jobs faster with Newrole. Explore verified openings from trusted companies. No spam, no fake calls — just real tech career moves."
-        />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://www.newrole.in" />
-       <meta name="google-site-verification" content="z3S3YuiRlbJVB_u7hB9OAhXaVifVn7bO5dzXyyHM-bc" />
-      </Helmet>
-
-      <Navbar />
-      <BodyMain />
-      <BodyMain1 />
-      <PlatformComparison />
-      {/* <BodyMain2 /> */}
-      <ReviewsCarousel />
-      <BannerLandpage />
-      <Footer />
-
-     
-    </>
-  );
-}
