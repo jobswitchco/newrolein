@@ -322,7 +322,7 @@ const handleToggleSwitch = async (event) => {
 </Grid>
                 )}
 
-<Box
+{/* <Box
   sx={{
     mt: 4,
     width: '100%',
@@ -341,7 +341,7 @@ const handleToggleSwitch = async (event) => {
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowFullScreen
   ></iframe>
-</Box>
+</Box> */}
 
 
     </Box>
