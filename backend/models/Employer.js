@@ -61,6 +61,14 @@ const Employer_Schema = new Schema({
         type: Number
     },
 
+      last_login: {
+  type: Date
+},
+
+loginHistory: [{
+  type: Date
+}],
+
     is_del: {
         type: Boolean,
         default: false

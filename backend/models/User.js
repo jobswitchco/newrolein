@@ -107,6 +107,14 @@ tabViewDurations: [{
         type: Number
     },
 
+      last_login: {
+  type: Date
+},
+
+loginHistory: [{
+  type: Date
+}],
+
 
     is_del: {
         type: Boolean,

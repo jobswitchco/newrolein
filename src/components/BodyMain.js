@@ -341,11 +341,11 @@ function BodyMain() {
 
 {/* content div  */}
   <div>
-
+{/* 
           <div className="hero-sub-txt">
             Stop applying for Jobs— <br />
             Let employers find the talent they need.
-          </div>
+          </div> */}
 
 
 <div className="sub-content-div-container">

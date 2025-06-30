@@ -66,13 +66,13 @@ router.post("/user-login-gmail", async (req, res) => {
   try {
     const { email, firstName, lastName } = req.body;
 
-
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
     }
 
     let user = await USER.findOne({ email });
 
+    const now = new Date();
     let wasNew = false;
 
     if (!user) {
@@ -82,8 +82,19 @@ router.post("/user-login-gmail", async (req, res) => {
         firstName,
         lastName,
         is_google_user: true,
+        last_login: now,
+        loginHistory: [now]
       });
       wasNew = true;
+    } else {
+      // Update last_login and append to loginHistory
+      await USER.updateOne(
+        { _id: user._id },
+        {
+          $set: { last_login: now },
+          $push: { loginHistory: now }
+        }
+      );
     }
 
     const token = await generateJWTtoken(user._id, user.email);
@@ -91,8 +102,7 @@ router.post("/user-login-gmail", async (req, res) => {
     res.cookie("token_professional", token, {
       httpOnly: true,
       secure: false,
-      // sameSite: "Strict", 
-      sameSite: "Lax", 
+      sameSite: "Lax",
     });
 
     return res.status(200).json({

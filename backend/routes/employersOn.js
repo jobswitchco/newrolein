@@ -142,14 +142,12 @@ router.post("/change-password", authenticateToken, async (req, res) => {
   }
 });
 
-
 router.post("/employer-login", async (req, res, next) => {
-
   try {
     const { email, password } = req.body;
 
     if (!email || !password) {
-     return res.status(400).send({
+      return res.status(400).send({
         error: "All fields are mandatory",
         data: null,
         message: "Please provide all fields",
@@ -160,34 +158,41 @@ router.post("/employer-login", async (req, res, next) => {
 
     if (!user) {
       return res.status(400).send({
-        error: "User does not exists!",
+        error: "User does not exist!",
         data: null,
-        message: "User does not exists!",
+        message: "User does not exist!",
       });
     }
 
     const token = await generateJWTtoken(user._id, user.email);
 
-
-    bcrypt.compare(password, user.password, function async (err1, result) {
+    bcrypt.compare(password, user.password, async function (err1, result) {
       if (result === true) {
+        const now = new Date();
 
-      res.cookie("token_employer", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "Lax", 
-      });
-  
-      return res.status(200).json({
-        success: true,
-        user: {
-          user_id: user._id,
-          user_email: user.email,
-        },
-        token,
-      });
+        // Update last_login and push to loginHistory
+        await Employer.updateOne(
+          { _id: user._id },
+          {
+            $set: { last_login: now },
+            $push: { loginHistory: now }
+          }
+        );
 
+        res.cookie("token_employer", token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "Lax",
+        });
 
+        return res.status(200).json({
+          success: true,
+          user: {
+            user_id: user._id,
+            user_email: user.email,
+          },
+          token,
+        });
       } else {
         return res.status(400).send({
           error: "email, password mismatch",
@@ -195,7 +200,6 @@ router.post("/employer-login", async (req, res, next) => {
           message: "Wrong Email or Password",
         });
       }
-
     });
   } catch (error) {
     return res.status(500).send({
@@ -205,6 +209,7 @@ router.post("/employer-login", async (req, res, next) => {
     });
   }
 });
+
 
 router.post("/check-resetPin-withDb", async function (req, res) {
 
