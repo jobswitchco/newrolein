@@ -84,7 +84,7 @@ const ResponsiveDrawer = ({ window }) => {
         </ListItem>
       </List>
 
-      <Box sx={{ flexGrow: 1 }} />
+      <Box />
 
       <List>
         <ListItem disablePadding>
