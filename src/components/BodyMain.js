@@ -91,37 +91,45 @@ function BodyMain() {
                 height: 50px;
                 font-weight: 500;
                 background-color: #261FB3;
-                padding-left: 4rem;
-                padding-right: 4rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
                 margin-top: 3rem;
-                  border-radius: 26px;
                       border-width: 0px;
+                       /* Rounded only on left side */
+                      border-top-left-radius: 26px;
+                      border-bottom-left-radius: 26px;
+
+                      /* Remove full border-radius */
+                      border-top-right-radius: 0;
+                      border-bottom-right-radius: 0;
 
               
               }
 
-              .hero-signup-btn-grad:hover {
-   
-                    justify-content: center;
-                    align-items: center;
-                    background-size: 200% auto;
-                    color: white;
-                    display: flex;
-                    width: 100%;
-                    text-decoration: none;
-                    height: 50px;
-                    font-weight: 500;
-                    background-color: #261FB3;
-                    padding-left: 4rem;
-                    padding-right: 4rem;
-                    margin-top: 3rem;
+              .hero-signup-btn-grad-second {
+                justify-content: center;
+                align-items: center;
+                color: white;
+                display: flex;
+                width: 100%;
+                text-decoration: none;
+                height: 50px;
+                font-weight: 500;
+                background-color: #261FB3;
+                padding-left: 2.75rem;
+                padding-right: 2.75rem;
+                margin-top: 3rem;
+                border-width: 0px;
 
-                  
-                  }
+                /* Rounded only on left side */
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
 
-             
+                /* Remove full border-radius */
+                border-top-right-radius: 26px;
+                border-bottom-right-radius: 26px;
+              }
 
-                 
 
                   .sub-content-div-container{
 
@@ -272,8 +280,7 @@ function BodyMain() {
                       padding-bottom: 6rem;
                     }
 
-                     .hero-signup-btn-grad {
-   
+                   .hero-signup-btn-grad {
                       justify-content: center;
                       align-items: center;
                       color: white;
@@ -283,19 +290,23 @@ function BodyMain() {
                       height: 50px;
                       font-weight: 500;
                       background-color: #261FB3;
-                      padding-left: 4rem;
-                      padding-right: 4rem;
+                      padding-left: 3rem;
+                      padding-right: 3rem;
                       margin-top: 3rem;
-                      border-radius: 26px;
                       border-width: 0px;
-                    
+
+                      /* Rounded only on left side */
+                      border-top-left-radius: 26px;
+                      border-bottom-left-radius: 26px;
+
+                      /* Remove full border-radius */
+                      border-top-right-radius: 0;
+                      border-bottom-right-radius: 0;
                     }
 
-                  .hero-signup-btn-grad:hover {
-                  
+                  .hero-signup-btn-grad-second {
                     justify-content: center;
                     align-items: center;
-                    background-size: 200% auto;
                     color: white;
                     display: flex;
                     width: 100%;
@@ -306,8 +317,15 @@ function BodyMain() {
                     padding-left: 4rem;
                     padding-right: 4rem;
                     margin-top: 3rem;
+                    border-width: 0px;
 
-                  
+                    /* Rounded only on left side */
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+
+                    /* Remove full border-radius */
+                    border-top-right-radius: 26px;
+                    border-bottom-right-radius: 26px;
                   }
 
           }
@@ -328,11 +346,16 @@ function BodyMain() {
             </h2>
 
 
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Link to="/professional/login" style={{ textDecoration: 'none' }}>
-                <button className="hero-signup-btn-grad">Enroll now</button>
-              </Link>
-            </div>
+         <div style={{ display: 'flex', justifyContent: 'center', gap: '1px' }}>
+  <Link to="/professional/login" style={{ textDecoration: 'none' }}>
+    <button className="hero-signup-btn-grad">Enrol now</button>
+  </Link>
+
+  <Link to="/professional/login" style={{ textDecoration: 'none' }}>
+    <button className="hero-signup-btn-grad-second">Login</button>
+  </Link>
+</div>
+
 
         </div>
 

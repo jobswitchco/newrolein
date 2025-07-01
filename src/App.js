@@ -5,54 +5,50 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { lazy, Suspense } from 'react';
 
-// Non-lazy component
 import LandingPage from './components/LandingPage.js';
+import VerifyWorkMail from './components/Employee/VerifyWorkMail.js';
+import UserSideNavBar from './components/Employee/UserSideNavBar.js';
+import EmployerSideNavBar from './components/Employer/EmployerSideNavBar.js';
+import Support from './components/Employee/Support.js';
+import Profile from './components/Employee/Profile.js';
+import ForgotPassword from './components/Employee/ForgotPassword.js';
+import Pricing from './components/Pricing.js';
+import Terms from './components/Terms.js';
+import PrivacyPolicy from './components/PrivacyPolicy.js';
+import CancellationRefund from './components/CancellationRefund.js';
+import ShippingPolicy from './components/ShippingPolicy.js';
+import ContactUs from './components/ContactUs.js';
+import ProfileSettings from './components/Employee/Profile.js';
+import AccountDetails from './components/Employee/AccountDetails.js';
+import EmployerAccountDetails from './components/Employer/AccountDetails.js';
+import GoogleApiDisclosure from './components/GoogleApiDisclosure.js';
+import DisclosurePolicy from './components/DisclosurePolicy.js';
+import TrustCenter from './components/TrustCenter.js';
+import AboutUs from './components/AboutUs.js';
+import YouTubeDisclosure from './components/YoutubeApiDisclosure.js';
+import Security from './components/Security.js';
+import EmployeeLogin from './components/Employee/GoogleUserLogin.js';
+import CareerDetails from './components/Employee/CareerDetails.js';
+import ProfileBasedDiscovery from './components/ProfileDiscovery.js';
+import DirectEmployerOutreach from './components/EmployerReachout.js';
+import FasterHiring from './components/FasterHiring.js';
+import EmployerLogin from './components/Employer/EmployerLogin.js';
+import EmployerSignup from './components/Employer/EmployerSignup.js';
+import AdminSideBar from './components/Admin/AdminSideBar.js';
+import AllEmployers from './components/Admin/AllEmployers.js';
+import ProfessionalsTable from './components/Employer/AllProfessionals.js';
+import ShortlistTable from './components/Employer/ShortlistTable.js';
+import InvitedTable from './components/Employer/InvitedTable.js';
+import InvitationsTable from './components/Employee/InvitationsTable.js';
+import DashboardOverview from './components/Employee/Dashboard.js';
 
-// Lazy-loaded components
-const VerifyWorkMail = lazy(() => import('./components/Employee/VerifyWorkMail'));
-const UserSideNavBar = lazy(() => import('./components/Employee/UserSideNavBar'));
-const EmployerSideNavBar = lazy(() => import('./components/Employer/EmployerSideNavBar'));
-const Support = lazy(() => import('./components/Employee/Support'));
-const Profile = lazy(() => import('./components/Employee/Profile'));
-const ForgotPassword = lazy(() => import('./components/Employee/ForgotPassword'));
-const Pricing = lazy(() => import('./components/Pricing'));
-const Terms = lazy(() => import('./components/Terms'));
-const PrivacyPolicy = lazy(() => import('./components/PrivacyPolicy'));
-const CancellationRefund = lazy(() => import('./components/CancellationRefund'));
-const ShippingPolicy = lazy(() => import('./components/ShippingPolicy'));
-const ContactUs = lazy(() => import('./components/ContactUs'));
-const ProfileSettings = lazy(() => import('./components/Employee/Profile'));
-const AccountDetails = lazy(() => import('./components/Employee/AccountDetails'));
-const EmployerAccountDetails = lazy(() => import('./components/Employer/AccountDetails'));
-const GoogleApiDisclosure = lazy(() => import('./components/GoogleApiDisclosure'));
-const DisclosurePolicy = lazy(() => import('./components/DisclosurePolicy'));
-const TrustCenter = lazy(() => import('./components/TrustCenter'));
-const AboutUs = lazy(() => import('./components/AboutUs'));
-const YouTubeDisclosure = lazy(() => import('./components/YoutubeApiDisclosure'));
-const Security = lazy(() => import('./components/Security'));
-const EmployeeLogin = lazy(() => import('./components/Employee/GoogleUserLogin'));
-const CareerDetails = lazy(() => import('./components/Employee/CareerDetails'));
-const ProfileBasedDiscovery = lazy(() => import('./components/ProfileDiscovery'));
-const DirectEmployerOutreach = lazy(() => import('./components/EmployerReachout'));
-const FasterHiring = lazy(() => import('./components/FasterHiring'));
-const EmployerLogin = lazy(() => import('./components/Employer/EmployerLogin'));
-const EmployerSignup = lazy(() => import('./components/Employer/EmployerSignup'));
-const AdminSideBar = lazy(() => import('./components/Admin/AdminSideBar'));
-const AllEmployers = lazy(() => import('./components/Admin/AllEmployers'));
-const ProfessionalsTable = lazy(() => import('./components/Employer/AllProfessionals'));
-const ShortlistTable = lazy(() => import('./components/Employer/ShortlistTable'));
-const InvitedTable = lazy(() => import('./components/Employer/InvitedTable'));
-const InvitationsTable = lazy(() => import('./components/Employee/InvitationsTable'));
-const DashboardOverview = lazy(() => import('./components/Employee/Dashboard'));
 
 function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div className="App">
         <Router>
-          <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/professional/login" element={<EmployeeLogin />} />
@@ -101,7 +97,6 @@ function App() {
                 {/* Other global routes */}
               </Route>
             </Routes>
-          </Suspense>
         </Router>
 
         <ToastContainer

@@ -47,6 +47,8 @@ import SkillsComp from "./SkillsComp";
 import JobPreferences from "./JobPreferences";
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import JobRoleSelector from "./JobRoleSelector";
+import UANDetails from "./UANDetails";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -937,6 +939,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
       <SkillsComp />
       <JobPreferences />
+      <UANDetails />
 
 
           </div>
@@ -1249,7 +1252,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       </Grid>
 
         {/* CTC */}
-      {formData.employmentType !== 'Internship' && (
+      {( formData.employmentType !== 'Internship' && !currEmpTrue ) && (
       <Grid item xs={12} md={6}>
   <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
   {currEmpTrue?  'CTC' : 'Current CTC'}
@@ -1517,7 +1520,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
   </Stack>
 
   <Typography sx={{ marginTop: '12px', fontSize: '14px', color: 'grey' }} mb={2}>
-      Details like job title, company name, etc, help employers understand your work
+      Share projects you worked on in this organization to showcase your contributions.
     </Typography>
 
     <Box mt={2}>

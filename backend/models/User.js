@@ -115,6 +115,16 @@ loginHistory: [{
   type: Date
 }],
 
+uanNumber: {
+  type: String,
+  default: ''
+},
+
+linkedinUrl: {
+  type: String,
+  default: ''
+},
+
 
     is_del: {
         type: Boolean,
