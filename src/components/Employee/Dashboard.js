@@ -127,7 +127,7 @@ const handleToggleSwitch = async (event) => {
   return (
 
 
-    <Box sx={{ p: { xs: 2, md: 4 }, mt: { xs: 0, md: 2}, mb: 8 }}>
+    <Box sx={{ p: { xs: 2, md: 4 }, mt: { xs: 0, md: 2}, mb: 12 }}>
      
  { loading ? ( <Box
                   sx={{
