@@ -48,6 +48,7 @@ import JobPreferences from "./JobPreferences";
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import JobRoleSelector from "./JobRoleSelector";
 import UANDetails from "./UANDetails";
+import Certifications from "./Certifications";
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -940,6 +941,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       <SkillsComp />
       <JobPreferences />
       <UANDetails />
+      <Certifications />
 
 
           </div>

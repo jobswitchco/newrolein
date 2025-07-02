@@ -83,7 +83,7 @@ const UANDetails = () => {
 
   return (
     <>
-    <Box sx={{  border: "1px solid grey", p: 3,  borderRadius: "8px",  mt: 2, mb : 12}}>
+    <Box sx={{  border: "1px solid grey", p: 3,  borderRadius: "8px",  mt: 2}}>
 
        <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1, alignItems : 'center', mb: 0.5}}>
                         <RecentActors sx={{ fontSize : '22px'}} />

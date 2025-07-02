@@ -212,11 +212,11 @@ function SkillsComp() {
                         <CircularProgress size="small" sx={{ color : '#71C0BB'}}/>
                       </Box>) : userDetails?.skills?.length > 0 ? (
         userDetails.skills.map((skill) => (
-          <Box key={skill._id} sx={{ display: "inline-block", mr: 1 }}>
+          <Box key={skill._id} sx={{ display: "inline-block", mr: 1, mt: 0.5 }}>
             <Chip
               label={skill.name}
               onDelete={() => handleDeleteDialogOpen(skill._id)}
-              sx={{ backgroundColor : '#E4E0E1', mb: isSmallScreen ? '6px' : ''}}
+              sx={{ backgroundColor : skill.color, mb: isSmallScreen ? '6px' : ''}}
             />
           </Box>
         ))

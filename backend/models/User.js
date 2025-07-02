@@ -125,6 +125,14 @@ linkedinUrl: {
   default: ''
 },
 
+certifications: [
+  {
+    certificationName: {type: String},
+    issuedBy: {type: String},
+    issuedOn: {type: Date}
+  }
+],
+
 
     is_del: {
         type: Boolean,

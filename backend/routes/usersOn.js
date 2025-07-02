@@ -305,6 +305,87 @@ router.post("/update-user-additional-details", authenticateToken, async (req, re
   }
 });
 
+router.post('/get-user-certifications', authenticateToken, async (req, res) => {
+  try {
+      if (!req.user) {
+      return res.status(401).json({ valid: false, message: "Invalid token" });
+    }
+
+    const userId = req.user.user_id   
+
+    const user = await USER.findById(userId).select('certifications');
+    res.json({ success: true, data: user.certifications || [] });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
+
+router.post('/add-user-certification', authenticateToken, async (req, res) => {
+  try {
+
+     if (!req.user) {
+      return res.status(401).json({ valid: false, message: "Invalid token" });
+    }
+
+    const userId = req.user.user_id   
+
+    const { certificationName, issuedBy, issuedOn } = req.body;
+
+    await USER.findByIdAndUpdate(userId, {
+      $push: {
+        certifications: { certificationName, issuedBy, issuedOn }
+      }
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
+
+router.put("/update-user-certification", authenticateToken, async (req, res) => {
+  try {
+     if (!req.user) {
+      return res.status(401).json({ valid: false, message: "Invalid token" });
+    }
+
+    const userId = req.user.user_id   
+    const { certId, certificationName, issuedBy, issuedOn } = req.body;
+    await USER.updateOne(
+      { _id: userId, "certifications._id": certId },
+      {
+        $set: {
+          "certifications.$.certificationName": certificationName,
+          "certifications.$.issuedBy": issuedBy,
+          "certifications.$.issuedOn": issuedOn,
+        },
+      }
+    );
+    res.json({ success: true });
+  } catch {
+    res.json({ success: false });
+  }
+});
+
+router.delete("/delete-user-certification", authenticateToken, async (req, res) => {
+  try {
+
+      if (!req.user) {
+      return res.status(401).json({ valid: false, message: "Invalid token" });
+    }
+
+    const userId = req.user.user_id  
+
+    const { certId } = req.body;
+    await USER.findByIdAndUpdate(userId, {
+      $pull: { certifications: { _id: certId } },
+    });
+    res.json({ success: true });
+  } catch {
+    res.json({ success: false });
+  }
+});
+
 
 router.get("/verify-login-token-refresh-token", authenticateToken, async (req, res) => {
     try {
