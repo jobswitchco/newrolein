@@ -17,7 +17,7 @@ const password = process.env.SMTP_PASSWORD;
   });
 
   const mailOptions = {
-    from: 'noreply@newrole.in',
+    from: '"Newrole" <noreply@newrole.in>',
     to: options.to,
     subject: options.subject,
     html: `

@@ -576,7 +576,7 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
     const basicDetails = {
       name: user.applicantName,
       email: user.email,
-      phone: user.phone,
+      phone: user.mobile_number,
       city: user.city,
       country: user.country,
     };
