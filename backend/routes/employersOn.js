@@ -16,6 +16,7 @@ router.use(cookieParser());
 import authenticateToken from "../middleware/authenticateTokenEmployer.js";
 import generateJWTtoken  from "../middleware/generateJWTtoken.js";
 import mongoose from 'mongoose';
+import sendMailShortlist from "../utils/sendMailShortlist.js";
 
 
 
@@ -580,6 +581,11 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
       country: user.country,
     };
 
+      const otherDetails = {
+      linkedinUrl: user?.linkedinUrl,
+      certifications: user?.certifications || [],
+    };
+
     const jobPreferences = {
       pref_company_type: user.pref_company_type,
       pref_job_locations: user.pref_job_locations || [],
@@ -620,7 +626,8 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
       jobPreferences,
       skills,
       isShortlisted,
-      isInvited
+      isInvited,
+      otherDetails
     });
   } catch (error) {
     console.error('❌ Error in /get-professional-details:', error);
@@ -700,6 +707,15 @@ router.post('/shortlist-a-candidate', authenticateToken, async (req, res) => {
         short_listed : true,
         created_at: new Date(),
       });
+
+          const user = await USER.findById(userId).select('email');
+
+          const options = {
+        to: user.email.toLowerCase(),
+        subject: "Shortlist Confirmation on Newrole.in",
+      };
+
+      await sendMailShortlist(options);
     }
 
     res.json({ success: true });

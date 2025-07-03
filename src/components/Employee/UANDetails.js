@@ -92,7 +92,7 @@ const UANDetails = () => {
       
                       </Stack>
 
-                      <Typography sx={{ mb: 3, fontSize: '14px', color: '#093FB4'}}>Profiles with a verified UAN & LinkedIn URL attract 10x more recruiter views.</Typography>
+                      <Typography sx={{ mb: 3, fontSize: '14px', color: '#093FB4'}}>Profiles with a valid UAN & LinkedIn URL attract 10x more recruiter views.</Typography>
      
 
    {["uanNumber", "linkedinUrl"].map((field) => (

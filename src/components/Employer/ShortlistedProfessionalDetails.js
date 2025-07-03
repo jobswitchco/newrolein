@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import {
-  Box, Typography, Grid, Avatar, CircularProgress, Dialog, IconButton, DialogContent, Divider, Chip, Stack, Tabs, Tab, Tooltip
+  Box, Typography, Grid, Avatar, CircularProgress, Dialog, IconButton, DialogContent, Divider, Chip, Stack, Tabs, Tab, Accordion, AccordionSummary, AccordionDetails
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/CloseOutlined';
 import axios from 'axios';
@@ -10,15 +10,15 @@ import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutli
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+
 
 
 const ShortlistedProfessionalDetails = ({userId, open, onClose}) => {
   const [user, setUser] = useState(null);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  // const baseUrl = "http://localhost:8001/employersOn";
       const baseUrl="/api/employersOn";
-
   const [activeTab, setActiveTab] = useState(0);
    const [shortlisted, setShortlisted] = useState(false);
    const [invited, setInvited] = useState(false);
@@ -141,8 +141,20 @@ const handleClick = async () => {
     );
   }
 
-  const { basicDetails, employmentDetails = [], jobPreferences, skills =[]} = user;
+  const { basicDetails, employmentDetails = [], jobPreferences, otherDetails, skills =[]} = user;
+  const tabsConfig = [];
 
+if (employmentDetails?.length > 0) {
+  tabsConfig.push({ label: 'Employment Details', key: 'employment' });
+}
+
+if (otherDetails?.certifications?.length > 0) {
+  tabsConfig.push({ label: 'Certifications', key: 'certifications' });
+}
+
+if (jobPreferences && Object.keys(jobPreferences).length > 0) {
+  tabsConfig.push({ label: 'Job Preferences', key: 'preferences' });
+}
   return (
     
     <Dialog 
@@ -316,14 +328,21 @@ const handleClick = async () => {
           {/* Right Panel */}
         <Grid item xs={12} md={8} sx={{ mt: 3, pl: 2 }}>
   {/* Tabs Header */}
-  <Tabs value={activeTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary">
-    <Tab label="Employment Details" sx={{ textTransform : 'none'}}/>
-    <Tab label="Projects" sx={{ textTransform : 'none'}}/>
-    <Tab label="Job Preferences" sx={{ textTransform : 'none'}}/>
+{!isLoading && (
+  <Tabs
+    value={activeTab}
+    onChange={(e, newValue) => setActiveTab(newValue)}
+    indicatorColor="primary"
+    textColor="primary"
+  >
+    {tabsConfig.map((tab, index) => (
+      <Tab key={tab.key} label={tab.label} sx={{ textTransform: "none" }} />
+    ))}
   </Tabs>
+)}
 
   <Box mt={2}>
- {activeTab === 0 && (
+ {tabsConfig[activeTab]?.key === "employment" && employmentDetails &&  (
   <Box>
    {activeTab === 0 && (
   <Box>
@@ -333,37 +352,14 @@ const handleClick = async () => {
       .map((emp, index) => (
         <Box key={emp._id || index} sx={{ mt: 4, mb: 6 }}>
           <Stack direction="row" alignItems="center" gap={2}>
-            <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>
+            <Typography sx={{ fontSize: '16px', fontWeight: 500 }}>
               {emp.jobRole?.name}
             </Typography>
           
           </Stack>
 
-          {emp.hideCompanyName ? (
-           <Tooltip
-  title={
-    emp.hideCompanyName
-      ? 'Current company name is hidden by the working professional.'
-      : ''
-  }
-  arrow
->
-  <Typography
-    sx={{
-      fontSize: '16px',
-      fontWeight: 400,
-      mt: '4px',
-      filter: emp.hideCompanyName ? 'blur(3px)' : 'none',
-      userSelect: emp.hideCompanyName ? 'none' : 'auto',
-      cursor: emp.hideCompanyName ? 'help' : 'default'
-    }}
-  >
-    {emp.companyName}
-  </Typography>
-</Tooltip>
+        
 
-
-          ) : (
             <Stack sx={{ display : 'flex', flexDirection : 'row', gap : 1}}>
 
             <Typography sx={{ fontSize: '16px', fontWeight: 400, mt: '4px' }}>
@@ -378,9 +374,7 @@ const handleClick = async () => {
           </Typography>
 
             </Stack>
-          )}
 
-          
 
           <Stack direction="row" mt="4px" gap={1}>
             <Typography sx={{ fontSize: '16px', fontWeight: 400 }}>
@@ -415,7 +409,7 @@ const handleClick = async () => {
             </Stack>
           </Stack>
 
-          {emp.employmentType !== 'Internship' && (
+          { (emp.employmentType !== 'Internship' && emp.isCurrentEmployment) && (
             <Stack direction="row" alignItems="center" gap={1} mt={1}>
               <Typography sx={{ fontSize: '16px', fontWeight: 400 }}>
                 <Box component="span" sx={{ color: 'grey' }}>
@@ -442,6 +436,137 @@ const handleClick = async () => {
             </Stack>
           )}
 
+{emp.projects?.length > 0 && (
+  <Accordion
+    sx={{
+      mt: 2,
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+      border: 'none',
+      '&::before': { display: 'none' }, // removes divider line
+    }}
+    disableGutters
+    elevation={0}
+  >
+    <AccordionSummary
+      aria-controls="project-details-content"
+      id="project-details-header"
+      sx={{
+        px: 0,
+        py: 0.5,
+        minHeight: 'auto',
+        '& .MuiAccordionSummary-content': {
+          margin: 0,
+        },
+      }}
+    >
+      <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1}}>
+      <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Projects</Typography>
+        <ExpandMoreOutlinedIcon />
+
+      </Stack>
+    </AccordionSummary>
+
+    <AccordionDetails sx={{ px: 0, pt: 1 }}>
+     {emp.projects.map((proj, index) => (
+  <Box key={index} sx={{ mb: 2, p: 2, backgroundColor: '#FAFAFA', borderRadius: 2 }}>
+    <Typography sx={{ fontWeight: 500, fontSize: '16px', mb: 1 }}>{proj.projectName}</Typography>
+
+    <Grid container spacing={1}>
+
+      {proj?.roleInProject && 
+      (
+      <>
+         <Grid item xs={12} sm={2}>
+        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Role:</Typography>
+      </Grid>
+      <Grid item xs={12} sm={10}>
+        <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject || 'N/A'}</Typography>
+      </Grid>
+      </>
+
+      )}
+     
+ {proj?.projectSummary && 
+      (
+      <>
+      <Grid item xs={12} sm={2}>
+        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Summary:</Typography>
+      </Grid>
+      <Grid item xs={12} sm={10}>
+        <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary || 'N/A'}</Typography>
+      </Grid>
+      </>
+      )}
+
+       {proj?.responsibilities && 
+      (
+      <>
+    
+      <Grid item xs={12} sm={2}>
+        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Responsibilities:</Typography>
+      </Grid>
+      <Grid item xs={12} sm={10}>
+        <Typography sx={{ fontSize: '15px' }}>{proj.responsibilities || 'N/A'}</Typography>
+      </Grid>
+      </>
+      )}
+
+        {proj?.projectImpact && 
+      (
+      <>
+    
+       <Grid item xs={12} sm={2}>
+        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Impact:</Typography>
+      </Grid>
+      <Grid item xs={12} sm={10}>
+        <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact || 'N/A'}</Typography>
+      </Grid>
+      </>
+      )}
+
+         {proj.projectLinks?.length > 0 && (
+
+          <>
+
+         <Grid item xs={12} sm={2}>
+        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links:</Typography>
+        </Grid>
+         <Grid item xs={12} sm={10}>
+        {proj.projectLinks.map((link, idx) => (
+          <Typography
+            key={idx}
+            component="a"
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: '#3A59D1',
+              textDecoration: 'underline',
+              fontSize: '14px',
+              display: 'block',
+              mb: 0.5,
+            }}
+          >
+            {link}
+          </Typography>
+        ))}
+        </Grid>
+        </>
+    )}
+
+
+    
+    </Grid>
+
+ 
+  </Box>
+))}
+
+    </AccordionDetails>
+  </Accordion>
+
+)}
      
         </Box>
       ))}
@@ -452,90 +577,30 @@ const handleClick = async () => {
 )}
 
 
- {activeTab === 1 && (
-  <Box>
-    {employmentDetails
-      ?.filter(emp => emp.projects && emp.projects.length > 0)
-      .map((emp, empIndex) => (
-        <Box key={emp._id || empIndex} mb={2}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 1 }}>
-            @ {emp.companyName || 'Company'}
-          </Typography>
-
-          {emp.projects.map((proj, projIndex) => (
-            <Box
-              key={projIndex}
-              sx={{
-                mt: 1.5,
-                p: 2,
-                backgroundColor: '#FAFAFA',
-                borderRadius: 2,
-              }}
-            >
-              <Typography sx={{ fontSize: '16px', fontWeight: 500, mb: 2 }}>
-                {proj.projectName}
+ {tabsConfig[activeTab]?.key === "certifications" && (
+   <Box sx={{ display: 'flex' }}>
+       
+        <Box sx={{ px: 2, mt: 2}}>
+          {otherDetails?.certifications?.length > 0 ? (
+            otherDetails.certifications.map((cert, idx) => (
+              <Box key={idx} sx={{ mb: 1 }}>
+               <Typography sx={{fontSize: '16px', fontWeight: 500 }}>{cert.certificationName}</Typography>
+                              <Typography sx={{ fontSize : '15px', color: '#000000'}}>{cert.issuedBy}</Typography>
+                              <Typography sx={{ fontSize : '15px', color: 'grey'}}>
+                Issued on: {new Date(cert.issuedOn).toLocaleDateString("en-GB")}
               </Typography>
-
-              <Grid container spacing={1} mb={1}>
-                <Grid item sx={{ width: 80 }}>
-                  <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Role</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject}</Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={1} mb={1}>
-                <Grid item sx={{ width: 80 }}>
-                  <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Summary</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary}</Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container spacing={1} mb={1}>
-                <Grid item sx={{ width: 80 }}>
-                  <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Impact</Typography>
-                </Grid>
-                <Grid item xs>
-                  <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact}</Typography>
-                </Grid>
-              </Grid>
-
-              {proj.projectLinks?.length > 0 && (
-                <Box mt={2}>
-                  <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links:</Typography>
-                  {proj.projectLinks.map((link, linkIndex) => (
-                    <Typography
-                      key={linkIndex}
-                      component="a"
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        color: '#3A59D1',
-                        textDecoration: 'underline',
-                        fontSize: '14px',
-                        display: 'block',
-                        mb: 0.5,
-                        wordBreak: 'break-word',
-                      }}
-                    >
-                      {link}
-                    </Typography>
-                  ))}
-                </Box>
-              )}
-            </Box>
-          ))}
+              </Box>
+            ))
+          ) : (
+            <Typography>N/A</Typography>
+          )}
         </Box>
-      ))}
-  </Box>
+      </Box>
 )}
 
 
-{activeTab === 2 && (
+ {tabsConfig[activeTab]?.key === "preferences" && (
+
   <Box sx={{ mt: 5}}>
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       <Box sx={{ display: 'flex' }}>
