@@ -44,7 +44,7 @@ const mailOptions = {
         </p>
 
         <div style="margin-top: 40px; background: #FFFFFF; padding: 15px; text-align: center; font-size: 13px; color: #777;">
-          © ${new Date().getFullYear()} JobSwitch / Newrole.in. All rights reserved.
+          © ${new Date().getFullYear()} Newrole.in. All rights reserved.
           <br/>
           <img src="https://storage.googleapis.com/newroleinbucket/desk-logo.jpg" alt="Newrole.in" width="40" style="margin-top: 10px;" />
         </div>
