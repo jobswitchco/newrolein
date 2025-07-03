@@ -239,7 +239,7 @@ const handleToggleSwitch = async (event) => {
   </Box>
 </Grid>
 
- {/* Invitations Box */}
+ {/* Shortlisted Box */}
   <Grid item xs={12} sm={6} md={3}>
   <Box
     sx={{
@@ -254,23 +254,23 @@ const handleToggleSwitch = async (event) => {
     }}
   >
     <Stack sx={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Typography sx={{ fontSize: isMobile ? '16px' : '18px', mb: 2, fontWeight: 500 }}>Invitations</Typography>
+      <Typography sx={{ fontSize: isMobile ? '16px' : '18px', mb: 2, fontWeight: 500 }}>Shortlisted</Typography>
       <Typography sx={{ fontSize: isMobile ? '12px' : '14px', mb: 2, fontWeight: 400, ml: '4px', color: 'grey', mt: 0.5 }}>
-        (total)
+        (times)
       </Typography>
     </Stack>
 
     <Box sx={{ display: 'flex', justifyContent: 'center', flexGrow: 1, alignItems: 'center' }}>
-      <Typography sx={{ fontSize: isMobile ? '22px' : '32px', fontWeight: 600 }}>{userDetails.totalInvitations}</Typography>
+      <Typography sx={{ fontSize: isMobile ? '22px' : '32px', fontWeight: 600 }}>{userDetails.totalShortlists}</Typography>
     </Box>
 
-    {userDetails?.totalInvitations === 0 ? (
+    {userDetails?.totalShortlists === 0 ? (
       <Typography sx={{ fontSize: '12px', textAlign: 'center', color: 'text.secondary', mt: isMobile ? 2 : 0 }}>
         No worries. Keep your profile active!
       </Typography>
     ) : (
       <Typography sx={{ fontSize: '12px', textAlign: 'center', color: '#237804', mt: isMobile ? 2 : 0 }}>
-        🎉 New job opportunities.
+        🎉 New role opportunities.
       </Typography>
     )}
   </Box>

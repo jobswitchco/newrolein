@@ -20,7 +20,6 @@ import {
     RadioGroup,
     Radio,
     FormLabel,
-    Switch,
     Tooltip,
     Select,
     IconButton,
@@ -45,11 +44,10 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import SkillsComp from "./SkillsComp";
 import JobPreferences from "./JobPreferences";
+import UANDetails from "./UANDetails";
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import JobRoleSelector from "./JobRoleSelector";
-import UANDetails from "./UANDetails";
 import Certifications from "./Certifications";
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -61,9 +59,7 @@ function CareerDetails() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  // const baseUrl = "http://localhost:8001/usersOn";
       const baseUrl="/api/usersOn";
-
   const [ loading, setLoading ] = useState(false);
   const [ userDetails, setUserDetails ] = useState({});
   const [open, setOpen] = useState(false);
@@ -188,7 +184,7 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
         
                               if(ress.data.success){
                                 setUserDetails(ress.data.data);
-                                // console.log('Data::::::::', ress.data.data);
+                                console.log('Data::::::::', ress.data.data);
                                 const hasCurrentEmployment = ress.data.data.employmentDetails.some((curr) => curr.isCurrentEmployment);
                                 setCurrEmpTrue(hasCurrentEmployment);
                                 setLoading(false);
@@ -503,7 +499,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       }
       return response.data.cities || [];
     } catch (error) {
-      // console.error("Error fetching cities:", error);
+      console.error("Error fetching cities:", error);
       setCities([]);
       return [];
     }
@@ -588,7 +584,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
                   />
                 </Box>
                 <Typography sx={{ fontSize: isSmallScreen ? "13px" : "14px", fontWeight: 300, color: "grey" }}>
-                Recruiters see this name. It's editable.
+                 Recruiters see this name. It's editable.
                 </Typography>
               </Stack>
             </Box>
@@ -605,6 +601,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
           </Box>
 
           <div >
+            
           
             <Box
               sx={{
@@ -745,7 +742,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
 {isSmallScreen ? (
   <>
-  {emp.employmentType !== 'Internship' && (
+  {(emp.employmentType !== 'Internship' && emp.isCurrentEmployment) && (
     <>
 
   <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center'}}>
@@ -786,7 +783,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 )}
 </>) : (
   <>
-  {emp.employmentType !== 'Internship' && (
+  {(emp.employmentType !== 'Internship' && emp.isCurrentEmployment) && (
   <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
 
   <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center' }}>
@@ -835,7 +832,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 {emp.projects?.length > 0 && (
   <Accordion
     sx={{
-      mt: 1,
+      mt: 2,
       backgroundColor: 'transparent',
       boxShadow: 'none',
       border: 'none',
@@ -845,7 +842,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
     elevation={0}
   >
     <AccordionSummary
-      expandIcon={<ExpandMoreOutlinedIcon />}
       aria-controls="project-details-content"
       id="project-details-header"
       sx={{
@@ -857,7 +853,11 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
         },
       }}
     >
+      <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1}}>
       <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Projects</Typography>
+        <ExpandMoreOutlinedIcon />
+
+      </Stack>
     </AccordionSummary>
 
     <AccordionDetails sx={{ px: 0, pt: 1 }}>
@@ -866,38 +866,66 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
     <Typography sx={{ fontWeight: 500, fontSize: '16px', mb: 1 }}>{proj.projectName}</Typography>
 
     <Grid container spacing={1}>
-      <Grid item xs={12} sm={2}>
+
+      {proj?.roleInProject && 
+      (
+      <>
+         <Grid item xs={12} sm={2}>
         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Role:</Typography>
       </Grid>
       <Grid item xs={12} sm={10}>
         <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject || 'N/A'}</Typography>
       </Grid>
+      </>
 
+      )}
+     
+ {proj?.projectSummary && 
+      (
+      <>
       <Grid item xs={12} sm={2}>
         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Summary:</Typography>
       </Grid>
       <Grid item xs={12} sm={10}>
         <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary || 'N/A'}</Typography>
       </Grid>
+      </>
+      )}
 
+       {proj?.responsibilities && 
+      (
+      <>
+    
       <Grid item xs={12} sm={2}>
         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Responsibilities:</Typography>
       </Grid>
       <Grid item xs={12} sm={10}>
         <Typography sx={{ fontSize: '15px' }}>{proj.responsibilities || 'N/A'}</Typography>
       </Grid>
+      </>
+      )}
 
-      <Grid item xs={12} sm={2}>
+        {proj?.projectImpact && 
+      (
+      <>
+    
+       <Grid item xs={12} sm={2}>
         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Impact:</Typography>
       </Grid>
       <Grid item xs={12} sm={10}>
         <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact || 'N/A'}</Typography>
       </Grid>
-    </Grid>
+      </>
+      )}
 
-    {proj.projectLinks?.length > 0 && (
-      <Box mt={2}>
+         {proj.projectLinks?.length > 0 && (
+
+          <>
+
+         <Grid item xs={12} sm={2}>
         <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links:</Typography>
+        </Grid>
+         <Grid item xs={12} sm={10}>
         {proj.projectLinks.map((link, idx) => (
           <Typography
             key={idx}
@@ -916,8 +944,15 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
             {link}
           </Typography>
         ))}
-      </Box>
+        </Grid>
+        </>
     )}
+
+
+    
+    </Grid>
+
+ 
   </Box>
 ))}
 
@@ -1020,7 +1055,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
   name="isCurrentEmployment"
   value={formData.isCurrentEmployment}
   onChange={handleChange}
-  sx={{ gap: 5, marginTop: '6px' }}
+  sx={{ gap: isSmallScreen ? 2 : 5, marginTop: '6px' }}
 >
 
 
@@ -1120,7 +1155,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       name="employmentType"
       value={formData.employmentType}
       onChange={handleChange}
-      sx={{ gap: 5 }}
+      sx={{ gap: isSmallScreen ? 1 : 5 }}
     >
       <FormControlLabel
         value="Full-time"
@@ -1134,9 +1169,11 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       />
     </RadioGroup>
 
+
+
+
     {/* Grid section */}
-   
-     <Grid container spacing={2} mt={1} mb={4}>
+    <Grid container spacing={2} mt={1} mb={4}>
 
 
  <Grid container spacing={2} sx={{ pl: isSmallScreen ? 2 : 2, mt: 0.5}}>
@@ -1254,7 +1291,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       </Grid>
 
         {/* CTC */}
-      {( formData.employmentType !== 'Internship' && !currEmpTrue ) && (
+      {( formData.employmentType !== 'Internship' && !currEmpTrue )&& (
       <Grid item xs={12} md={6}>
   <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
   {currEmpTrue?  'CTC' : 'Current CTC'}
@@ -1288,7 +1325,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       onChange={handleChange}
       required
       fullWidth
-      sx={{ flex: 1 }}
+      sx={{ flex: 1}}
       slotProps={{
         inputLabel: {
           sx: {
@@ -1584,6 +1621,11 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
 
     </Grid>
+
+
+
+
+
   </DialogContent>
 
 </Dialog>

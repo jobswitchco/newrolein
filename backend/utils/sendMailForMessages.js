@@ -2,6 +2,9 @@ import nodemailer from "nodemailer";
 
 const sendMailForMessages = async (options) => {
 
+const password = process.env.SMTP_PASSWORD;
+
+
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -9,7 +12,7 @@ const sendMailForMessages = async (options) => {
     secure: false,
     auth: {
       user: "noreply@newrole.in",
-      pass: "wvhajyzzgqnzhlhj",
+      pass: password,
     },
   });
 

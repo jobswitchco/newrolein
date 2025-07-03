@@ -1,11 +1,10 @@
-
 import { useEffect, useState } from 'react';
 import {
   Box, Typography, Grid, Avatar, CircularProgress, Dialog, IconButton, DialogContent, Divider, Chip, Stack, Tabs, Tab, Accordion, AccordionSummary, AccordionDetails
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/CloseOutlined';
 import axios from 'axios';
-import manImage from '../../images/man-6086273_1280.jpg';
+import manImage from '../../images/profile-pic.svg';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -155,6 +154,11 @@ if (otherDetails?.certifications?.length > 0) {
 if (jobPreferences && Object.keys(jobPreferences).length > 0) {
   tabsConfig.push({ label: 'Job Preferences', key: 'preferences' });
 }
+if (otherDetails) {
+  tabsConfig.push({ label: 'Connect', key: 'connect' });
+}
+
+
   return (
     
     <Dialog 
@@ -638,6 +642,56 @@ if (jobPreferences && Object.keys(jobPreferences).length > 0) {
             : "N/A"}
         </Typography>
       </Box>
+    </Box>
+  </Box>
+)}
+
+ {tabsConfig[activeTab]?.key === "connect" && (
+
+  <Box sx={{ mt: 5}}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+     
+     {otherDetails?.linkedinUrl && (
+        <Box sx={{ display: 'flex' }}>
+        <Typography sx={{ fontSize : '15px', fontWeight: 500, width: 240 }}>LinkedIn</Typography>
+     <Typography
+            component="a"
+            href={otherDetails?.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: '#3A59D1',
+              textDecoration: 'underline',
+              fontSize: '14px',
+              display: 'block',
+              mb: 0.5,
+            }}
+          >
+            {otherDetails?.linkedinUrl}
+          </Typography>
+
+      </Box>
+
+     )}
+    
+
+       <Box sx={{ display: 'flex' }}>
+        <Typography sx={{ fontSize : '15px', fontWeight: 500, width: 240 }}>Email</Typography>
+       <Typography>
+  {basicDetails?.email}
+</Typography>
+
+      </Box>
+
+       <Box sx={{ display: 'flex' }}>
+        <Typography sx={{ fontSize : '15px', fontWeight: 500, width: 240 }}>Mobile</Typography>
+       <Typography>
+  +91 {basicDetails?.phone}
+</Typography>
+
+      </Box>
+
+
     </Box>
   </Box>
 )}

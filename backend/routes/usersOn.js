@@ -1113,13 +1113,18 @@ router.get("/profile-completion", authenticateToken, async (req, res) => {
 
     const profileViewsCount = user.profileViews?.length || 0;
     const openForJobs = user.openForJobs;
-    const totalInvitations = await CONVERSATION.countDocuments({ professional: userId });
+    const totalShortlists = await SHORTLIST.countDocuments({
+  user_id: userId,
+  short_listed: true,
+  is_del: false,
+});
+
 
     return res.status(200).json({
       success: true,
       completionPercentage: completion,
       profileViews: profileViewsCount,
-      totalInvitations: totalInvitations,
+      totalShortlists: totalShortlists,
       openForJobs: openForJobs
     });
 
