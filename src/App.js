@@ -11,6 +11,7 @@ import VerifyWorkMail from './components/Employee/VerifyWorkMail.js';
 import UserSideNavBar from './components/Employee/UserSideNavBar.js';
 import EmployerSideNavBar from './components/Employer/EmployerSideNavBar.js';
 import Support from './components/Employee/Support.js';
+import EmployerSupport from './components/Employer/Support.js';
 import Profile from './components/Employee/Profile.js';
 import ForgotPassword from './components/Employee/ForgotPassword.js';
 import Pricing from './components/Pricing.js';
@@ -86,6 +87,7 @@ function App() {
                 <Route path="shortlisted_candidates" element={<ShortlistTable />} />
                 <Route path="invited_candidates" element={<InvitedTable />} />
                 <Route path="account/details" element={<EmployerAccountDetails />} />
+                <Route path="support" element={<EmployerSupport />} />
               </Route>
 
               <Route path="/admin/*" element={<AdminSideBar />}>
