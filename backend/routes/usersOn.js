@@ -4,6 +4,7 @@ const router = express.Router();
 import bcrypt from "bcryptjs";
 import EmploymentDetails from "../models/EmploymentDetails.js";
 import USER from "../models/User.js";
+import SHORTLIST from "../models/Shortlists.js";
 import JobLocations from "../models/JobLocations.js";
 import CONVERSATION from "../models/Conversation.js";
 import MESSAGE from "../models/Messages.js";
