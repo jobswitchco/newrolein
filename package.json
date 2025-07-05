@@ -61,14 +61,7 @@
       "--no-sandbox"
     ],
     "include": [
-      "/",
-      "/employer/login",
-      "/verify/workmail",
-      "/onboard/agency/pricing",
-      "/about_us",
-      "/contact",
-      "/terms",
-      "/privacy_policy"
+      "/"
     ]
   },
   "eslintConfig": {
