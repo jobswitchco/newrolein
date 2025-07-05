@@ -6,28 +6,24 @@ import {
   Typography,
   CircularProgress,
   Stack,
-   Dialog,
+  Dialog,
   DialogContent
 } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {RecentActors} from '@mui/icons-material';
+import { RecentActors } from '@mui/icons-material';
 import { IconButton } from "@mui/material";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
-
-
-// const baseUrl = "http://localhost:8001/usersOn";
       const baseUrl="/api/usersOn";
 
 
 const UANDetails = () => {
-  const [editing, setEditing] = useState({ uanNumber: false, linkedinUrl: false });
-  const [inputValues, setInputValues] = useState({ uanNumber: "", linkedinUrl: "" });
+  const [editing, setEditing] = useState(false);
+  const [linkedinUrl, setLinkedinUrl] = useState("");
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState({ uanNumber: false, linkedinUrl: false });
-  const [helpDialog, setHelpDialog] = useState({ open: false, field: "" });
-
+  const [saving, setSaving] = useState(false);
+  const [helpDialogOpen, setHelpDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -35,10 +31,7 @@ const UANDetails = () => {
         setLoading(true);
         const res = await axios.post(`${baseUrl}/get-user-additional-details`, {}, { withCredentials: true });
         if (res.data.success) {
-          setInputValues({
-            uanNumber: res.data.data.uanNumber || "",
-            linkedinUrl: res.data.data.linkedinUrl || ""
-          });
+          setLinkedinUrl(res.data.data.linkedinUrl || "");
         } else {
           toast.error("Failed to fetch user details");
         }
@@ -52,24 +45,24 @@ const UANDetails = () => {
     fetchDetails();
   }, []);
 
-  const handleSave = async (field) => {
+  const handleSave = async () => {
     try {
-      setSaving((prev) => ({ ...prev, [field]: true }));
+      setSaving(true);
       const res = await axios.post(
         `${baseUrl}/update-user-additional-details`,
-        { [field]: inputValues[field] },
+        { linkedinUrl },
         { withCredentials: true }
       );
       if (res.data.success) {
-        toast.success(`${field === "uanNumber" ? "UAN Number" : "LinkedIn URL"} updated`);
-        setEditing((prev) => ({ ...prev, [field]: false }));
+        toast.success("LinkedIn URL updated");
+        setEditing(false);
       } else {
         toast.error("Failed to update");
       }
     } catch (err) {
       toast.error("Error while saving");
     } finally {
-      setSaving((prev) => ({ ...prev, [field]: false }));
+      setSaving(false);
     }
   };
 
@@ -83,75 +76,65 @@ const UANDetails = () => {
 
   return (
     <>
-    <Box sx={{  border: "1px solid grey", p: 3,  borderRadius: "8px",  mt: 2}}>
+      <Box sx={{ border: "1px solid grey", p: 3, borderRadius: "8px", mt: 2 }}>
+        <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', mb: 0.5 }}>
+          <RecentActors sx={{ fontSize: '22px' }} />
+          <Typography sx={{ fontSize: "16px", fontWeight: 500, color: '#FF4F0F' }}>
+            Additional Details
+          </Typography>
+        </Stack>
 
-       <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1, alignItems : 'center', mb: 0.5}}>
-                        <RecentActors sx={{ fontSize : '22px'}} />
-              <Typography sx={{ fontSize: "16px", fontWeight: 500, color : '#FF4F0F' }}>Additional Details</Typography>
-      
-      
-                      </Stack>
+        <Typography sx={{ mb: 3, fontSize: '14px', color: '#093FB4' }}>
+          Profiles with a valid LinkedIn URL attract 10x more recruiters.
+        </Typography>
 
-                      <Typography sx={{ mb: 3, fontSize: '14px', color: '#093FB4'}}>Profiles with a valid UAN & LinkedIn URL attract 10x more recruiter views.</Typography>
-     
+        <Box mb={3}>
+          <Box display="flex" alignItems="center" gap={2}>
+            <TextField
+              fullWidth
+              label="LinkedIn URL"
+              value={linkedinUrl}
+              onClick={() => setEditing(true)}
+              onChange={(e) => setLinkedinUrl(e.target.value)}
+              InputProps={{
+                readOnly: !editing,
+              }}
+            />
+            {editing && (
+              <Button
+                variant="contained"
+                size="small"
+                onClick={handleSave}
+                disabled={saving}
+              >
+                {saving ? "Saving..." : "Save"}
+              </Button>
+            )}
+          </Box>
 
-   {["uanNumber", "linkedinUrl"].map((field) => (
-  <Box key={field} mb={3}>
-    <Box display="flex" alignItems="center" gap={2}>
-      <TextField
-        fullWidth
-        label={field === "uanNumber" ? "UAN (Universal Account Number)" : "LinkedIn URL"}
-        value={inputValues[field]}
-        onClick={() => setEditing((prev) => ({ ...prev, [field]: true }))}
-        onChange={(e) =>
-          setInputValues((prev) => ({ ...prev, [field]: e.target.value }))
-        }
-        InputProps={{
-          readOnly: !editing[field],
-        }}
-      />
-      {editing[field] && (
-        <Button
-          variant="contained"
-          onClick={() => handleSave(field)}
-          disabled={saving[field]}
-        >
-          {saving[field] ? "Saving..." : "Save"}
-        </Button>
-      )}
-    </Box>
+          <Box display="flex" alignItems="center" gap={0.5} mt={0.5} ml={0.5}>
+            <Typography variant="caption" sx={{ color: "gray", fontSize: "12px" }}>
+              Why it is important
+            </Typography>
+            <IconButton
+              size="small"
+              sx={{ p: 0, color: "gray" }}
+              onClick={() => setHelpDialogOpen(true)}
+            >
+              <HelpOutlineIcon fontSize="small" />
+            </IconButton>
+          </Box>
+        </Box>
+      </Box>
 
-    {/* Caption and Tooltip Below */}
-  <Box display="flex" alignItems="center" gap={0.5} mt={0.5} ml={0.5}>
-  <Typography variant="caption" sx={{ color: "gray", fontSize: "12px" }}>
-    Why it is important
-  </Typography>
-  <IconButton
-    size="small"
-    sx={{ p: 0, color: "gray" }}
-    onClick={() => setHelpDialog({ open: true, field })}
-  >
-    <HelpOutlineIcon fontSize="small" />
-  </IconButton>
-</Box>
-
-  </Box>
-))}
-
-
-    </Box>
-
-    <Dialog open={helpDialog.open} onClose={() => setHelpDialog({ open: false, field: "" })}>
-  <DialogContent>
-    <Typography sx={{ fontSize: '14px' }}>
-      {helpDialog.field === "uanNumber"
-        ? "Your UAN helps verify your current employer privately. It is never shared with recruiters."
-        : "Adding your LinkedIn URL helps recruiters better understand your professional background and skills."}
-    </Typography>
-  </DialogContent>
-</Dialog>
-
-</>
+      <Dialog open={helpDialogOpen} onClose={() => setHelpDialogOpen(false)}>
+        <DialogContent>
+          <Typography sx={{ fontSize: '14px' }}>
+            Adding your LinkedIn URL helps recruiters better understand your professional background and skills.
+          </Typography>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

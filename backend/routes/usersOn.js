@@ -263,14 +263,13 @@ router.post('/check-work-email-verified', authenticateToken, async (req, res) =>
 
 router.post("/get-user-additional-details", authenticateToken, async (req, res) => {
   try {
-
-     if (!req.user) {
+    if (!req.user) {
       return res.status(401).json({ valid: false, message: "Invalid token" });
     }
 
-    const userId = req.user.user_id    
+    const userId = req.user.user_id;
 
-    const user = await USER.findById(userId).select("uanNumber linkedinUrl");
+    const user = await USER.findById(userId).select("linkedinUrl");
     if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
     res.json({ success: true, data: user });
@@ -280,18 +279,19 @@ router.post("/get-user-additional-details", authenticateToken, async (req, res) 
   }
 });
 
+
 router.post("/update-user-additional-details", authenticateToken, async (req, res) => {
   try {
-
-     if (!req.user) {
+    if (!req.user) {
       return res.status(401).json({ valid: false, message: "Invalid token" });
     }
 
-    const userId = req.user.user_id   
+    const userId = req.user.user_id;
 
     const updates = {};
-    if (req.body.uanNumber !== undefined) updates.uanNumber = req.body.uanNumber;
-    if (req.body.linkedinUrl !== undefined) updates.linkedinUrl = req.body.linkedinUrl;
+    if (req.body.linkedinUrl !== undefined) {
+      updates.linkedinUrl = req.body.linkedinUrl;
+    }
 
     if (Object.keys(updates).length === 0) {
       return res.status(400).json({ success: false, message: "No valid fields to update" });
