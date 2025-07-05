@@ -20,6 +20,8 @@ import { jwtDecode } from "jwt-decode";
 import { useDispatch} from 'react-redux';
 import {login} from '../../store/professionalSlice';
 import logo from "../../images/desk-logo.svg";
+import { Helmet } from "react-helmet";
+
 
 
 
@@ -123,6 +125,23 @@ function BrandSignup() {
 
   return (
     <>
+
+      <Helmet>
+            <title>Working Professional Login | Newrole</title>
+<meta name="description" content="Login to Newrole as a verified working professional and discover better job opportunities directly from top companies. No resumes. No middlemen." />
+
+            <meta
+              property="og:title"
+              content="Working Professional Login | Newrole"
+            />
+            <meta
+              property="og:description"
+              content="Login to Newrole as a verified working professional and discover better job opportunities directly from top companies. No resumes. No middlemen."
+            />
+            <meta property="og:type" content="website" />
+          </Helmet>
+
+
 {/* <Grid container spacing='2'> */}
 
 {isSmallScreen ? ( 

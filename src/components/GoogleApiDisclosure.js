@@ -8,12 +8,21 @@ function GoogleApiDisclosure() {
   return (
    <>
 
-      <header>
-        <title>Security and Data Protection | Newrole</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <Helmet>
+            <title>Security and Data Protection | Newrole</title>
+            <meta name="description" content="Learn how Newrole ensures your data is protected with secure infrastructure, encryption, and industry-standard privacy practices for professionals and employers." />
 
-      </header>
+            <meta
+              property="og:title"
+              content="Security and Data Protection | Newrole"
+            />
+            <meta
+              property="og:description"
+              content="Learn how Newrole ensures your data is protected with secure infrastructure, encryption, and industry-standard privacy practices for professionals and employers."
+            />
+            <meta property="og:type" content="website" />
+          </Helmet>
+
    <Navbar />
 
 

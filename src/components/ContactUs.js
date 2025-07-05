@@ -2,16 +2,29 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { Container, Typography, Grid, Paper, Divider, Link } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
+import { Helmet } from "react-helmet";
+
 
 function SupportContact() {
 
   return (
     <>
-      <header>
-        <title>Contact Us | Newrole</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </header>
+     <Helmet>
+            <title>Contact Us | Newrole</title>
+            <meta
+              name="description"
+              content="Contact Us | Newrole"
+            />
+            <meta
+              property="og:title"
+              content="Contact Us | Newrole"
+            />
+            <meta
+              property="og:description"
+              content="Contact Us | Newrole"
+            />
+            <meta property="og:type" content="website" />
+          </Helmet>
 
       <Navbar />
 

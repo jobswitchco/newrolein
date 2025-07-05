@@ -20,6 +20,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import logo from "../../images/desk-logo.svg"
 import feedbackImg from "../../images/feedback-7323668_1280.png"
+import { Helmet } from "react-helmet";
+
 
 function EmployerLogin() {
   const navigate = useNavigate();
@@ -126,6 +128,23 @@ function EmployerLogin() {
 
   return (
     <>
+
+      <Helmet>
+            <title>Employer Login | Newrole</title>
+<meta name="description" content="Login to Newrole as a verified employer and discover better verified working professionals." />
+
+            <meta
+              property="og:title"
+              content="Employer Login | Newrole"
+            />
+            <meta
+              property="og:description"
+              content="Login to Newrole as a verified employer and discover better verified working professionals."
+            />
+            <meta property="og:type" content="website" />
+          </Helmet>
+
+
       {isSmallScreen ? (
          <Box sx={{ minHeight: '100vh', backgroundColor: '#f8f9fa', position: 'relative' }}>
       {/* Logo at top-left */}
