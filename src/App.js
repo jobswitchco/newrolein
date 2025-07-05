@@ -43,13 +43,17 @@ import ShortlistTable from './components/Employer/ShortlistTable.js';
 import InvitedTable from './components/Employer/InvitedTable.js';
 import InvitationsTable from './components/Employee/InvitationsTable.js';
 import DashboardOverview from './components/Employee/Dashboard.js';
+import GoogleAnalytics from './components/GoogleAnalytics.js';
 
 
 function App() {
+
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div className="App">
         <Router>
+          <GoogleAnalytics />
             <Routes>
               <Route path="/" element={<LandingPage />} />
               <Route path="/professional/login" element={<EmployeeLogin />} />

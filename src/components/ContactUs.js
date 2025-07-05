@@ -1,18 +1,9 @@
-import { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Container, Typography, Grid, Paper, Divider, Link } from '@mui/material';
 import { LocationOn } from '@mui/icons-material';
 
 function SupportContact() {
-  useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      window.dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'G-D1X0WBG5EL');
-  }, []);
 
   return (
     <>
@@ -20,7 +11,6 @@ function SupportContact() {
         <title>Contact Us | Newrole</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-D1X0WBG5EL"></script>
       </header>
 
       <Navbar />

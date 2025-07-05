@@ -409,10 +409,10 @@ router.post('/get-all-professional-details', authenticateToken, async (req, res)
     limit = parseInt(limit);
 
     // Step 1: Fetch all active user IDs
-    const allUserIds = await USER.find({ is_del: false, openForJobs : true }).select('_id');
+    const allUserIds = await USER.find({ is_del: false, openForJobs: true }).select('_id');
     const userIdList = allUserIds.map(u => u._id);
 
-    // Step 2: Find user_ids that are ALREADY shortlisted by this employer
+    // Step 2: Get already shortlisted user_ids
     const shortlistedDocs = await SHORTLIST.find({
       employer,
       short_listed: true,
@@ -428,24 +428,26 @@ router.post('/get-all-professional-details', authenticateToken, async (req, res)
       return res.status(200).json({ users: [], totalPages: 0 });
     }
 
-    // Step 4: Build pipeline for aggregation
+    // Step 4: Prepare filter stages
     const matchStage = {
       _id: { $in: nonShortlistedUserIds.map(id => new mongoose.Types.ObjectId(id)) },
       is_del: false
     };
 
+    const matchEmploymentStage = {};
     if (filters.roleId) {
-      matchStage['employmentDetails.jobRoleId'] = new mongoose.Types.ObjectId(filters.roleId);
+      matchEmploymentStage['employmentDetails.jobRoleId'] = new mongoose.Types.ObjectId(filters.roleId);
     }
     if (filters.noticePeriod) {
-      matchStage['employmentDetails.noticePeriod'] = filters.noticePeriod;
+      matchEmploymentStage['employmentDetails.noticePeriod'] = filters.noticePeriod;
     }
     if (filters.ctcFrom || filters.ctcTo) {
-      matchStage['employmentDetails.ctc'] = {};
-      if (filters.ctcFrom) matchStage['employmentDetails.ctc'].$gte = parseInt(filters.ctcFrom);
-      if (filters.ctcTo) matchStage['employmentDetails.ctc'].$lte = parseInt(filters.ctcTo);
+      matchEmploymentStage['employmentDetails.ctc'] = {};
+      if (filters.ctcFrom) matchEmploymentStage['employmentDetails.ctc'].$gte = parseInt(filters.ctcFrom);
+      if (filters.ctcTo) matchEmploymentStage['employmentDetails.ctc'].$lte = parseInt(filters.ctcTo);
     }
 
+    // Step 5: Main pipeline
     const pipeline = [
       { $match: matchStage },
       {
@@ -457,6 +459,7 @@ router.post('/get-all-professional-details', authenticateToken, async (req, res)
         }
       },
       { $unwind: '$employmentDetails' },
+      ...(Object.keys(matchEmploymentStage).length > 0 ? [{ $match: matchEmploymentStage }] : []),
       { $match: { 'employmentDetails.isCurrentEmployment': true } },
       {
         $lookup: {
@@ -498,7 +501,7 @@ router.post('/get-all-professional-details', authenticateToken, async (req, res)
 
     const users = await USER.aggregate(pipeline);
 
-    // Step 5: Count pipeline
+    // Step 6: Count pipeline
     const countPipeline = [
       { $match: matchStage },
       {
@@ -510,6 +513,7 @@ router.post('/get-all-professional-details', authenticateToken, async (req, res)
         }
       },
       { $unwind: '$employmentDetails' },
+      ...(Object.keys(matchEmploymentStage).length > 0 ? [{ $match: matchEmploymentStage }] : []),
       { $match: { 'employmentDetails.isCurrentEmployment': true } },
       {
         $group: {

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../components/Navbar";
 import BodyMain from "../components/BodyMain";
@@ -29,10 +29,6 @@ export default function LandingPage() {
         />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://www.newrole.in" />
-        <meta
-          name="google-site-verification"
-          content="z3S3YuiRlbJVB_u7hB9OAhXaVifVn7bO5dzXyyHM-bc"
-        />
       </Helmet>
 
       <Navbar />
