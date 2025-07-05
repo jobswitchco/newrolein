@@ -1,4 +1,4 @@
-import { hydrate, render } from 'react-dom';
+import { createRoot, hydrateRoot } from 'react-dom/client'; // ✅ use correct import
 import './index.css';
 import './styles/bootstrap.css';
 import './styles/own.css';
@@ -14,20 +14,18 @@ const rootElement = document.getElementById('root');
 // Wrap the app in GoogleOAuth and Redux Provider
 const AppTree = (
   <GoogleOAuthProvider clientId='455976777846-jve7vqhe2ujq5ofm8svqkbpj8mse8kf9.apps.googleusercontent.com'>
-
     <Provider store={store}>
       <App />
     </Provider>
   </GoogleOAuthProvider>
 );
 
-// Support react-snap hydration
+// 🔁 Use hydrateRoot for SSR (used by react-snap), else fallback to createRoot
 if (rootElement.hasChildNodes()) {
-  hydrate(AppTree, rootElement);
+  hydrateRoot(rootElement, AppTree);
 } else {
-  render(AppTree, rootElement);
+  createRoot(rootElement).render(AppTree);
 }
 
 // Optional: Performance metrics
 reportWebVitals();
-

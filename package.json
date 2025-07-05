@@ -62,7 +62,6 @@
     ],
     "include": [
       "/",
-      "/professional/login",
       "/employer/login",
       "/verify/workmail",
       "/onboard/agency/pricing",
