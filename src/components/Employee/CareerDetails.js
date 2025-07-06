@@ -234,7 +234,7 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
       fromMonth: '',
       toYear: '',
       toMonth: '',
-      ctc: '',
+      ctc: 0,
       currency: 'INR',
       noticePeriod: '',
       projects: [],
@@ -425,35 +425,60 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
 
 
-  const handleSave = async () => {
-    try {
-      const response = await axios.post(
-        baseUrl + '/save_employment_details',
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+ const handleSave = async () => {
+  // Required fields excluding 'currency'
+  const requiredFields = [
+    'employmentType',
+    'totalExperienceYears',
+    'totalExperienceMonths',
+    'companyName',
+    'jobRoleId',
+    'fromYear',
+    'fromMonth',
+    'ctc',
+    'noticePeriod',
+    'workLocation',
+  ];
 
-      if(response.data.saved){
-
-        await fetchData();
-        handleDialogClose();
-        toast.success('Employment Saved');
-      }
-
-      else{
-        handleDialogClose();
-        toast.error('Error! Please try again');
-      }
-    } catch (error) {
-        handleDialogClose();
-       toast.error('Error! Please try again');
+  // Validate
+  for (const field of requiredFields) {
+    if (
+      formData[field] === undefined ||
+      formData[field] === '' ||
+      formData[field] === null ||
+      (typeof formData[field] === 'number' && isNaN(formData[field]))
+    ) {
+      toast.warning('All fields are mandatory');
+      return;
     }
-  };
+  }
+
+  try {
+    const response = await axios.post(
+      baseUrl + '/save_employment_details',
+      formData,
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.data.saved) {
+      await fetchData();
+      handleDialogClose();
+      toast.success('Employment Saved');
+    } else {
+      handleDialogClose();
+      toast.error('Error! Please try again');
+    }
+  } catch (error) {
+    handleDialogClose();
+    toast.error('Error! Please try again');
+  }
+};
+
 
 
 
