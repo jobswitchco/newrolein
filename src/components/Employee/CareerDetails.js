@@ -429,8 +429,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
   // Required fields excluding 'currency'
   const requiredFields = [
     'employmentType',
-    'totalExperienceYears',
-    'totalExperienceMonths',
     'companyName',
     'jobRoleId',
     'fromYear',
