@@ -73,6 +73,10 @@ const User_Schema = new Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "job_locations",
               }],
+                  projects_worked_on: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "projects_worked",
+              }],
     expected_ctcFrom: { type : Number},
     expected_ctcTo: { type : Number},
     currency: { type: String }, 

@@ -76,7 +76,7 @@ const UANDetails = () => {
 
   return (
     <>
-      <Box sx={{ border: "1px solid grey", p: 3, borderRadius: "8px", mt: 2 }}>
+      <Box sx={{ border: "1px solid grey", p: 3, borderRadius: "8px", mt: 2, mb: 12 }}>
         <Stack sx={{ display: 'flex', flexDirection: 'row', gap: 1, alignItems: 'center', mb: 0.5 }}>
           <RecentActors sx={{ fontSize: '22px' }} />
           <Typography sx={{ fontSize: "16px", fontWeight: 500, color: '#FF4F0F' }}>

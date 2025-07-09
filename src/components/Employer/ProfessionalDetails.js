@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import {
   Box, Typography, Grid, Avatar, CircularProgress, Dialog, IconButton, DialogContent, Divider, Chip, Stack, Tabs, Tab, Accordion, AccordionDetails, AccordionSummary
@@ -9,14 +10,17 @@ import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutli
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 
 const ProfessionalDetails = ({userId, open, onClose}) => {
   const [user, setUser] = useState(null);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  // const baseUrl = "http://localhost:8001/employersOn";
       const baseUrl="/api/employersOn";
+
   const [activeTab, setActiveTab] = useState(0);
    const [shortlisted, setShortlisted] = useState(false);
 
@@ -102,6 +106,7 @@ useEffect(() => {
     axios.post(baseUrl + '/get-professional-details', { userId }, { withCredentials: true })
       .then(res => {
         setUser(res.data);
+        console.log('User Data::::', res.data);
         setShortlisted(res.data.isShortlisted)
         setIsDataLoading(false);
       })
@@ -215,7 +220,7 @@ useEffect(() => {
     );
   }
 
-  const { basicDetails, employmentDetails = [], jobPreferences, otherDetails, skills =[]} = user;
+  const { basicDetails, employmentDetails = [], projectsWorked = [], jobPreferences, otherDetails, skills =[]} = user;
 
   const tabsConfig = [];
 
@@ -223,9 +228,15 @@ if (employmentDetails?.length > 0) {
   tabsConfig.push({ label: 'Employment Details', key: 'employment' });
 }
 
+if (projectsWorked?.length > 0) {
+  tabsConfig.push({ label: 'Projects', key: 'projectsWorked' });
+}
+
 if (otherDetails?.certifications?.length > 0) {
   tabsConfig.push({ label: 'Certifications', key: 'certifications' });
 }
+
+
 
 if (jobPreferences && Object.keys(jobPreferences).length > 0) {
   tabsConfig.push({ label: 'Job Preferences', key: 'preferences' });
@@ -524,138 +535,6 @@ if (jobPreferences && Object.keys(jobPreferences).length > 0) {
               )}
             </Stack>
           )}
-
-{emp.projects?.length > 0 && (
-  <Accordion
-    sx={{
-      mt: 2,
-      backgroundColor: 'transparent',
-      boxShadow: 'none',
-      border: 'none',
-      '&::before': { display: 'none' }, // removes divider line
-    }}
-    disableGutters
-    elevation={0}
-  >
-    <AccordionSummary
-      aria-controls="project-details-content"
-      id="project-details-header"
-      sx={{
-        px: 0,
-        py: 0.5,
-        minHeight: 'auto',
-        '& .MuiAccordionSummary-content': {
-          margin: 0,
-        },
-      }}
-    >
-      <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1}}>
-      <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Projects</Typography>
-        <ExpandMoreOutlinedIcon />
-
-      </Stack>
-    </AccordionSummary>
-
-    <AccordionDetails sx={{ px: 0, pt: 1 }}>
-     {emp.projects.map((proj, index) => (
-  <Box key={index} sx={{ mb: 2, p: 2, backgroundColor: '#FAFAFA', borderRadius: 2 }}>
-    <Typography sx={{ fontWeight: 500, fontSize: '16px', mb: 1 }}>{proj.projectName}</Typography>
-
-    <Grid container spacing={1}>
-
-      {proj?.roleInProject && 
-      (
-      <>
-         <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Role:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject || 'N/A'}</Typography>
-      </Grid>
-      </>
-
-      )}
-     
- {proj?.projectSummary && 
-      (
-      <>
-      <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Summary:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary || 'N/A'}</Typography>
-      </Grid>
-      </>
-      )}
-
-       {proj?.responsibilities && 
-      (
-      <>
-    
-      <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Responsibilities:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.responsibilities || 'N/A'}</Typography>
-      </Grid>
-      </>
-      )}
-
-        {proj?.projectImpact && 
-      (
-      <>
-    
-       <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Impact:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact || 'N/A'}</Typography>
-      </Grid>
-      </>
-      )}
-
-         {proj.projectLinks?.length > 0 && (
-
-          <>
-
-         <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links:</Typography>
-        </Grid>
-         <Grid item xs={12} sm={10}>
-        {proj.projectLinks.map((link, idx) => (
-          <Typography
-            key={idx}
-            component="a"
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              color: '#3A59D1',
-              textDecoration: 'underline',
-              fontSize: '14px',
-              display: 'block',
-              mb: 0.5,
-            }}
-          >
-            {link}
-          </Typography>
-        ))}
-        </Grid>
-        </>
-    )}
-
-
-    
-    </Grid>
-
- 
-  </Box>
-))}
-
-    </AccordionDetails>
-  </Accordion>
-
-)}
      
         </Box>
       ))}
@@ -665,6 +544,140 @@ if (jobPreferences && Object.keys(jobPreferences).length > 0) {
   </Box>
 )}
 
+
+ {tabsConfig[activeTab]?.key === "projectsWorked" && (
+   <Box sx={{ display: 'flex' }}>
+       
+    
+           
+      
+            {
+              projectsWorked.map((proj, index) => (
+                <Accordion
+                  key={proj._id || index}
+                  sx={{
+                    border: '1px solid #E0E0E0',
+                    borderRadius: '8px',
+                    backgroundColor: '#FAFAFA',
+                    mt: 2,
+                    '&:before': { display: 'none' },
+                    boxShadow: 'none',
+                  }}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
+        {proj.projectName?.length > 80
+          ? proj.projectName.slice(0, 80) + "..."
+          : proj.projectName}
+      </Typography>
+      
+      
+                  </AccordionSummary>
+                  <AccordionDetails>
+                 
+                    <Grid container spacing={1}>
+                 
+                       {proj?.roleInProject && 
+                       (
+                       <>
+                          <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Role</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                 
+                       )}
+                      
+                  {proj?.projectSummary && 
+                       (
+                       <>
+                       <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Summary</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                       )}
+                 
+                        {proj?.responsibilities && 
+                       (
+                       <>
+                     
+                       <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Responsibilities</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.responsibilities || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                       )}
+                 
+                         {proj?.projectImpact && 
+                       (
+                       <>
+                     
+                        <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Impact</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                       )}
+                 
+                          {proj.projectLinks?.length > 0 && (
+                 
+                           <>
+                 
+                          <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links</Typography>
+                         </Grid>
+                          <Grid item xs={12} sm={10}>
+                         {proj.projectLinks.map((link, idx) => (
+                           <Typography
+                             key={idx}
+                             component="a"
+                             href={link}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                             sx={{
+                               color: '#3A59D1',
+                               textDecoration: 'underline',
+                               fontSize: '14px',
+                               display: 'block',
+                               mb: 0.5,
+                             }}
+                           >
+                             {link}
+                           </Typography>
+                         ))}
+                         </Grid>
+                         </>
+                     )}
+      
+                     <Grid item mt={2}>
+              
+      
+                     </Grid>
+      
+      
+                 
+                 
+                     
+                     </Grid>
+      
+                   
+                  </AccordionDetails>
+                </Accordion>
+              ))
+            }
+      
+      
+      </Box>
+)}
 
  {tabsConfig[activeTab]?.key === "certifications" && (
    <Box sx={{ display: 'flex' }}>

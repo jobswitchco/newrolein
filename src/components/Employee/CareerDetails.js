@@ -26,15 +26,11 @@ import {
     AppBar,
     Slide,
     Toolbar,
-    Accordion,
-AccordionSummary,
-AccordionDetails,
 DialogContentText,
 CircularProgress,
 Menu
   } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
@@ -48,6 +44,7 @@ import UANDetails from "./UANDetails";
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import JobRoleSelector from "./JobRoleSelector";
 import Certifications from "./Certifications";
+import ProjectsWorked from "./ProjectsWorked";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -57,18 +54,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 function CareerDetails() {
   const navigate = useNavigate();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  // const baseUrl = "http://localhost:8001/usersOn";
       const baseUrl="/api/usersOn";
+
   const [ loading, setLoading ] = useState(false);
   const [ userDetails, setUserDetails ] = useState({});
-  const [open, setOpen] = useState(false);
   const [currEmpTrue, setCurrEmpTrue] = useState(false);
   const [isNameEditDialogOpen, setIsNameEditDialogOpen] = useState(false);
 const [editApName, setEditApName] = useState('');
   const [selectedCity, setSelectedCity] = useState("");
   const [cities, setCities] = useState([]);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [isEditMode, setIsEditMode] = useState(false);
+const [editingEmploymentId, setEditingEmploymentId] = useState(null);
+
   
 
 
@@ -120,6 +122,34 @@ const handleCloseNameEditDialog = () => {
 
     }
   };
+
+  const handleEditEmployment = (emp) => {
+  setFormData({
+    isCurrentEmployment: emp.isCurrentEmployment,
+    employmentType: emp.employmentType || '',
+    totalExperienceYears: emp.totalExperienceYears || '',
+    totalExperienceMonths: emp.totalExperienceMonths || '',
+    companyName: emp.companyName || '',
+    hideCurrentCompany: emp.hideCurrentCompany || false,
+    jobRoleId: emp.jobRoleId?._id || '',
+    fromYear: emp.fromYear || '',
+    fromMonth: emp.fromMonth || '',
+    toYear: emp.toYear || '',
+    toMonth: emp.toMonth || '',
+    ctc: emp.ctc || 0,
+    currency: emp.currency || 'INR',
+    noticePeriod: emp.noticePeriod || '',
+    workLocation: emp.workLocation?._id || '',  
+  });
+
+  setSelectedCity(emp.workLocation?._id || '');
+  setEditingEmploymentId(emp._id);
+  setIsEditMode(true);
+  setIsEditDialogOpen(true);
+};
+
+
+
 
   
 
@@ -184,7 +214,6 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
         
                               if(ress.data.success){
                                 setUserDetails(ress.data.data);
-                                console.log('Data::::::::', ress.data.data);
                                 const hasCurrentEmployment = ress.data.data.employmentDetails.some((curr) => curr.isCurrentEmployment);
                                 setCurrEmpTrue(hasCurrentEmployment);
                                 setLoading(false);
@@ -215,7 +244,7 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
                     if (userDetails && Object.keys(userDetails).length > 0) {
                       setFormData(prev => ({
                         ...prev,
-                        isCurrentEmployment: userDetails?.employmentDetails?.length > 0 ? false : true
+                        isCurrentEmployment: userDetails?.employmentDetails?.isCurrentEmployment
                       }));
                     }
                   }, [userDetails]);
@@ -223,7 +252,7 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
 
                     
     const [formData, setFormData] = React.useState({
-      isCurrentEmployment: userDetails?.employmentDetails?.length > 0 ? false : true,
+      isCurrentEmployment: userDetails?.employmentDetails?.isCurrentEmployment,
       employmentType: 'Full-time',
       totalExperienceYears: '',
       totalExperienceMonths: '',
@@ -237,100 +266,15 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
       ctc: 0,
       currency: 'INR',
       noticePeriod: '',
-      projects: [],
       workLocation: ''
     });
 
-    const [projectForm, setProjectForm] = useState({
-      projectName: '',
-      roleInProject: '',
-      responsibilities : '', 
-      projectSummary: '',
-      projectImpact: '',
-      projectLinks: []
-    });
-
-    const [editingProjectIndex, setEditingProjectIndex] = useState(null);
-
-
-    const handleProjectChange = (e) => {
-      const { name, value } = e.target;
-      setProjectForm(prev => ({ ...prev, [name]: value }));
-    };
-
-  //    const handleSelect = (cityId) => {
-  //   setSelectedCities((prev) =>
-  //     prev.includes(cityId)
-  //       ? prev.filter((id) => id !== cityId)
-  //       : [...prev, cityId]
-  //   );
-  // };
 
   const handleSelect = (cityId) => {
   setSelectedCity(cityId);
    setFormData((prev) => ({ ...prev, workLocation: cityId }));
   handleClose(); 
 };
-
-    
-    const handleAddProject = () => {
-      if (!projectForm.projectName || !projectForm.roleInProject) {
-        toast.error("Project Name and Role are required");
-        return;
-      }
-    
-      if (editingProjectIndex !== null) {
-        // Update existing project
-        setFormData(prev => {
-          const updatedProjects = [...prev.projects];
-          updatedProjects[editingProjectIndex] = projectForm;
-          return {
-            ...prev,
-            projects: updatedProjects,
-          };
-        });
-        setEditingProjectIndex(null); // exit edit mode
-      } else {
-        // Add new project
-        setFormData(prev => ({
-          ...prev,
-          projects: [...prev.projects, projectForm],
-        }));
-      }
-    
-      // Reset form
-      setProjectForm({
-        projectName: '',
-        roleInProject: '',
-        responsibilities: '',
-        projectSummary: '',
-        projectImpact: '',
-      });
-      setOpen(false); // close dialog
-    };
-    
-    
-    const handleDeleteProject = (indexToDelete) => {
-      setFormData(prev => ({
-        ...prev,
-        projects: prev.projects.filter((_, i) => i !== indexToDelete)
-      }));
-    };
-
-    const handleProjectLinkChange = (e, idx) => {
-      const updatedLinks = [...projectForm.projectLinks];
-      updatedLinks[idx] = e.target.value;
-      setProjectForm({ ...projectForm, projectLinks: updatedLinks });
-    };
-    
-    const handleAddProjectLink = () => {
-      setProjectForm({ ...projectForm, projectLinks: [...projectForm.projectLinks, ""] });
-    };
-    
-    const handleRemoveProjectLink = (idx) => {
-      const updatedLinks = projectForm.projectLinks.filter((_, i) => i !== idx);
-      setProjectForm({ ...projectForm, projectLinks: updatedLinks });
-    };
 
 
     const handleOpenDialog = (employmentId) => {
@@ -393,20 +337,31 @@ const [selectedEmploymentId, setSelectedEmploymentId] = useState(null);
 }
 
     
-                  const hasEmployment = userDetails?.employmentDetails?.length > 0;
+  const hasEmployment = userDetails?.employmentDetails?.length > 0;
               
 
 const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
     
+ const handleDialogOpen = () => {
+    setIsDialogOpen(true);
+  };
+
   const handleDialogClose = () => {
     setIsDialogOpen(false);
   };
 
   
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
+  const handleEditDialogOpen = () => {
+    setIsEditDialogOpen(true);
   };
+
+   const handleEditDialogClose = () => {
+    setIsEditDialogOpen(false);
+  };
+
+  
+ 
 
   
   const handleChange = (e) => {
@@ -424,19 +379,21 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
 
 
-
- const handleSave = async () => {
-  // Required fields excluding 'currency'
+const handleSave = async () => {
+  // Base required fields
   const requiredFields = [
     'employmentType',
     'companyName',
     'jobRoleId',
     'fromYear',
     'fromMonth',
-    'ctc',
-    'noticePeriod',
-    'workLocation',
+    'workLocation'
   ];
+
+  // Add ctc and noticePeriod only if isCurrentEmployment is true
+  if (formData.isCurrentEmployment) {
+    requiredFields.push('ctc', 'noticePeriod');
+  }
 
   // Validate
   for (const field of requiredFields) {
@@ -467,6 +424,20 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
       await fetchData();
       handleDialogClose();
       toast.success('Employment Saved');
+      setFormData({
+        employmentType: '',
+        companyName: '',
+        jobRoleId: '',
+        fromYear: '',
+        fromMonth: '',
+        toYear: '',
+        toMonth: '',
+        ctc: '',
+        currency: 'INR',
+        noticePeriod: '',
+        workLocation: '',
+      });
+
     } else {
       handleDialogClose();
       toast.error('Error! Please try again');
@@ -476,6 +447,83 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
     toast.error('Error! Please try again');
   }
 };
+
+
+const handleUpdateEmpDetails = async () => {
+  const {
+    employmentType,
+    companyName,
+    jobRoleId,
+    fromYear,
+    fromMonth,
+    toYear,
+    toMonth,
+    ctc,
+    noticePeriod,
+    workLocation,
+    isCurrentEmployment,
+  } = formData;
+
+  // Shared required fields
+  const commonFields = [
+    employmentType,
+    companyName,
+    jobRoleId,
+    fromYear,
+    fromMonth,
+    workLocation,
+  ];
+
+  if (commonFields.some(field => field === undefined || field === '' || field === null)) {
+    toast.warning('All fields are mandatory');
+    return;
+  }
+
+
+  try {
+    const response = await axios.post(
+      baseUrl + '/update_employment_details',
+      {
+        employment_id: editingEmploymentId,
+        ...formData,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+
+    if (response.data.saved) {
+      await fetchData();
+      handleEditDialogClose();
+      toast.success('Employment Updated');
+      setFormData({
+        employmentType: '',
+        companyName: '',
+        jobRoleId: '',
+        fromYear: '',
+        fromMonth: '',
+        toYear: '',
+        toMonth: '',
+        isCurrentEmployment: true,
+        ctc: '',
+        currency: 'INR',
+        noticePeriod: '',
+        workLocation: '',
+      });
+
+    } else {
+      toast.error('Error! Please try again');
+    }
+  } catch (error) {
+    handleEditDialogClose();
+    toast.error('Error! Please try again');
+  }
+};
+
 
 
 
@@ -570,26 +618,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
         
           <Box>
             <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
-              {/* <div
-                style={{
-                  width: isSmallScreen ? "30px" : "40px",
-                  height: isSmallScreen ? "30px" : "40px",
-                  borderRadius: "50%",
-                  overflow: "hidden",
-                  display: "inline-block",
-                  marginTop : '4px'
-                }}
-              >
-                <img
-                  src={propic}
-                  alt="propic"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              </div> */}
 
               <Stack sx={{ display: "flex", flexDirection: "column" }}>
                 <Box
@@ -653,15 +681,23 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
   .sort((a, b) => (b.isCurrentEmployment === true) - (a.isCurrentEmployment === true))
   .map((emp, index) => (
     <Box key={emp._id || index} sx={{ mt: 2, mb: 1 }}>
-      <Stack direction="row" alignItems="center" gap={2} sx={{ alignItems : 'center'}}>
+      <Stack direction="row" alignItems="center" sx={{ alignItems : 'center'}}>
         <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>
           {emp.jobRoleId.name}
         </Typography>
         <IconButton
   onClick={() => emp._id && handleOpenDialog(emp._id)}
-  size="small"
+  size="small" 
+  sx={{ ml: 1}}
 >
   <DeleteOutlineOutlinedIcon sx={{ fontSize: '18px' }} />
+</IconButton>
+
+  <IconButton
+  onClick={() => handleEditEmployment(emp)}
+  size="small"
+>
+  <EditOutlinedIcon sx={{ fontSize: '18px', ml: 0.5}} />
 </IconButton>
 
 
@@ -850,140 +886,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 )}
 
 
-
-
-{emp.projects?.length > 0 && (
-  <Accordion
-    sx={{
-      mt: 2,
-      backgroundColor: 'transparent',
-      boxShadow: 'none',
-      border: 'none',
-      '&::before': { display: 'none' }, // removes divider line
-    }}
-    disableGutters
-    elevation={0}
-  >
-    <AccordionSummary
-      aria-controls="project-details-content"
-      id="project-details-header"
-      sx={{
-        px: 0,
-        py: 0.5,
-        minHeight: 'auto',
-        '& .MuiAccordionSummary-content': {
-          margin: 0,
-        },
-      }}
-    >
-      <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1}}>
-      <Typography sx={{ fontSize: '15px', fontWeight: 500 }}>Projects</Typography>
-        <ExpandMoreOutlinedIcon />
-
-      </Stack>
-    </AccordionSummary>
-
-    <AccordionDetails sx={{ px: 0, pt: 1 }}>
-     {emp.projects.map((proj, index) => (
-  <Box key={index} sx={{ mb: 2, p: 2, backgroundColor: '#FAFAFA', borderRadius: 2 }}>
-    <Typography sx={{ fontWeight: 500, fontSize: '16px', mb: 1 }}>{proj.projectName}</Typography>
-
-    <Grid container spacing={1}>
-
-      {proj?.roleInProject && 
-      (
-      <>
-         <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Role:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject || 'N/A'}</Typography>
-      </Grid>
-      </>
-
-      )}
-     
- {proj?.projectSummary && 
-      (
-      <>
-      <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Summary:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary || 'N/A'}</Typography>
-      </Grid>
-      </>
-      )}
-
-       {proj?.responsibilities && 
-      (
-      <>
-    
-      <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Responsibilities:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.responsibilities || 'N/A'}</Typography>
-      </Grid>
-      </>
-      )}
-
-        {proj?.projectImpact && 
-      (
-      <>
-    
-       <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Impact:</Typography>
-      </Grid>
-      <Grid item xs={12} sm={10}>
-        <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact || 'N/A'}</Typography>
-      </Grid>
-      </>
-      )}
-
-         {proj.projectLinks?.length > 0 && (
-
-          <>
-
-         <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links:</Typography>
-        </Grid>
-         <Grid item xs={12} sm={10}>
-        {proj.projectLinks.map((link, idx) => (
-          <Typography
-            key={idx}
-            component="a"
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              color: '#3A59D1',
-              textDecoration: 'underline',
-              fontSize: '14px',
-              display: 'block',
-              mb: 0.5,
-            }}
-          >
-            {link}
-          </Typography>
-        ))}
-        </Grid>
-        </>
-    )}
-
-
-    
-    </Grid>
-
- 
-  </Box>
-))}
-
-    </AccordionDetails>
-  </Accordion>
-
-)}
-
     </Box>
 
 
@@ -997,9 +899,10 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
             </Box>
 
       <SkillsComp />
+      <ProjectsWorked />
+      <Certifications />
       <JobPreferences />
       <UANDetails />
-      <Certifications />
 
 
           </div>
@@ -1016,7 +919,296 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
       
 
-      
+<Dialog
+  fullScreen
+  open={isEditDialogOpen}
+  onClose={handleEditDialogClose}
+  TransitionComponent={Transition}
+>
+  <AppBar position="relative" sx={{ backgroundColor: "#fff", boxShadow: "none", borderBottom: "1px solid #e0e0e0" }}>
+    <Toolbar sx={{ justifyContent: "space-between", px: 3 }}>
+      <Stack sx={{ flexDirection: 'row', gap: 2, alignItems: 'center' }}>
+        <IconButton edge="start" color="inherit" onClick={handleEditDialogClose} aria-label="close">
+          <CloseIcon sx={{ color: "#000" }} />
+        </IconButton>
+        <Typography sx={{ fontSize: '16px', fontWeight: 500, color: "#000" }}>
+          Edit details
+        </Typography>
+      </Stack>
+
+      <Button
+        onClick={()=> handleUpdateEmpDetails()}
+        color="success"
+        sx={{
+          borderRadius: "18px",
+          backgroundColor: "#3A59D1",
+          color: "#FFFFFF",
+          px: 3,
+          textTransform: "none",
+          "&:hover": { backgroundColor: "#5b9f61" }
+        }}
+      >
+        Update
+      </Button>
+    </Toolbar>
+  </AppBar>
+
+  <DialogContent dividers sx={{ px: isSmallScreen ? 4 : 9, pt: 0 }}>
+    <Typography sx={{ mt: 2, fontSize: '16px', fontWeight: 500 }}>
+      Employment
+    </Typography>
+    <Typography sx={{ fontSize: '14px', color: 'grey' }} mb={2}>
+      Details like job title, company name, etc, help employers understand your work
+    </Typography>
+
+    <FormLabel sx={{ fontSize: '14px', fontWeight: 500, color: '#000', mt: 2 }}>
+      Employment Type
+    </FormLabel>
+    <RadioGroup
+      row
+      name="employmentType"
+      value={formData.employmentType}
+      onChange={handleChange}
+      sx={{ gap: isSmallScreen ? 1 : 5 }}
+    >
+      <FormControlLabel
+        value="Full-time"
+        control={<Radio sx={{ color: 'black', '&.Mui-checked': { color: 'black' } }} />}
+        label={<Typography sx={{ fontSize: '14px' }}>Full-time</Typography>}
+      />
+      <FormControlLabel
+        value="Internship"
+        control={<Radio sx={{ color: 'black', '&.Mui-checked': { color: 'black' } }} />}
+        label={<Typography sx={{ fontSize: '14px' }}>Internship</Typography>}
+      />
+    </RadioGroup>
+
+    <Grid container spacing={2} mt={2}>
+      <Grid item xs={12} md={6}>
+        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
+          Company Name
+        </Typography>
+        <TextField
+          label={!formData.companyName ? 'Company Name' : ''}
+          name="companyName"
+          fullWidth
+          value={formData.companyName}
+          onChange={handleChange}
+          required
+          slotProps={{
+            inputLabel: {
+              sx: { fontSize: '14px', display: 'block', '&.Mui-focused': { display: 'none' } },
+              shrink: false
+            }
+          }}
+        />
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
+          Work Location
+        </Typography>
+        <TextField
+          label={!selectedCity ? "Select City" : ""}
+          value={cities.find((city) => city._id === selectedCity)?.city || ""}
+          onClick={handleToggle}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={{ cursor: "pointer" }}
+          slotProps={{ inputLabel: { sx: { fontSize: '14px' } } }}
+        />
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          transformOrigin={{ vertical: "top", horizontal: "left" }}
+          PaperProps={{
+            style: { maxHeight: 200, width: 250, padding: "0.5rem" },
+          }}
+        >
+          {cities.map((city) => (
+            <MenuItem key={city._id} onClick={() => handleSelect(city._id)}>
+              <FormControlLabel
+                control={<Radio checked={selectedCity === city._id} />}
+                label={city.city}
+              />
+            </MenuItem>
+          ))}
+        </Menu>
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+        <JobRoleSelector
+          selectedRoleId={formData.jobRoleId}
+          onRoleSelect={(roleId) => setFormData({ ...formData, jobRoleId: roleId })}
+        />
+      </Grid>
+
+      {(formData.employmentType !== 'Internship' && formData.isCurrentEmployment) && (
+        <Grid item xs={12} md={6}>
+          <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
+            Current CTC
+          </Typography>
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <Select
+              value={formData.currency || 'INR'}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  currency: e.target.value,
+                }))
+              }
+              displayEmpty
+              variant="outlined"
+              sx={{ minWidth: 80, fontSize: '14px' }}
+            >
+              {currencies.map((curr) => (
+                <MenuItem key={curr.label} value={curr.label}>
+                  {curr.label}
+                </MenuItem>
+              ))}
+            </Select>
+
+            <TextField
+              name="ctc"
+              type="number"
+              fullWidth
+              value={formData.ctc}
+              onChange={handleChange}
+              label={!formData.ctc ? "Current CTC" : ""}
+              required
+              slotProps={{
+                inputLabel: {
+                  sx: { fontSize: '14px', display: 'block', '&.Mui-focused': { display: 'none' } },
+                  shrink: false
+                }
+              }}
+            />
+          </Box>
+        </Grid>
+      )}
+
+      {/* Joining & Exit dates */}
+      <Grid item xs={12}>
+        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
+          {currEmpTrue ? 'Joining Date' : 'Working From'}
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              name="fromYear"
+              select
+              fullWidth
+              label={!formData.fromYear ? 'Select Year' : ''}
+              value={formData.fromYear}
+              onChange={handleChange}
+              slotProps={{ inputLabel: { sx: { fontSize: '14px' } } }}
+            >
+              {years.map((year) => (
+                <MenuItem key={year} value={year}>{year}</MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              name="fromMonth"
+              select
+              fullWidth
+              label={!formData.fromMonth ? 'Select Month' : ''}
+              value={formData.fromMonth}
+              onChange={handleChange}
+              slotProps={{ inputLabel: { sx: { fontSize: '14px' } } }}
+            >
+              {months.map((month) => (
+                <MenuItem key={month} value={month}>{month}</MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      {!formData.isCurrentEmployment && (
+        <Grid item xs={12}>
+          <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5, mt: 2 }}>
+            Worked Till
+          </Typography>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <TextField
+                name="toYear"
+                select
+                fullWidth
+                label={!formData.toYear ? 'Select Year' : ''}
+                value={formData.toYear}
+                onChange={handleChange}
+                slotProps={{ inputLabel: { sx: { fontSize: '14px' } } }}
+              >
+                {years.map((year) => (
+                  <MenuItem key={year} value={year}>{year}</MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                name="toMonth"
+                select
+                fullWidth
+                label={!formData.toMonth ? 'Select Month' : ''}
+                value={formData.toMonth}
+                onChange={handleChange}
+                slotProps={{ inputLabel: { sx: { fontSize: '14px' } } }}
+              >
+                {months.map((month) => (
+                  <MenuItem key={month} value={month}>{month}</MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
+
+      {formData.isCurrentEmployment && (
+        <Grid item xs={12}>
+          <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>
+            Notice Period
+          </Typography>
+          <TextField
+            name="noticePeriod"
+            select
+            fullWidth
+            value={formData.noticePeriod}
+            onChange={handleChange}
+            label={!formData.noticePeriod ? "Select Notice Period" : ""}
+            slotProps={{
+              inputLabel: {
+                sx: {
+                  fontSize: "14px",
+                  display: "block",
+                  "&.Mui-focused": { display: "none" },
+                },
+                shrink: false,
+              },
+            }}
+          >
+            {[
+              "15 Days or less",
+              "1 Month",
+              "2 Months",
+              "3 Months",
+              "Serving Notice Period"
+            ].map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Grid>
+      )}
+    </Grid>
+  </DialogContent>
+</Dialog>
+
     
 
         <Dialog
@@ -1341,7 +1533,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
     </Select>
 
     <TextField
-    label={currEmpTrue?  !formData.ctc ? 'CTC' : '' : !formData.ctc ? 'Current CTC' : ''}
       name="ctc"
       type="number"
       value={formData.ctc}
@@ -1555,93 +1746,6 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 </>)}
 
 
-<Grid item xs={12} mt={3}>
-  <Stack sx={{ display : 'flex', flexDirection : 'row', gap : 2, alignItems : 'center'}}>
-
-  <Typography sx={{ fontSize: '16px', fontWeight: 500, mb: 0.5 }}>
-    Projects
-  </Typography>
-
-  <Button
-  variant="outlined"
-  size="small"
-  startIcon={<AddOutlinedIcon />}
-  sx={{
-    textTransform: 'none',
-    borderStyle: 'dashed',
-    borderColor: 'gray',
-    color: 'grey'
-  }}
-  onClick={() => setOpen(true)}
->
-  Add project
-</Button>
-
-
-
-  </Stack>
-
-  <Typography sx={{ marginTop: '12px', fontSize: '14px', color: 'grey' }} mb={2}>
-      Share projects you worked on in this organization to showcase your contributions.
-    </Typography>
-
-    <Box mt={2}>
-  {formData.projects.map((proj, index) => (
-    <Box key={index} sx={{ mt: 1, p: 1, border: "1px solid #ccc", borderRadius: 1 }}>
-     <Stack sx={{ display : 'flex', flexDirection : 'row'}}>
-
-      <Box>
-        <Stack sx={{ display : 'flex', flexDirection : 'row', alignItems : 'center', gap: 2}}>
-      <Typography sx={{ fontSize : '15px', fontWeight : 500}}>{proj.projectName}</Typography>
-     
-     <Stack sx={{ display : 'flex', flexDirection : 'row', gap : 1}}>
-     <DeleteOutlineOutlinedIcon 
-      sx={{ color : '#E55050', fontSize : '22px', cursor : 'pointer'}}
-      onClick={() => handleDeleteProject(index)} />
-    <EditOutlinedIcon 
-  sx={{ color: '#393E46', fontSize: '22px', cursor: 'pointer' }}
-  onClick={() => {
-    setProjectForm(proj);              // populate form with selected project
-    setEditingProjectIndex(index);     // store index to update later
-    setOpen(true);                     // open dialog
-  }}
-/>
-
-
-     </Stack>
-     
-        </Stack>
-      <Typography sx={{ fontSize : '14px', fontWeight : 400, mt: 1}}>{proj.roleInProject}</Typography>
-      <Typography sx={{ fontSize : '14px', fontWeight : 400, mt: 0.5}}>{proj.projectSummary}</Typography>
-      <Typography sx={{ fontSize : '14px', fontWeight : 400, mt: 1}}>{proj.responsibilities}</Typography>
-      <Typography sx={{ fontSize : '14px', fontWeight : 400, mt: 0.5}}>{proj.projectImpact}</Typography>
-      {proj.projectLinks && proj.projectLinks.length > 0 && (
-    <Box mt={1}>
-      {proj.projectLinks.map((link, idx) => (
-        <Typography
-          key={idx}
-          sx={{ fontSize: '14px', color: '#3A59D1', textDecoration: 'underline', cursor: 'pointer', mr: 1 }}
-          component="a"
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {link}
-        </Typography>
-      ))}
-    </Box>
-  )}
-      </Box>
-
-
-
-     </Stack>
-    
-    </Box>
-  ))}
-</Box>
-  </Grid>
-
 
     </Grid>
 
@@ -1653,225 +1757,7 @@ const years = Array.from({ length: 16 }, (_, i) => currentYear - i);
 
 </Dialog>
 
-<Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="sm">
-        <DialogTitle sx={{ fontSize : '18px', fontWeight : 500}}>Add Project Details</DialogTitle>
-        <DialogContent dividers >
-          <Stack mt={1}>
-          <Typography sx={{ fontSize: "14px", fontWeight: 500, mb: 0.5 }}>
-            Project Name
-          </Typography>
-            <TextField
-              name="projectName"
-             label={!projectForm.projectName ? "e.g., Invoice Automation System, Sales Dashboard" : "" }
-              fullWidth
-              value={projectForm.projectName}
-              onChange={handleProjectChange}
-              slotProps={{
-                inputLabel: {
-                  sx: {
-                    fontSize: "14px",
-                    "&.Mui-focused": {
-                      display: "none",
-                    },
-                    display: "block",
-                  },
-                  shrink: false,
-                },
-              }}
-            />
 
-<Typography sx={{ fontSize: "14px", fontWeight: 500, mb: 0.5, mt : 2 }}>
-            Role
-          </Typography>
-            <TextField
-              name="roleInProject"
-              label={!projectForm.roleInProject ? "eg., UI/UX Designer, Lead Developer" : "" }
-              fullWidth
-              value={projectForm.roleInProject}
-              onChange={handleProjectChange}
-              slotProps={{
-                inputLabel: {
-                  sx: {
-                    fontSize: "14px",
-                    "&.Mui-focused": {
-                      display: "none",
-                    },
-                    display: "block",
-                  },
-                  shrink: false,
-                },
-              }}
-            />
-
-<Typography sx={{ fontSize: "14px", fontWeight: 500, mb: 0.5, mt : 2 }}>
-            Project Summary
-          </Typography>
-            <TextField
-              name="projectSummary"
-              label={!projectForm.projectSummary ? "e.g., Developed a scalable API system to handle 1M+ users" : ""}
-              fullWidth
-              multiline
-              value={projectForm.projectSummary}
-              onChange={handleProjectChange}
-              sx={{
-                '& .MuiInputBase-root': {
-                  minHeight: '120px', // Fixed overall field height
-                  alignItems: 'flex-start', // Align text to top
-                },
-                '& .MuiInputBase-inputMultiline': {
-                  height: '100%', // Ensure textarea fills the container
-                  overflow: 'auto', // Scroll if content overflows
-                },
-              }}
-              slotProps={{
-                inputLabel: {
-                  sx: {
-                    fontSize: "14px",
-                    "&.Mui-focused": {
-                      display: "none",
-                    },
-                    display: "block",
-                  },
-                  shrink: false,
-                },
-              }}
-            />
-
-            <Typography sx={{ fontSize: "14px", fontWeight: 500, mb: 0.5, mt : 2 }}>
-            Responsibilities
-          </Typography>
-            <TextField
-              name="responsibilities"
-              label={!projectForm.responsibilities ? "e.g., Handled all backend API calls" : ""}
-              fullWidth
-              multiline
-              value={projectForm.responsibilities}
-              onChange={handleProjectChange}
-              sx={{
-                '& .MuiInputBase-root': {
-                  minHeight: '120px',
-                  alignItems: 'flex-start',
-                },
-                '& .MuiInputBase-inputMultiline': {
-                  height: '100%',
-                  overflow: 'auto',
-                },
-              }}
-              slotProps={{
-                inputLabel: {
-                  sx: {
-                    fontSize: "14px",
-                    "&.Mui-focused": {
-                      display: "none",
-                    },
-                    display: "block",
-                  },
-                  shrink: false,
-                },
-              }}
-            />
-
-<Stack sx={{ display : 'flex', flexDirection : 'row', gap: 0.5}}>
-<Typography sx={{ fontSize: "14px", fontWeight: 500, mb: 0.5, mt : 2 }}>
-            Project Impact
-          </Typography>
-
-          <Typography sx={{ fontSize: "14px", fontWeight: 400, mb: 0.5, mt : 2, color : 'grey' }}>
-          (optional)
-          </Typography>
-          </Stack>
-
-
-            <TextField
-              name="projectImpact"
-              label={!projectForm.projectImpact ? "e.g., Boosted conversion rate by 25% through UX improvements" : "" }
-              fullWidth
-              multiline
-              value={projectForm.projectImpact}
-    onChange={handleProjectChange}
-              slotProps={{
-                inputLabel: {
-                  sx: {
-                    fontSize: "14px",
-                    "&.Mui-focused": {
-                      display: "none",
-                    },
-                    display: "block",
-                  },
-                  shrink: false,
-                },
-              }}
-            />
-
-
-<Stack sx={{ display: 'flex', flexDirection: 'row', gap: 0.5, mt: 2, alignItems : 'center' }}>
-  <Typography sx={{ fontSize: "14px", fontWeight: 500 }}>
-    Project Links
-  </Typography>
-  <Typography sx={{ fontSize: "14px", fontWeight: 400, color: 'grey' }}>
-    (optional)
-  </Typography>
-</Stack>
-
-{(projectForm.projectLinks || []).map((link, idx) => (
-  <Box key={idx} sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-    <TextField
-    name="projectLinks"
-      fullWidth
-      placeholder="e.g., https://github.com/project, https://projectdemo.com"
-      value={link}
-      onChange={(e) => handleProjectLinkChange(e, idx)}
-      sx={{
-        flexGrow: 1,
-        '& input::placeholder': {
-          fontSize: '14px',
-        },
-      }}
-    />
-    <Button
-      onClick={() => handleRemoveProjectLink(idx)}
-      sx={{ minWidth: 0, ml: 1 }}
-    >
-      ❌
-    </Button>
-  </Box>
-))}
-
-<Button
-  onClick={handleAddProjectLink}
-  variant="outlined"
-  sx={{ mt: 1, width: 'fit-content', textTransform: 'none', color : '#7F55B1' }}
->
-  ➕ Add link
-</Button>
-
-
-
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpen(false)} sx={{ color : 'grey'}}>
-            Cancel
-          </Button>
-          <Button
-          onClick={handleAddProject}
-        color="success"
-        sx={{
-          borderRadius: "18px",
-          backgroundColor: "#3A59D1",
-          color: "#FFFFFF",
-          px: 3,
-          mr: 2,
-          textTransform: "none",
-          "&:hover": {
-            backgroundColor: "#5b9f61",
-          },
-        }}
-      >
-        Save
-      </Button>
-        </DialogActions>
-      </Dialog>
 
 
       <Dialog open={openDeleteDialog} onClose={handleCloseDialog}>

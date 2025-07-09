@@ -25,7 +25,6 @@ const EmploymentDetails_Schema = new Schema({
     currency: { type: String }, 
     noticePeriod : { type: String},
     totalExpInMonths : { type: Number},
-    projects : { type: Array},
      workLocation: {
            type: mongoose.Schema.Types.ObjectId,
            ref: "job_locations",

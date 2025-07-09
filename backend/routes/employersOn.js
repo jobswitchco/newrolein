@@ -11,6 +11,7 @@ import PaidSubscriptions from '../models/PaidSubscriptions.js';
 import sendMail from "../utils/sendMail.js";
 import sendInvitationMail from "../utils/sendMailInvitationEmployer.js";
 import sendMailForMessages from "../utils/sendMailForMessages.js";
+import ProjectsWorked from "../models/Projects.js";
 
 router.use(cookieParser());
 import authenticateToken from "../middleware/authenticateTokenEmployer.js";
@@ -542,8 +543,6 @@ router.post('/get-all-professional-details', authenticateToken, async (req, res)
 
 
 router.post('/get-professional-details', authenticateToken, async (req, res) => {
-
-
   const employerId = req.user?.user_id;
   if (!employerId) return res.status(400).json({ message: "Username is invalid." });
 
@@ -553,11 +552,14 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
     const user = await USER.findById(userId)
       .populate({
         path: 'employmentDetails',
-        populate: [{ path: 'jobRoleId', model: 'roles' }, {
-        path: 'workLocation',
-        model: 'job_locations',
-        select: 'city',
-      }]
+        populate: [
+          { path: 'jobRoleId', model: 'roles' },
+          {
+            path: 'workLocation',
+            model: 'job_locations',
+            select: 'city',
+          }
+        ]
       })
       .populate({ path: 'skills', model: 'skills' })
       .populate({ path: 'pref_job_locations', model: 'job_locations' })
@@ -574,8 +576,18 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
     });
 
     const isShortlisted = !!(shortlistEntry?.short_listed);
-
     const isInvited = !!(shortlistEntry?.invited);
+
+    // 👇 Fetch Projects if present in user
+    let projectsWorked = [];
+    if (user.projects_worked_on?.length) {
+      projectsWorked = await ProjectsWorked.find({
+        _id: { $in: user.projects_worked_on },
+        is_del: false
+      })
+        .sort({ updated_at: -1 })
+        .lean();
+    }
 
     const basicDetails = {
       name: user.applicantName,
@@ -585,9 +597,9 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
       country: user.country,
     };
 
-      const otherDetails = {
+    const otherDetails = {
       linkedinUrl: user?.linkedinUrl,
-      certifications: user?.certifications || [],
+      certifications: user.certifications || [],
     };
 
     const jobPreferences = {
@@ -613,9 +625,7 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
       toYear: emp.toYear,
       isCurrentEmployment: emp.isCurrentEmployment,
       totalExpInMonths: emp.totalExpInMonths,
-      projects: emp.projects || [],
-      workLocation: emp.workLocation,
-
+      workLocation: emp.workLocation, // includes city here
     }));
 
     const skills = (user.skills || []).map(skill => ({
@@ -631,8 +641,10 @@ router.post('/get-professional-details', authenticateToken, async (req, res) => 
       skills,
       isShortlisted,
       isInvited,
-      otherDetails
+      otherDetails,
+      projectsWorked // ✅ send all project details
     });
+
   } catch (error) {
     console.error('❌ Error in /get-professional-details:', error);
     return res.status(500).json({ message: 'Internal Server Error' });

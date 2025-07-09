@@ -1,15 +1,18 @@
+
 import { useEffect, useState } from 'react';
 import {
   Box, Typography, Grid, Avatar, CircularProgress, Dialog, IconButton, DialogContent, Divider, Chip, Stack, Tabs, Tab, Accordion, AccordionSummary, AccordionDetails
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/CloseOutlined';
 import axios from 'axios';
-import manImage from '../../images/profile-pic.svg';
+import manImage from '../../images/man-6086273_1280.jpg';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { ToastContainer } from 'react-toastify';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 
 
 
@@ -17,7 +20,9 @@ const ShortlistedProfessionalDetails = ({userId, open, onClose}) => {
   const [user, setUser] = useState(null);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  // const baseUrl = "http://localhost:8001/employersOn";
       const baseUrl="/api/employersOn";
+
   const [activeTab, setActiveTab] = useState(0);
    const [shortlisted, setShortlisted] = useState(false);
    const [invited, setInvited] = useState(false);
@@ -140,11 +145,15 @@ const handleClick = async () => {
     );
   }
 
-  const { basicDetails, employmentDetails = [], jobPreferences, otherDetails, skills =[]} = user;
+  const { basicDetails, employmentDetails = [],  projectsWorked = [], jobPreferences, otherDetails, skills =[]} = user;
   const tabsConfig = [];
 
 if (employmentDetails?.length > 0) {
   tabsConfig.push({ label: 'Employment Details', key: 'employment' });
+}
+
+if (projectsWorked?.length > 0) {
+  tabsConfig.push({ label: 'Projects', key: 'projectsWorked' });
 }
 
 if (otherDetails?.certifications?.length > 0) {
@@ -578,6 +587,140 @@ if (otherDetails) {
 )}
 
   </Box>
+)}
+
+ {tabsConfig[activeTab]?.key === "projectsWorked" && (
+   <Box sx={{ display: 'flex' }}>
+       
+    
+           
+      
+            {
+              projectsWorked.map((proj, index) => (
+                <Accordion
+                  key={proj._id || index}
+                  sx={{
+                    border: '1px solid #E0E0E0',
+                    borderRadius: '8px',
+                    backgroundColor: '#FAFAFA',
+                    mt: 2,
+                    '&:before': { display: 'none' },
+                    boxShadow: 'none',
+                  }}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography sx={{ fontSize: 15, fontWeight: 500 }}>
+        {proj.projectName?.length > 80
+          ? proj.projectName.slice(0, 80) + "..."
+          : proj.projectName}
+      </Typography>
+      
+      
+                  </AccordionSummary>
+                  <AccordionDetails>
+                 
+                    <Grid container spacing={1}>
+                 
+                       {proj?.roleInProject && 
+                       (
+                       <>
+                          <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Role</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.roleInProject || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                 
+                       )}
+                      
+                  {proj?.projectSummary && 
+                       (
+                       <>
+                       <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Summary</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.projectSummary || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                       )}
+                 
+                        {proj?.responsibilities && 
+                       (
+                       <>
+                     
+                       <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Responsibilities</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.responsibilities || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                       )}
+                 
+                         {proj?.projectImpact && 
+                       (
+                       <>
+                     
+                        <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontWeight: 500, fontSize: '15px' }}>Impact</Typography>
+                       </Grid>
+                       <Grid item xs={12} sm={10}>
+                         <Typography sx={{ fontSize: '15px' }}>{proj.projectImpact || 'N/A'}</Typography>
+                       </Grid>
+                       </>
+                       )}
+                 
+                          {proj.projectLinks?.length > 0 && (
+                 
+                           <>
+                 
+                          <Grid item xs={12} sm={2}>
+                         <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links</Typography>
+                         </Grid>
+                          <Grid item xs={12} sm={10}>
+                         {proj.projectLinks.map((link, idx) => (
+                           <Typography
+                             key={idx}
+                             component="a"
+                             href={link}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                             sx={{
+                               color: '#3A59D1',
+                               textDecoration: 'underline',
+                               fontSize: '14px',
+                               display: 'block',
+                               mb: 0.5,
+                             }}
+                           >
+                             {link}
+                           </Typography>
+                         ))}
+                         </Grid>
+                         </>
+                     )}
+      
+                     <Grid item mt={2}>
+              
+      
+                     </Grid>
+      
+      
+                 
+                 
+                     
+                     </Grid>
+      
+                   
+                  </AccordionDetails>
+                </Accordion>
+              ))
+            }
+      
+      
+      </Box>
 )}
 
 

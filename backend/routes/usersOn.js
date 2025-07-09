@@ -8,6 +8,7 @@ import SHORTLIST from "../models/Shortlists.js";
 import JobLocations from "../models/JobLocations.js";
 import CONVERSATION from "../models/Conversation.js";
 import MESSAGE from "../models/Messages.js";
+import ProjectsWorked from "../models/Projects.js";
 import Skills from "../models/Skills.js";
 import Roles from "../models/Roles.js";
 import sendMail from "../utils/sendMail.js";
@@ -677,7 +678,6 @@ router.post("/save_employment_details", authenticateToken, async function (req, 
     ctc,
     currency,
     noticePeriod,
-    projects,
     workLocation
   } = req.body;
 
@@ -716,7 +716,6 @@ router.post("/save_employment_details", authenticateToken, async function (req, 
       ctc,
       currency,
       noticePeriod,
-      projects,
       totalExpInMonths: Math.max(0, totalExpInMonths),
       workLocation
     });
@@ -733,6 +732,200 @@ router.post("/save_employment_details", authenticateToken, async function (req, 
   } catch (error) {
     console.error("Error saving employment details:", error);
     return res.status(500).json({ saved : false, message: "Internal server error." });
+  }
+});
+
+router.post('/update_employment_details', authenticateToken, async (req, res) => {
+
+  try {
+    const {
+      employment_id,
+      employmentType,
+      companyName,
+      jobRoleId,
+      fromYear,
+      fromMonth,
+      toYear,
+      toMonth,
+      ctc,
+      currency,
+      noticePeriod,
+      workLocation,
+    } = req.body;
+
+    const userId = req.user.user_id;
+
+    // Make sure employment record exists and belongs to the user
+    const employment = await EmploymentDetails.findOne({
+      _id: employment_id,
+      user_id: userId,
+      is_del: false,
+    });
+
+    if (!employment) {
+      return res.status(404).json({ saved: false, message: 'Employment not found or unauthorized' });
+    }
+
+    // Update fields directly
+    employment.employmentType = employmentType;
+    employment.companyName = companyName;
+    employment.jobRoleId = jobRoleId;
+    employment.fromYear = fromYear;
+    employment.fromMonth = fromMonth;
+    employment.toYear = toYear || null;
+    employment.toMonth = toMonth || null;
+    employment.ctc = ctc;
+    employment.currency = currency || 'INR';
+    employment.noticePeriod = noticePeriod;
+    employment.workLocation = workLocation;
+    employment.updated_at = new Date();
+
+    await employment.save();
+
+
+
+    return res.json({ saved: true, message: 'Employment updated successfully' });
+  } catch (error) {
+    console.error('Error updating employment:', error);
+    return res.status(500).json({ saved: false, message: 'Internal Server Error' });
+  }
+});
+
+router.post('/get-projects-worked', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    // Step 1: Get project IDs from user
+    const user = await USER.findById(userId).select('projects_worked_on');
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const projectIds = user.projects_worked_on || [];
+
+    if (projectIds.length === 0) {
+      return res.status(200).json({ success: true, data: [] });
+    }
+
+    // Step 2: Get project details
+    const projects = await ProjectsWorked.find({
+      _id: { $in: projectIds },
+      is_del: false
+
+    });
+
+    return res.status(200).json({ success: true, data: projects });
+  } catch (error) {
+    console.error('Error fetching user projects:', error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+router.post('/add-project', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const newProject = new ProjectsWorked({
+      ...req.body,
+      user_id: userId,
+    });
+
+    await newProject.save();
+
+    // Optionally add to user's profile (if you maintain a reference array)
+    await USER.findByIdAndUpdate(userId, {
+      $addToSet: { projects_worked_on: newProject._id }
+    });
+
+    return res.status(200).json({ success: true, message: "Project saved" });
+  } catch (err) {
+    console.error("Error saving project:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+router.post('/update-project/:id', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+    const projectId = req.params.id;
+
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    const project = await ProjectsWorked.findOne({
+      _id: projectId,
+      user_id: userId,
+      is_del: false
+    });
+
+    if (!project) {
+      return res.status(404).json({ success: false, message: "Project not found" });
+    }
+
+    // Update fields
+    const updatableFields = [
+      'projectName',
+      'roleInProject',
+      'projectSummary',
+      'responsibilities',
+      'projectImpact',
+      'projectLinks'
+    ];
+
+    updatableFields.forEach(field => {
+      if (req.body[field] !== undefined) {
+        project[field] = req.body[field];
+      }
+    });
+
+    await project.save();
+
+    return res.status(200).json({ success: true, message: "Project updated" });
+  } catch (err) {
+    console.error("Error updating project:", err);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// DELETE Project route
+router.post('/delete-project/:id', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.user_id;
+    const projectId = req.params.id;
+
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Unauthorized" });
+    }
+
+    // Soft delete from ProjectsWorked
+    const project = await ProjectsWorked.findOneAndUpdate(
+      { _id: projectId, user_id: userId },
+      { is_del: true },
+      { new: true }
+    );
+
+    if (!project) {
+      return res.status(404).json({ success: false, message: "Project not found" });
+    }
+
+    // Remove reference from User collection
+    await USER.findByIdAndUpdate(userId, {
+      $pull: { projects_worked_on: projectId }
+    });
+
+    return res.status(200).json({ success: true, message: "Project deleted" });
+  } catch (error) {
+    console.error("Delete project error:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 });
 
@@ -1229,6 +1422,23 @@ router.post('/get-user-details', authenticateToken, async function (req, res) {
   } catch (error) {
     console.error("❌ Error fetching user details:", error);
     return res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+router.get('/role/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const role = await Roles.findById(id);
+    if (!role) {
+      return res.status(404).json({ success: false, message: "Role not found" });
+    }
+
+    return res.json({ success: true, role });
+  } catch (err) {
+    console.error('Error fetching role by ID:', err);
+    return res.status(500).json({ success: false, message: "Server error" });
   }
 });
 

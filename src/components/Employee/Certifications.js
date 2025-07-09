@@ -149,7 +149,7 @@ const handleSave = async () => {
   };
 
   return (
-    <Box sx={{ border: "1px solid #ccc", borderRadius: 2, p: 3, mt: 2, mb: 12 }}>
+    <Box sx={{ border: "1px solid #ccc", borderRadius: 2, p: 3, mt: 2 }}>
       <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
        
          <Stack sx={{ display : 'flex', flexDirection : 'row', gap: 1, alignItems : 'center', mb: 0.5}}>
