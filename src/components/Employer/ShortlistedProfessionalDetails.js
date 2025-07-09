@@ -538,15 +538,15 @@ if (otherDetails) {
       </>
       )}
 
-         {proj.projectLinks?.length > 0 && (
-
-          <>
-
-         <Grid item xs={12} sm={2}>
-        <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links:</Typography>
-        </Grid>
-         <Grid item xs={12} sm={10}>
-        {proj.projectLinks.map((link, idx) => (
+            {Array.isArray(proj?.projectLinks) && proj.projectLinks.some(link => link.trim()) && (
+  <>
+    <Grid item xs={12} sm={2}>
+      <Typography sx={{ fontSize: '14px', fontWeight: 500, mb: 0.5 }}>Links</Typography>
+    </Grid>
+    <Grid item xs={12} sm={10}>
+      {proj.projectLinks
+        .filter(link => link.trim())
+        .map((link, idx) => (
           <Typography
             key={idx}
             component="a"
@@ -564,9 +564,9 @@ if (otherDetails) {
             {link}
           </Typography>
         ))}
-        </Grid>
-        </>
-    )}
+    </Grid>
+  </>
+)}
 
 
     
