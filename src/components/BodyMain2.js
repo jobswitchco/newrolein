@@ -9,7 +9,10 @@ import {
 } from "@mui/material";
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS CSS
-import godaddy_logo from "../images/GoDaddy_logo.svg.png";
+import cred_logo from "../images/cred-logo.png";
+import deloitte_logo from "../images/deloitte-seeklogo.png";
+import paytm_logo from "../images/paytm-seeklogo.png";
+import khoros_logo from "../images/khoros-seeklogo.png";
 
 
 function BodyMain2() {
@@ -18,7 +21,7 @@ function BodyMain2() {
 
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in ms
+      duration: 600, // Animation duration in ms
       once: true, // Animation will run once
     });
   }, []);
@@ -29,109 +32,102 @@ function BodyMain2() {
    sx={{
     // px : isMobile ? 4 : 10,
     // mb: isMobile ? 10 : 14, 
-    mt: isMobile ? 3 : 6
+    mt: isMobile ? 1 : 2,
+    mb: isMobile ? 6 : 2
   }}
   >
 
   <Box sx={{
     display : 'flex',
     flexDirection : 'column',
-    background : '#D9EAFD', 
+    background : '#C9E9D2', 
     textAlign : 'center',
-    py : isMobile ? 10 : 12,
+    py : isMobile ? 8 : 12,
     px: isMobile ? 4 : 10
   }}>
-    <Typography sx={{ fontSize : isMobile ? '20px' : '28px', fontWeight : 400, mb: 2}}>Trusted by 100+ world best companies</Typography>
+    <Typography sx={{ fontSize : isMobile ? '20px' : '28px', fontWeight : 400, mb: 2}}>Trusted by 100+ professionals from top companies</Typography>
 
 
 {isMobile ? (<>
 
-<Stack sx={{ display : 'flex', flexDirection : 'column', alignItems : 'center'}}>
+<Stack sx={{ display : 'flex', flexDirection : 'column', alignItems : 'center', py: 2}}>
 
-<Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', mt: 4}}>
+<Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', gap: 4}}>
       
         <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
+        className="img-fluid rounded" 
+        src={cred_logo} 
+        style={{ width: '120px', height : '36px'}}
+        alt="cred_logo" 
         data-aos="zoom-in" 
-        data-aos-delay="600"  />
+        data-aos-delay="400"  />
 
            <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
+        className="img-fluid rounded" 
+        style={{ width: '120px', height : '24px'}}
+        src={deloitte_logo} 
+        alt="deloitte_logo" 
         data-aos="zoom-in" 
-        data-aos-delay="600"  />
+        data-aos-delay="400"  />
         </Stack>
 
-        <Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', mt: 4}}>
+        <Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', gap: 4, mt: 4}}>
       
+         <img  
+        className="img-fluid rounded" 
+        style={{ width: '120px', height : '34px'}}
+        src={khoros_logo} 
+        alt="khoros_logo" 
+        data-aos="zoom-in" 
+        data-aos-delay="400"  />
+
         <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
+        className="img-fluid rounded" 
+        style={{ width: '120px', height : '24px'}}
+        src={paytm_logo} 
+        alt="paytm_logo" 
         data-aos="zoom-in" 
-        data-aos-delay="600"  />
+        data-aos-delay="400"  />
 
-           <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
-        data-aos="zoom-in" 
-        data-aos-delay="600"  />
-        </Stack>
-
-        <Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', mt: 4}}>
-      
-        <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
-        data-aos="zoom-in" 
-        data-aos-delay="600"  />
-
+        
         </Stack>
 
 </Stack>
 
 </>) : (<>
-  <Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', mt: isMobile ? 2 : 4}}>
+  <Stack sx={{ display : 'flex', flexDirection : 'row', justifyContent : 'space-between', mt: isMobile ? 2 : 6, px: 12}}>
       
+         <img  
+        className="img-fluid rounded" 
+        src={cred_logo} 
+        style={{ width: '120px', height : '40px'}}
+        alt="cred_logo" 
+        data-aos="zoom-in" 
+        data-aos-delay="400"  />
+
+           <img  
+        className="img-fluid rounded" 
+        style={{ width: '120px', height : '30px'}}
+        src={deloitte_logo} 
+        alt="deloitte_logo" 
+        data-aos="zoom-in" 
+        data-aos-delay="400"  />
+
+           <img  
+        className="img-fluid rounded" 
+        style={{ width: '120px', height : '40px'}}
+        src={khoros_logo} 
+        alt="khoros_logo" 
+        data-aos="zoom-in" 
+        data-aos-delay="400"  />
+
         <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
+        className="img-fluid rounded" 
+        style={{ width: '120px', height : '30px'}}
+        src={paytm_logo} 
+        alt="paytm_logo" 
         data-aos="zoom-in" 
-        data-aos-delay="200"  />
-
-           <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
-        data-aos="zoom-in" 
-        data-aos-delay="200"  />
-
-           <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
-        data-aos="zoom-in" 
-        data-aos-delay="200"  />
-
-           <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
-        data-aos="zoom-in" 
-        data-aos-delay="200"  />
-
-           <img  
-        className="img-fluid rounded img-company-logos" 
-        src={godaddy_logo} 
-        alt="youtube-icon" 
-        data-aos="zoom-in" 
-        data-aos-delay="200"  />
+        data-aos-delay="400"  />
 
 
     </Stack>

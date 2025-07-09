@@ -31,7 +31,7 @@ function BodyMain1() {
       <Stack sx={{ display : 'flex', flexDirection : 'column', px: isMobile ? 0 : 3}}>
 
 <WavingHandOutlinedIcon sx={{ fontSize : '44px', mb: 1, color : '#261FB3'}}/>
-<Typography sx={{ fontSize : isMobile ? '17px' : '19px', fontWeight : 500, mb: 2}}>No Resumes. No Applications.</Typography>
+<Typography sx={{ fontSize : isMobile ? '16px' : '18px', fontWeight : 400, mb: 2, width: 'fit-content', borderRadius : '26px', px: 1, background : '#261FB3', color: '#FFFFFF'}}>No Resumes. No Applications.</Typography>
 <Typography sx={{ fontSize : isMobile ? '16px' : '18px', pr: isMobile ? 0 : 7, mb: isMobile ? 2 : 0}}>
   Working professionals shouldn't need to post <span style={{ display : 'inline-block', textDecoration : 'underline', fontWeight : 500}}> resumes </span> or apply for <span style={{ display : 'inline-block', textDecoration : 'underline', fontWeight : 500}}>jobs.</span> Get discovered by top companies based on your experience and preferences — while staying in your current role.
 
@@ -58,7 +58,8 @@ function BodyMain1() {
       <Stack sx={{ display : 'flex', flexDirection : 'column', px: isMobile ? 0 : 3}}>
 
 <PersonSearchOutlinedIcon sx={{ fontSize : '44px', mb: 1, color : '#B13BFF'}}/>
-<Typography sx={{ fontSize : isMobile ? '18px' : '20px', fontWeight : 500, mb: 2}}>How Employers Hire</Typography>
+<Typography sx={{ fontSize : isMobile ? '16px' : '18px', fontWeight : 400, mb: 2, width: 'fit-content', borderRadius : '26px', px: 1, background : '#B13BFF', color: '#FFFFFF'}}>How Employers Hire</Typography>
+
 <Typography sx={{ fontSize : isMobile ? '16px' : '18px', pr: isMobile ? 0 : 7, mb: isMobile ? 2 : 0}}>
   Recruiters actively explore professionals based on <span style={{ display : 'inline-block', fontStyle : 'italic', textDecoration : 'underline'}}>role</span>, <span style={{ display : 'inline-block', fontStyle : 'italic', textDecoration : 'underline'}}>experience</span>, and <span style={{ display : 'inline-block', fontStyle : 'italic', textDecoration : 'underline'}}>skills</span>. 
   They review your full profile, assess project details & <span style={{ display : 'inline-block', textDecoration : 'underline'}}>shortlist</span> suitable candidates. 
@@ -85,13 +86,13 @@ function BodyMain1() {
 
     <Grid item xs={12} md={6}>
 
-      <Typography sx={{ fontSize : isMobile ? '26px' :'38px', fontWeight : 500}}>We have Flipped the Hiring Process.</Typography>
+      <Typography sx={{ fontSize : isMobile ? '26px' :'38px', fontWeight : 500, background : '#F1EAFF', borderLeft: '6px solid #4535C1', pl: 2, py: 1}}>We have Flipped the Hiring Process.</Typography>
 
     </Grid>
 
      <Grid item xs={12} md={6} sx={{ mt: isMobile ? 2 : 0}}>
 
-      <Typography sx={{ fontSize : '18px'}}>Skip the job hunt. Let companies find and contact you based on your profile — no applications needed.</Typography>
+      <Typography sx={{ fontSize : '18px', borderRight: '6px solid #4535C1', pr: 2, py: 1}}>Skip the job hunt. Let companies find and contact you based on your profile — no applications needed.</Typography>
 
 
     </Grid>

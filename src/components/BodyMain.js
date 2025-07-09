@@ -147,6 +147,8 @@ function BodyMain() {
                     font-size: 1rem;
                     font-weight: 500;
                     color: #09122C;
+                    border-left: 4px solid blue;
+
 
                   }
 
@@ -231,6 +233,8 @@ function BodyMain() {
                     font-size: 1rem;
                     font-weight: 500;
                     color: #09122C;
+                    border-left: 4px solid blue;
+
 
                   }
 

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Navbar from "../components/Navbar";
 import BodyMain from "../components/BodyMain";
 import BodyMain1 from "./BodyMain1";
+import BodyMain2 from "./BodyMain2";
 
 // Lazy-loaded components
 const Footer = lazy(() => import("../components/Footer"));
@@ -33,6 +34,7 @@ export default function LandingPage() {
 
       <Navbar />
       <BodyMain />
+      <BodyMain2 />
       <BodyMain1 />
 
       {/* Lazy-loaded below */}

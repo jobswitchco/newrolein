@@ -85,7 +85,7 @@ const UANDetails = () => {
         </Stack>
 
         <Typography sx={{ mb: 3, fontSize: '14px', color: '#093FB4' }}>
-          Profiles with a valid LinkedIn URL attract 10x more recruiters.
+          Profiles with a valid LinkedIn URL attracts 10x more recruiters.
         </Typography>
 
         <Box mb={3}>
