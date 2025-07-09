@@ -590,7 +590,7 @@ if (otherDetails) {
 )}
 
  {tabsConfig[activeTab]?.key === "projectsWorked" && (
-   <Box sx={{ display: 'flex' }}>
+   <Box sx={{ display: 'flex', flexDirection : 'column'}}>
        
     
            

@@ -546,7 +546,7 @@ if (jobPreferences && Object.keys(jobPreferences).length > 0) {
 
 
  {tabsConfig[activeTab]?.key === "projectsWorked" && (
-   <Box sx={{ display: 'flex' }}>
+   <Box sx={{ display: 'flex', flexDirection : 'column' }}>
        
     
            
