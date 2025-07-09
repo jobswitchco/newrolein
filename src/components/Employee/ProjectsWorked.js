@@ -283,7 +283,7 @@ const handleAddOrUpdateProject = async () => {
                  </>
                  )}
            
-                    {proj.projectLinks?.length > 0 && (
+                    {proj?.projectLinks?.length > 0 && (
            
                      <>
            
